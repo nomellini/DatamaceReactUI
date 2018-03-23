@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { clienteActions } from '../actions/cliente.actions';
+import FetchError from '../componentes/FetchError';
 
 class Clientes extends React.Component {
 
@@ -9,14 +10,11 @@ class Clientes extends React.Component {
     this.fetch = this.fetch.bind(this);
   }
 
-
-
   fetch(event) {
     event.preventDefault();
     const { dispatch } = this.props;
     dispatch(clienteActions.getClientes(this.props.pageIndex, this.props.pageSize));
   }
-
 
   componentWillMount() {
     const { dispatch } = this.props;
@@ -39,6 +37,9 @@ class Clientes extends React.Component {
   }
 
   render() {
+
+    const {isFetching, errorMessage } = this.props;
+
     return <div className="row">
       <div className="col-md-12">
         <h2>Clientes</h2>
@@ -51,14 +52,16 @@ class Clientes extends React.Component {
       <div className="col-md-12">
         <button onClick={this.fetch} className="btn btn-primary">fetch</button>
       </div>
+      <FetchError message={this.props.errorMessage}/>
     </div>;
   }
 }
 
 function mapStateToProps(state) {
+  const { errorMessage } = state;
   const { clientes, pageIndex, pageSize, totalPages } = state.cliente;
   return {
-    clientes, pageIndex, pageSize, totalPages
+    clientes, pageIndex, pageSize, totalPages, errorMessage
   };
 }
 

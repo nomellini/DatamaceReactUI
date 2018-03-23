@@ -20,7 +20,10 @@ function getClientes(pageIndex, pageSize)
           dispatch(success(data, pageIndex, pageSize));
         },
         error => {
-
+          dispatch({
+            type: 'GET_CLIENTE_FAILURE',
+            message: error || "Algo deu errado"
+          })
         }
       )
   }

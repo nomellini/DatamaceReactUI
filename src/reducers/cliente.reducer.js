@@ -25,6 +25,8 @@ export function clienteReducer(state = initialState, action) {
         pageIndex: action.pageIndex,
         pageSize: action.pageSize
       }
+    case 'GET_CLIENTE_FAILURE':
+      return false;
     case 'LOGOUT_CLIENTE':
       return {}
     default:
