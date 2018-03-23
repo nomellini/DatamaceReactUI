@@ -1,0 +1,8 @@
+StateApp
+{
+  auth: {
+    token: string,
+    user: string,
+    isLoading: boolean
+  }
+}
