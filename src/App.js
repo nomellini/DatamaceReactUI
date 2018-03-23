@@ -11,6 +11,7 @@ import Home from './componentes/Home';
 import Layout from './componentes/Layout';
 import LoginPage from './componentes/LoginPage';
 import Clientes from './componentes/Clientes'
+import Cliente from './componentes/Cliente'
 
 class App extends Component {
 
@@ -21,6 +22,7 @@ class App extends Component {
           <Route exact path='/' component={Home} />
           <Route exact path='/Login' component={LoginPage} />
           <PrivateRoute path='/Clientes' component={Clientes}/>
+          <PrivateRoute path='/Cliente/:Id' component={Cliente}/>
         </Layout>
       </Router>
     );
