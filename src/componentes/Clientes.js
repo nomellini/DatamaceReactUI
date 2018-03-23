@@ -54,10 +54,11 @@ class Clientes extends React.Component {
             </tbody>
           </table>
           <div className="row">
-            <div className="col-md-6">
-              <Link className='btn btn-primary' to={'/Cliente/0'}>Novo Cliente</Link>
+            <div className="col-md-2">
+              <button onClick={this.fetch} className="btn btn-primary">fetch</button>
             </div>
-            <div className="col-md-6">
+            <div className="col-md-2">
+              <Link className='btn btn-danger' to={'/Cliente/0'}>Novo Cliente</Link>
             </div>
           </div>
         </div>
