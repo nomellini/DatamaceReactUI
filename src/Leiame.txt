@@ -22,3 +22,5 @@ StateApp
 
 
 Testando a Issue #2
+
+Este comit Fixes #2
