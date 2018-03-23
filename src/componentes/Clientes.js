@@ -37,9 +37,6 @@ class Clientes extends React.Component {
   }
 
   render() {
-
-    const {isFetching, errorMessage } = this.props;
-
     return <div className="row">
       <div className="col-md-12">
         <h2>Clientes</h2>
@@ -50,7 +47,7 @@ class Clientes extends React.Component {
         </div>
       </div>
       <div className="col-md-12">
-        <button onClick={this.fetch} className="btn btn-primary">fetch</button>
+        <button onClick={this.fetch} className="btn btn-primary" disabled={this.props.isFetching}>fetch</button>
       </div>
       <FetchError message={this.props.errorMessage}/>
     </div>;
@@ -58,10 +55,10 @@ class Clientes extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const { errorMessage } = state;
+  const { errorMessage, isFetching } = state;
   const { clientes, pageIndex, pageSize, totalPages } = state.cliente;
   return {
-    clientes, pageIndex, pageSize, totalPages, errorMessage
+    clientes, pageIndex, pageSize, totalPages, errorMessage, isFetching
   };
 }
 

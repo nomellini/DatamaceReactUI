@@ -1,19 +1,18 @@
 import { clienteService } from '../services/cliente.service';
+import consts from '../constants';
 
 export const clienteActions = {
   getClientes,
   logout
 };
 
-
 function logout() {
-  return { type: 'LOGOUT_CLIENTE' };
+  return { type: consts.LOGOUT_CLIENTE };
 }
 
-function getClientes(pageIndex, pageSize)
-{
-  return dispatch =>
-  {
+function getClientes(pageIndex, pageSize) {
+  return dispatch => {
+    dispatch({ type: consts.GET_CLIENTE_REQUEST });
     clienteService.getClientes(pageIndex, pageSize)
       .then(
         data => {
@@ -21,7 +20,7 @@ function getClientes(pageIndex, pageSize)
         },
         error => {
           dispatch({
-            type: 'GET_CLIENTE_FAILURE',
+            type: consts.FETCHING_FAILURE,
             message: error || "Algo deu errado"
           })
         }
@@ -31,7 +30,7 @@ function getClientes(pageIndex, pageSize)
 
   function success(data) {
     return {
-      type: 'GET_CLIENTE_SUCCESS',
+      type: consts.GET_CLIENTE_SUCCESS,
       clientes: data,
       pageIndex,
       pageSize,

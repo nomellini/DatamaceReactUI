@@ -1,3 +1,5 @@
+import consts from '../constants';
+
 const INITIAL_STATE = {
   clientes: [],
   pageIndex: 1,
@@ -18,16 +20,18 @@ const initialState =
 
 export function clienteReducer(state = initialState, action) {
   switch (action.type) {
-    case 'GET_CLIENTE_SUCCESS':
+    case consts.GET_CLIENTE_REQUEST:
+      return state
+    case consts.GET_CLIENTE_SUCCESS:
       return {
         clientes: action.clientes,
         totalPages: action.totalPages,
         pageIndex: action.pageIndex,
         pageSize: action.pageSize
       }
-    case 'GET_CLIENTE_FAILURE':
+    case consts.FETCHING_FAILURE:
       return false;
-    case 'LOGOUT_CLIENTE':
+    case consts.LOGOUT_CLIENTE:
       return {}
     default:
       return state

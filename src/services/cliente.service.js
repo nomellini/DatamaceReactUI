@@ -6,6 +6,7 @@ export const clienteService = {
 };
 
 function getClientes(PageIndex, PageSize) {
+
   const requestOptions = {
       method: 'GET',
       headers: authHeader()
