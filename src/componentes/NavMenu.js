@@ -44,9 +44,9 @@ class NavMenu extends React.Component {
 
 
 function mapStateToProps(state) {
-    const { isLogged } = state.auth;
+    const { isAuthenticated } = state.auth;
     return {
-        isLogged
+        isAuthenticated
     };
 }
 

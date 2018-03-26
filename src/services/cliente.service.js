@@ -1,5 +1,6 @@
-import {CLIENTE_API} from '../helper/apiConfig';
+import { CLIENTE_API } from '../helper/apiConfig';
 import { authHeader } from '../helper/auth-header';
+import axios from 'axios';
 
 export const clienteService = {
     getClientes
@@ -7,32 +8,25 @@ export const clienteService = {
 
 function getClientes(PageIndex, PageSize) {
 
-  const requestOptions = {
-      method: 'GET',
-      headers: authHeader()
-      //,      body: JSON.stringify({ PageIndex, PageSize })
-  };
-  return fetch(CLIENTE_API, requestOptions)
-  .then(handleResponse)
-  .then(payload => {
-    storeClienteDataToLocalStore(payload);
-    return payload;
-  })
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader()
+        //,      body: JSON.stringify({ PageIndex, PageSize })
+    };
+    return axios.get(CLIENTE_API, requestOptions)
+        .then(handleResponse)
 }
 
 
 function handleResponse(response) {
-  if (!response.ok) {
-      return Promise.reject(response.statusText);
-  }
-  return response.json();
+    storeClienteDataToLocalStore(response.data);
+    return response.data;
 }
 
 
-function storeClienteDataToLocalStore(payload)
-{
+function storeClienteDataToLocalStore(payload) {
     const clienteData = {
         clientes: payload
-   };
-   localStorage.setItem('clienteData', JSON.stringify(clienteData));
+    };
+    localStorage.setItem('clienteData', JSON.stringify(clienteData));
 }

@@ -31,8 +31,7 @@ class App extends Component {
 
 function mapStateToProps(state) {
 
-  const { usuario } = state.auth;
-  const appName = usuario ? "Datamace - " + usuario: "Datamace";
+  const appName = "Datamace";
 
   return {
     appName

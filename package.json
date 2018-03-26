@@ -19,6 +19,8 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
+    "axios": "^0.18.0",
+    "jwt-decode": "^2.2.0",
     "redux-logger": "^3.0.6"
   }
 }

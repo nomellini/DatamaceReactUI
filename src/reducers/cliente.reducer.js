@@ -9,8 +9,6 @@ const INITIAL_STATE = {
 
 let clienteData = JSON.parse(localStorage.getItem('clienteData'));
 
-console.log(clienteData);
-
 const initialState =
   clienteData ? {
     clientes: clienteData.clientes,

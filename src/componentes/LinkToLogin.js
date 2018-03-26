@@ -20,7 +20,7 @@ class LinkToLogin extends React.Component {
 
   render() {
 
-    if (!this.props.usuario)
+    if (!this.props.isAuthenticated)
       return (
         <NavLink to={'/Login'} exact activeClassName='active'>
           <span className='glyphicon glyphicon-log-in'></span>Login
@@ -35,9 +35,9 @@ class LinkToLogin extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const { usuario } = state.auth;
+  const { isAuthenticated } = state.auth;
   return {
-    usuario
+    isAuthenticated
   };
 }
 

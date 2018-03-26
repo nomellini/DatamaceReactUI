@@ -19,9 +19,3 @@ StateApp
     totalPages
   }
 }
-
-
-Testando a Issue #2
-
-Este comit fixes #2
-

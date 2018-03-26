@@ -1,4 +1,5 @@
-import {AUTH_API} from '../helper/apiConfig';
+import { AUTH_API } from '../helper/apiConfig';
+import  axios  from 'axios';
 
 export const userService = {
     login,
@@ -8,29 +9,11 @@ export const userService = {
 
 
 function login(usuario, senha) {
-
-    const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ usuario, senha })
-    };
-
-
-    return fetch(AUTH_API, requestOptions)
-        .then(response => {
-            //status = response.status;
-            return response.json();
-        })
-        .then(data => {
-            if (data && data.accessToken) {
-                storeLoginDataToLocalStore(usuario, data);
-                return data;
-            } else {
-                clearLoginDataOnLocalStore();
-                return Promise.reject(data) ;
-            }
-
-        });
+    const body = JSON.stringify({ usuario, senha });
+    return axios.post(AUTH_API, body,{
+        headers: {
+            'Content-Type': 'application/json',
+        }})
 }
 
 function logout() {
@@ -38,27 +21,11 @@ function logout() {
     localStorage.removeItem('clienteData');
 }
 
-function isLogged()
-{
-    let loginData = JSON.parse(localStorage.getItem('loginData'));
-    if (loginData) {
+function isLogged() {
+
+    if (localStorage.jwtToken) {
         return true;
     }
     else
         return false;
-}
-
-function storeLoginDataToLocalStore(usuario, apiPayload)
-{
-    const loginData = {
-         usuario: usuario,
-         token: apiPayload.accessToken,
-         message: apiPayload.message
-    };
-    localStorage.setItem('loginData', JSON.stringify(loginData));
-}
-
-function clearLoginDataOnLocalStore()
-{
-    localStorage.setItem('loginData', JSON.stringify({}));
 }

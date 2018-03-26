@@ -1,18 +1,32 @@
 import { userService } from '../services/user.service';
 import { history } from '../helper/history';
+import setAuthorizationToken from '../utils/setAuthorizationToken';
+import jwtDecode from 'jwt-decode'
+import consts from '../constants';
 
 export const userActions = {
   login,
   logout
 };
 
+
+export function setCurrentUser(user) {
+  return {
+    type: consts.SET_CURRENT_USER,
+    user
+  };
+}
+
 function login(usuario, senha) {
 
   return dispatch => (
-  userService.login(usuario, senha)
+    userService.login(usuario, senha)
     .then(
       data => {
-        dispatch(success(usuario, data));
+        const token = data.data.accessToken;
+        localStorage.setItem('jwtToken', token);
+        setAuthorizationToken(token);
+        dispatch(setCurrentUser(jwtDecode(token)));
         history.push('/');
       },
       error => {
@@ -20,14 +34,6 @@ function login(usuario, senha) {
       }
     )
   );
-
-  function success(usuario, data) {
-    return {
-      type: 'LOGIN_SUCCESS',
-      usuario: usuario,
-      data: data
-    }
-  }
 
   function failure(error) {
     return {
@@ -38,6 +44,10 @@ function login(usuario, senha) {
 }
 
 function logout() {
-  userService.logout();
-  return { type: 'LOGOUT' };
+  return dispatch => {
+    localStorage.removeItem('jwtToken');
+    setAuthorizationToken(false);
+    dispatch(setCurrentUser({}));
+    history.push('/');
+  }
 }
