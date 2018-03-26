@@ -3,22 +3,16 @@ import  axios  from 'axios';
 
 export const userService = {
     login,
-    logout,
     isLogged
 };
 
+//axios.defaults.headers.common['Content-Type'] = 'application/json';
 
 function login(usuario, senha) {
     const body = JSON.stringify({ usuario, senha });
-    return axios.post(AUTH_API, body,{
-        headers: {
-            'Content-Type': 'application/json',
-        }})
-}
-
-function logout() {
-    localStorage.removeItem('loginData');
-    localStorage.removeItem('clienteData');
+    return axios.post(AUTH_API, body, {
+        headers: { 'Content-Type' : 'application/json'}
+    });
 }
 
 function isLogged() {

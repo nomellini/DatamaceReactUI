@@ -55,7 +55,7 @@ class Clientes extends React.Component {
           </table>
           <div className="row">
             <div className="col-md-2">
-              <button onClick={this.fetch} className="btn btn-primary">fetch</button>
+              <button disabled={this.props.isFetching} onClick={this.fetch} className="btn btn-primary">fetch</button>
             </div>
             <div className="col-md-2">
               <Link className='btn btn-danger' to={'/Cliente/0'}>Novo Cliente</Link>
@@ -72,7 +72,8 @@ class Clientes extends React.Component {
 
     var clientes = [];
     if (this.props.clientes)
-      clientes = this.props.clientes.map(function (cli) {
+
+    clientes = this.props.clientes.map(function (cli) {
 
         return <tr className="" key={cli.codigo}>
           <td>{cli.codigo}</td>

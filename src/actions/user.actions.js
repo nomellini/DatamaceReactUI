@@ -4,6 +4,7 @@ import setAuthorizationToken from '../utils/setAuthorizationToken';
 import jwtDecode from 'jwt-decode'
 import consts from '../constants';
 
+
 export const userActions = {
   login,
   logout
@@ -17,36 +18,20 @@ export function setCurrentUser(user) {
   };
 }
 
-function login(usuario, senha) {
-
-  return dispatch => (
-    userService.login(usuario, senha)
-    .then(
-      data => {
-        const token = data.data.accessToken;
+export function login(usuario, senha) {
+  return dispatch => {
+    return userService.login(usuario, senha).then(res => {
+        const token = res.data.accessToken;
         localStorage.setItem('jwtToken', token);
         setAuthorizationToken(token);
         dispatch(setCurrentUser(jwtDecode(token)));
-        history.push('/');
-      },
-      error => {
-        dispatch(failure(error));
-      }
-    )
-  );
-
-  function failure(error) {
-    return {
-      type: 'LOGIN_FAILURE',
-      error
+      });
     }
-  }
 }
 
 function logout() {
   return dispatch => {
     localStorage.removeItem('jwtToken');
-    localStorage.removeItem('loginData');
     localStorage.removeItem('clienteData');
     setAuthorizationToken(false);
     dispatch(setCurrentUser({}));

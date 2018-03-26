@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux'
+import FlashMessagesList from './flash/FlashMessagesList';
 
 
 class Home extends React.Component {
@@ -8,7 +9,8 @@ class Home extends React.Component {
     render() {
         return <div>
             <h1>Hello, world ! </h1>
-        <h2>{this.props.usuario ? `Você está logado como ${this.props.usuario}` : ''}</h2>
+            <p><FlashMessagesList />            </p>
+            <h2>{this.props.usuario ? `Você está logado como ${this.props.usuario}` : ''}</h2>
             <p>Welcome to your new single-page application, built with:</p>
             <ul>
                 <li><a href='https://get.asp.net/'>ASP.NET Core</a> and <a href='https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx'>C#</a> for cross-platform server-side code</li>
@@ -27,7 +29,8 @@ class Home extends React.Component {
             <p>
                 For larger applications, or for server-side prerendering (i.e., for <em>isomorphic</em> or <em>universal</em> applications), you should consider using a Flux/Redux-like architecture.
             You can generate an ASP.NET Core application with React and Redux using <code>dotnet new reactredux</code> instead of using this template.
-        </p>
+            </p>
+
         </div>;
     }
 }
