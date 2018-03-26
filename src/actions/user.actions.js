@@ -46,6 +46,8 @@ function login(usuario, senha) {
 function logout() {
   return dispatch => {
     localStorage.removeItem('jwtToken');
+    localStorage.removeItem('loginData');
+    localStorage.removeItem('clienteData');
     setAuthorizationToken(false);
     dispatch(setCurrentUser({}));
     history.push('/');
