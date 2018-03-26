@@ -1,7 +1,10 @@
 import { Link } from 'react-router-dom';
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { clienteActions } from '../actions/cliente.actions';
+import PropTypes from 'prop-types'
+
+import { getClientes } from '../actions/cliente.actions';
+import { addFlashMessage } from '../actions/flashMessages.actions'
 
 class Clientes extends React.Component {
 
@@ -12,17 +15,14 @@ class Clientes extends React.Component {
 
   fetch(event) {
     event.preventDefault();
-    const { dispatch } = this.props;
-    dispatch(clienteActions.getClientes(this.props.pageIndex, this.props.pageSize));
+    this.props.getClientes(this.props.pageIndex, this.props.pageSize);
   }
 
-  componentWillMount() {
-    const { dispatch } = this.props;
-    if (!this.props.clientes) {
-      dispatch(clienteActions.getClientes(this.props.pageIndex, this.props.pageSize));
-    }
-
-  }
+  // componentWillMount() {
+  //   if (!this.props.clientes) {
+  //     this.props.getClientes(this.props.pageIndex, this.props.pageSize);
+  //   }
+  // }
 
 
   render() {
@@ -73,7 +73,7 @@ class Clientes extends React.Component {
     var clientes = [];
     if (this.props.clientes)
 
-    clientes = this.props.clientes.map(function (cli) {
+      clientes = this.props.clientes.map(function (cli) {
 
         return <tr className="" key={cli.codigo}>
           <td>{cli.codigo}</td>
@@ -90,10 +90,7 @@ class Clientes extends React.Component {
 
     return clientes
   }
-
-
 }
-
 
 function mapStateToProps(state) {
   const { errorMessage, isFetching } = state;
@@ -103,4 +100,11 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(Clientes);
+
+Clientes.propTypes = {
+  getClientes: PropTypes.func.isRequired,
+  addFlashMessage: PropTypes.func.isRequired
+}
+
+
+export default connect(mapStateToProps, { getClientes, addFlashMessage })(Clientes);

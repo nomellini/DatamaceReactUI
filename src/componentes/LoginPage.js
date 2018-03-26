@@ -50,7 +50,7 @@ class LoginPage extends React.Component {
         (res) => {
           this.props.addFlashMessage({
             type: 'success',
-            text: 'You signed up successfully. Welcome!'
+            text: `Login efetuado com sucesso (para fechar esta mensagem, clique no x)`
           });
           history.push('/');
         },
@@ -68,7 +68,6 @@ class LoginPage extends React.Component {
     if (redirectToReferrer) {
       return <Redirect to={from} />;
     }
-
 
     return <div className="row">
       <div className="col-md-12">

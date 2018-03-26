@@ -1,7 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { userActions } from '../actions/user.actions';
-import { clienteActions } from '../actions/cliente.actions';
 import { connect } from 'react-redux';
 
 class LinkToLogin extends React.Component {
@@ -15,7 +14,6 @@ class LinkToLogin extends React.Component {
     event.preventDefault();
     const { dispatch } = this.props;
     dispatch(userActions.logout());
-    dispatch(clienteActions.logout());
   }
 
   render() {

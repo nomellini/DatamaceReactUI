@@ -20,6 +20,7 @@ export function setCurrentUser(user) {
 
 export function login(usuario, senha) {
   return dispatch => {
+    dispatch({ type: consts.FETCHING });
     return userService.login(usuario, senha).then(res => {
         const token = res.data.accessToken;
         localStorage.setItem('jwtToken', token);
@@ -35,6 +36,9 @@ function logout() {
     localStorage.removeItem('clienteData');
     setAuthorizationToken(false);
     dispatch(setCurrentUser({}));
+    dispatch( {
+      type: consts.LOGOUT_USER,
+    })
     history.push('/');
   }
 }

@@ -2,11 +2,11 @@ import consts from '../constants';
 
 function fetchErrorReducer(state = null, action) {
   switch (action.type) {
+    case consts.FETCHING:
+    case consts.FETCH_SUCCESS:
+      return null
     case consts.FETCHING_FAILURE:
       return action.message;
-    case consts.LOGOUT_CLIENTE:
-    case consts.GET_CLIENTE_SUCCESS:
-      return null
     default:
       return state
   }
@@ -14,8 +14,10 @@ function fetchErrorReducer(state = null, action) {
 
 function isFetchingReducer(state = false, action) {
   switch (action.type) {
-    case consts.GET_CLIENTE_REQUEST:
+    case consts.FETCHING:
       return true
+    case consts.SET_CURRENT_USER:
+    case consts.FETCH_SUCCESS:
     case consts.GET_CLIENTE_SUCCESS:
     case consts.FETCHING_FAILURE:
       return false;

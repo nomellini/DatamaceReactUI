@@ -1,5 +1,9 @@
 
-import { ADD_FLASH_MESSAGE, DELETE_FLASH_MESSAGE } from '../constants';
+import {
+  LOGOUT_USER,
+  ADD_FLASH_MESSAGE,
+  DELETE_FLASH_MESSAGE,
+  DELETE_ALL_FLASH_MESSAGE } from '../constants';
 
 import shortid from 'shortid';
 import findIndex from 'lodash/findIndex';
@@ -15,6 +19,11 @@ export default (state = [], action = {}) => {
           text: action.message.text
         }
       ];
+
+    case LOGOUT_USER:
+    case DELETE_ALL_FLASH_MESSAGE:
+      return [];
+
     case DELETE_FLASH_MESSAGE:
       const index = findIndex(state, { id: action.id });
       if (index >= 0) {

@@ -2,17 +2,13 @@ import { clienteService } from '../services/cliente.service';
 import consts from '../constants';
 
 export const clienteActions = {
-  getClientes,
-  logout
+  getClientes
 };
 
-function logout() {
-  return { type: consts.LOGOUT_CLIENTE };
-}
 
-function getClientes(pageIndex, pageSize) {
+export function getClientes(pageIndex, pageSize) {
   return dispatch => {
-    dispatch({ type: consts.GET_CLIENTE_REQUEST });
+    dispatch({ type: consts.FETCHING });
     clienteService.getClientes(pageIndex, pageSize)
       .then(
         data => {
