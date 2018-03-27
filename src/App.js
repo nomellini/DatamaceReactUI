@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Router, Route } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PrivateRoute from './componentes/PrivateRoute'
 
@@ -23,9 +23,12 @@ class App extends Component {
   renderApp() {
     if (this.props.isAuthenticated) {
       return <Layout AppName={this.props.appName}>
-        <PrivateRoute exact path='/' component={HomePage} />
-        <PrivateRoute path='/Clientes' component={ClientesPage} />
-        <PrivateRoute path='/Cliente/:Id' component={ClientePage} />
+        <Switch>
+          <PrivateRoute exact path='/' component={HomePage} />
+          <PrivateRoute path='/Clientes' component={ClientesPage} />
+          <PrivateRoute path='/Cliente/:Id' component={ClientePage} />
+          <Route path="*" component={HomePage} />
+        </Switch>
       </Layout>
     }
     else {

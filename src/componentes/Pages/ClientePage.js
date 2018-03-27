@@ -195,13 +195,7 @@ class Cliente extends DtmPageBase {
 }
 
 function mapStateToProps(state, ownProps) {
-
-
-  const { role } = state.auth.user;
-
-
   return {
-    role,
     ClienteId: ownProps.match.params.Id
   };
 }

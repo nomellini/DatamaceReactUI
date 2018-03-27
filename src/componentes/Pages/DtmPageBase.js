@@ -1,5 +1,7 @@
 import React from 'react';
 import { history } from '../../helper/history';
+import store from '../../redux/store';
+import { addFlashMessage } from '../../actions/flashMessages.actions'
 
 export default class DtmPageBase extends React.Component {
 
@@ -11,16 +13,22 @@ export default class DtmPageBase extends React.Component {
  */
   componentWillMount() {
 
+    const state = store.getState();
+    const { role } = state.auth.user;
+    const PathName = history.location.pathname;
 
-    // console.log(history.location.pathname);
-    // const index = this.props.role.indexOf("Masters");
-    // if (index === -1) {
-    //   this.props.addFlashMessage({
-    //     type: 'success',
-    //     text: `Sem permissão para usar a tela`
-    //   });
-    //   history.push('/');
-    // }
+    // if (PathName !== '/') {
+    //   console.log(PathName)
+    //   const index = role.indexOf("Master1");
+    //   if (index === -1) {
+    //     store.dispatch(
+    //       addFlashMessage({
+    //         type: 'success',
+    //         text: `Sem permissão para ${PathName}`
+    //       }));
+    //     //history.push('/');
+
+
   }
 
 }
