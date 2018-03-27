@@ -16,6 +16,7 @@ function isFetchingReducer(state = false, action) {
   switch (action.type) {
     case consts.FETCHING:
       return true
+    case consts.FETCH_DONE:
     case consts.SET_CURRENT_USER:
     case consts.FETCH_SUCCESS:
     case consts.GET_CLIENTE_SUCCESS:

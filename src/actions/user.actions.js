@@ -20,7 +20,6 @@ export function setCurrentUser(user) {
 
 export function login(usuario, senha) {
   return dispatch => {
-    dispatch({ type: consts.FETCHING });
     return userService.login(usuario, senha).then(res => {
         const token = res.data.accessToken;
         localStorage.setItem('jwtToken', token);

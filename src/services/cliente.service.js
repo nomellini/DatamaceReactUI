@@ -3,7 +3,8 @@ import { authHeader } from '../helper/auth-header';
 import axios from 'axios';
 
 export const clienteService = {
-    getClientes
+    getClientes,
+    addCliente
 };
 
 function getClientes(PageIndex, PageSize) {
@@ -15,6 +16,16 @@ function getClientes(PageIndex, PageSize) {
     };
     return axios.get(CLIENTE_API, requestOptions)
         .then(handleResponse)
+}
+
+
+function addCliente(cliente)
+{
+    return axios.post(CLIENTE_API, cliente);
+    //     .then(
+    //         res => console.log(res),
+    //         err => console.log(err.response.data)
+    // );
 }
 
 

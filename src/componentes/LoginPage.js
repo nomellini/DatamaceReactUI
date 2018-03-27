@@ -44,7 +44,9 @@ class LoginPage extends React.Component {
     event.preventDefault();
     const { usuario, senha } = this.state;
     if (this.isValid()) {
+
       this.setState({ message: '', errors: {}, isLoading: true });
+
       this.props.login(usuario, senha).then(
 
         (res) => {
@@ -96,7 +98,7 @@ class LoginPage extends React.Component {
 
 
           <div className="form-group">
-            <button disabled={this.state.loading} className="btn btn-primary" type="submit">Vai</button>
+            <button disabled={this.state.isLoading} className="btn btn-primary" type="submit">Vai</button>
           </div>
 
         </form>

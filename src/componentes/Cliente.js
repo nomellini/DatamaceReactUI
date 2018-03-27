@@ -1,5 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { addCliente } from '../actions/cliente.actions'
+import PropTypes from 'prop-types'
 
 class Cliente extends React.Component {
 
@@ -7,9 +9,11 @@ class Cliente extends React.Component {
     super(props);
     this.onChange = this.onChange.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.gravar = this.gravar.bind(this);
 
 
     this.state = {
+      codigo: 0,
       nome: "",
       descricao: '',
       codigoSad: '',
@@ -17,6 +21,12 @@ class Cliente extends React.Component {
       email: '',
       status: false
     }
+  }
+
+  gravar()
+  {
+    console.log(JSON.stringify( this.state));
+    this.props.addCliente(this.state);
   }
 
   onChange(event) {
@@ -107,7 +117,7 @@ class Cliente extends React.Component {
       </div >
       <div className="row">
         <div className="col-md-6">
-          <button className='btn btn-primary' to={'/Cliente/0'}>Gravar</button>
+          <button onClick={this.gravar} className='btn btn-primary' to={'/Cliente/0'}>Gravar</button>
         </div>
         <div className="col-md-6">
         </div>
@@ -123,4 +133,9 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-export default connect(mapStateToProps)(Cliente);
+Cliente.propTypes = {
+  addCliente: PropTypes.func.isRequired
+}
+
+
+export default connect(mapStateToProps, {addCliente})(Cliente);
