@@ -5,8 +5,9 @@ import { addCliente } from '../actions/cliente.actions'
 import { addFlashMessage } from '../actions/flashMessages.actions'
 import PropTypes from 'prop-types'
 import { history } from '../helper/history';
+import DtmPageBase from './DtmPageBase'
 
-class Cliente extends React.Component {
+class Cliente extends DtmPageBase {
 
   constructor(props) {
 
@@ -39,6 +40,8 @@ class Cliente extends React.Component {
     this.props.addCliente(this.state).then(
 
       (res) => {
+
+
         // addFlashMessage adiciona uma mensagem na lista de mensagems do aplicativo
         this.props.addFlashMessage({
           type: 'success',
@@ -49,6 +52,7 @@ class Cliente extends React.Component {
 
       (err) => {
 
+
         if (err.message === "Network Error") {
           // message no state é apenas desta tela
           this.setState({ message: err.message, isLoading: false })
@@ -58,7 +62,9 @@ class Cliente extends React.Component {
 
         if (err.response.status !== 200) {
 
+
           if (err.response.status === 400) {
+
             this.setState({ errors: err.response.data.errors })
             this.setState({ message: err.response.data.message, isLoading: false })
           }
@@ -110,12 +116,12 @@ class Cliente extends React.Component {
         <div className="col-sm-8">
           <div className="form-horizontal">
 
-            <div className={classnames('form-group', { 'has-error': this.state.errors.nome })}>
+            <div className={classnames('form-group', { 'has-error': this.state.errors.Nome })}>
               <label htmlFor="inputNome" className="col-md-4 control-label">Nome</label>
               <div className="col-md-8">
                 <input type="text"
                   name="nome" className="form-control" value={this.state.nome} onChange={this.onChange} />
-                {this.state.errors.nome && <span className="help-block">{this.state.errors.nome}</span>}
+                {this.state.errors.Nome && <span className="help-block">{this.state.errors.Nome}</span>}
               </div>
             </div>
 
@@ -128,35 +134,35 @@ class Cliente extends React.Component {
             </div>
 
 
-            <div className={classnames('form-group', { 'has-error': this.state.errors.cnpj })}>
+            <div className={classnames('form-group', { 'has-error': this.state.errors.CNPJ })}>
               <label htmlFor="input" className="col-md-4 control-label">CNPJ</label>
               <div className="col-md-8">
                 <input type="text" name="cnpj" className="form-control" value={this.state.cnpj} onChange={this.onChange} />
-                {this.state.errors.cnpj && <span className="help-block">{this.state.errors.cnpj}</span>}
+                {this.state.errors.CNPJ && <span className="help-block">{this.state.errors.CNPJ}</span>}
               </div>
             </div>
 
             <div className={classnames('form-group', { 'has-error': this.state.errors.codigoSad })}>
-              <label htmlFor="input" className="col-md-4 control-label">Código SAD</label>
+              <label htmlFor="codigoSad" className="col-md-4 control-label">Código SAD</label>
               <div className="col-md-8">
                 <input type="text" name="codigoSad" className="form-control" value={this.state.codigoSad} onChange={this.onChange} />
                 {this.state.errors.codigoSad && <span className="help-block">{this.state.errors.codigoSad}</span>}
               </div>
             </div>
 
-            <div className={classnames('form-group', { 'has-error': this.state.errors.url })}>
+            <div className={classnames('form-group', { 'has-error': this.state.errors.URL })}>
               <label htmlFor="input" className="col-md-4 control-label">URL Server API</label>
               <div className="col-md-8">
                 <input type="text" name="url" className="form-control" value={this.state.url} onChange={this.onChange} />
-                {this.state.errors.url && <span className="help-block">{this.state.errors.url}</span>}
+                {this.state.errors.URL && <span className="help-block">{this.state.errors.URL}</span>}
               </div>
             </div>
 
-            <div className={classnames('form-group', { 'has-error': this.state.errors.email })}>
+            <div className={classnames('form-group', { 'has-error': this.state.errors.Email })}>
               <label htmlFor="input" className="col-md-4 control-label">Email</label>
               <div className="col-md-8">
                 <input type="text" name="email" className="form-control" value={this.state.email} onChange={this.onChange} />
-                {this.state.errors.email && <span className="help-block">{this.state.errors.email}</span>}
+                {this.state.errors.Email && <span className="help-block">{this.state.errors.Email}</span>}
               </div>
             </div>
 
@@ -188,7 +194,13 @@ class Cliente extends React.Component {
 }
 
 function mapStateToProps(state, ownProps) {
+
+
+  const { role } = state.auth.user;
+
+
   return {
+    role,
     ClienteId: ownProps.match.params.Id
   };
 }

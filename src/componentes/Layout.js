@@ -8,9 +8,10 @@ class Layout extends React.Component {
         return <div className='container-fluid'>
             <div className='row'>
                 <div className='col-sm-3'>
-                    <NavMenu AppName={this.props.AppName} />
+                <NavMenu AppName={this.props.AppName} />
                 </div>
                 <div className='col-sm-9'>
+
                     <div><FlashMessagesList /></div>
                     {this.props.children}
                 </div>

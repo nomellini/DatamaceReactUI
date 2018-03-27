@@ -21,7 +21,7 @@ function getClientes(PageIndex, PageSize) {
 
 function addCliente(cliente)
 {
-
+    return axios.post(CLIENTE_API, cliente);
 }
 
 

@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { connect } from 'react-redux'
 
+import DtmPageBase from './DtmPageBase'
 
-class Home extends React.Component {
+class Home extends DtmPageBase {
+
 
 
     BoasVindas() {

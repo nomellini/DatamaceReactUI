@@ -38,6 +38,6 @@ function logout() {
     dispatch( {
       type: consts.LOGOUT_USER,
     })
-    history.push('/');
+    history.push('/Login');
   }
 }

@@ -55,15 +55,14 @@ class LoginPage extends React.Component {
           });
           history.push('/');
         },
-        (err) =>
-        {
-            if (err.message === "Network Error") {
-              // message no state é apenas desta tela
-              this.setState({ message: err.message, isLoading: false })
-              return;
-            }
+        (err) => {
+          if (err.message === "Network Error") {
+            // message no state é apenas desta tela
+            this.setState({ message: err.message, isLoading: false })
+            return;
+          }
 
-            this.setState({ message: err.response.data.message, isLoading: false })
+          this.setState({ message: err.response.data.message, isLoading: false })
         }
 
       );
@@ -78,38 +77,40 @@ class LoginPage extends React.Component {
       return <Redirect to={from} />;
     }
 
-    return <div className="row">
-      <div className="col-md-12">
-        <form onSubmit={this.onSubmit}>
+    return <div className='container-fluid'>
+      <div className="row">
+        <div className="col-md-4 col-md-offset-4">
+          <form onSubmit={this.onSubmit}>
 
-          <h1>Login</h1>
+            <h1>Login</h1>
 
-          {this.state.message && <div className="alert alert-danger">{this.state.message}</div>}
+            {this.state.message && <div className="alert alert-danger">{this.state.message}</div>}
 
-          <div className={classnames('form-group', { 'has-error': this.state.errors.usuario })}>
-            <label htmlFor="usuario">Usuario</label>
-            <input className="form-control"
-              onChange={this.onChange} type="text" value={this.state.usuario} name="usuario">
-            </input>
-            {this.state.errors.usuario && <span className="help-block">{this.state.errors.usuario}</span>}
-          </div>
-
-
-          <div className={classnames('form-group', { 'has-error': this.state.errors.senha })}>
-            <label htmlFor="senha">Senha</label>
-            <input className="form-control"
-              onChange={this.onChange} type="password" value={this.state.senha} name="senha">
-            </input>
-            {this.state.errors.senha && <span className="help-block">{this.state.errors.senha}</span>}
-          </div>
+            <div className={classnames('form-group', { 'has-error': this.state.errors.usuario })}>
+              <label htmlFor="usuario">Usuario</label>
+              <input className="form-control"
+                onChange={this.onChange} type="text" value={this.state.usuario} name="usuario">
+              </input>
+              {this.state.errors.usuario && <span className="help-block">{this.state.errors.usuario}</span>}
+            </div>
 
 
-          <div className="form-group">
-            <button disabled={this.state.isLoading} className="btn btn-primary" type="submit">Vai</button>
-          </div>
+            <div className={classnames('form-group', { 'has-error': this.state.errors.senha })}>
+              <label htmlFor="senha">Senha</label>
+              <input className="form-control"
+                onChange={this.onChange} type="password" value={this.state.senha} name="senha">
+              </input>
+              {this.state.errors.senha && <span className="help-block">{this.state.errors.senha}</span>}
+            </div>
 
-        </form>
 
+            <div className="form-group">
+              <button disabled={this.state.isLoading} className="btn btn-primary" type="submit">Vai</button>
+            </div>
+
+          </form>
+
+        </div>
       </div>
     </div>;
   }
@@ -120,4 +121,4 @@ LoginPage.propTypes = {
   addFlashMessage: PropTypes.func.isRequired
 }
 
-export default connect(null, {login, addFlashMessage})(LoginPage);
+export default connect(null, { login, addFlashMessage })(LoginPage);

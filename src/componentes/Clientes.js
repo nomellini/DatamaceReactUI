@@ -4,18 +4,19 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types'
 
 import { getClientes } from '../actions/cliente.actions';
+import { history } from '../helper/history'
 
-class Clientes extends React.Component {
+import DtmPageBase from './DtmPageBase'
+
+class Clientes extends DtmPageBase {
 
   constructor(props) {
     super(props);
     this.fetch = this.fetch.bind(this);
-
     this.state = {
       errors: {},
       isLoading: false
     }
-
   }
 
   fetch(event) {
@@ -25,7 +26,11 @@ class Clientes extends React.Component {
 
     this.props.getClientes(this.props.pageIndex, this.props.pageSize)
       .then(
-        (res) => { console.log(res) },
+
+        (res) => {
+          this.setState({ isLoading: false })
+         },
+
         (err) => {
           console.log(err.message)
 
@@ -40,9 +45,9 @@ class Clientes extends React.Component {
   }
 
   componentWillMount() {
+    super.componentWillMount();
     this.props.getClientes(this.props.pageIndex, this.props.pageSize);
   }
-
 
   render() {
     return <div>

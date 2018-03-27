@@ -4,7 +4,6 @@ import { combineReducers, createStore, applyMiddleware, compose  } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { authenticationReducer } from '../reducers/authentication.reducer';
 import { clienteReducer } from '../reducers/cliente.reducer';
-import { fetchErrorReducer, isFetchingReducer } from '../reducers/fetch.reducer';
 import flashMessages from '../reducers/flashMessages';
 
 //const loggerMiddleware = createLogger();
@@ -12,8 +11,6 @@ import flashMessages from '../reducers/flashMessages';
 const rootReducer = combineReducers({
   auth: authenticationReducer,
   cliente: clienteReducer,
-  errorMessage: fetchErrorReducer,
-  isFetching: isFetchingReducer,
   flashMessages
 });
 

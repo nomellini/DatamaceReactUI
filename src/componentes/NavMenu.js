@@ -6,7 +6,7 @@ import LinkToLogin from './LinkToLogin';
 class NavMenu extends React.Component {
     render() {
         return <div className='main-nav'>
-            <div className='navbar navbar-inverse'>
+            <nav className='navbar navbar-inverse'>
                 <div className='navbar-header'>
                     <button type='button' className='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>
                         <span className='sr-only'>Toggle navigation</span>
@@ -22,6 +22,7 @@ class NavMenu extends React.Component {
                         <li>
                             <LinkToLogin />
                         </li>
+
                         <li>
                             <NavLink to={'/'} exact activeClassName='active'>
                                 <span className='glyphicon glyphicon-home'></span>Home
@@ -36,7 +37,7 @@ class NavMenu extends React.Component {
 
                     </ul>
                 </div>
-            </div>
+            </nav>
         </div>;
     }
 }
