@@ -4,10 +4,10 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from "react-router-dom";
 
-import { login } from '../actions/user.actions';
-import { history } from '../helper/history';
-import validateInput from '../validator/login';
-import { addFlashMessage } from '../actions/flashMessages.actions';
+import { login } from '../../actions/user.actions';
+import { history } from '../../helper/history';
+import validateInput from '../../validator/login';
+import { addFlashMessage } from '../../actions/flashMessages.actions';
 
 class LoginPage extends React.Component {
 

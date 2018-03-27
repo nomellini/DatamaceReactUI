@@ -1,11 +1,10 @@
-import { Link } from 'react-router-dom';
-import * as React from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
 import PropTypes from 'prop-types'
 
-import { getClientes } from '../actions/cliente.actions';
-import { history } from '../helper/history'
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
+import { getClientes } from '../../actions/cliente.actions';
 import DtmPageBase from './DtmPageBase'
 
 class Clientes extends DtmPageBase {

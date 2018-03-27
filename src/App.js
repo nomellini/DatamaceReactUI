@@ -5,13 +5,12 @@ import PrivateRoute from './componentes/PrivateRoute'
 
 import './site.css';
 
-
 import { history } from './helper/history';
-import Home from './componentes/Home';
 import Layout from './componentes/Layout';
-import LoginPage from './componentes/LoginPage';
-import Clientes from './componentes/Clientes'
-import Cliente from './componentes/Cliente'
+import HomePage from './componentes/Pages/HomePage';
+import LoginPage from './componentes/Pages/LoginPage';
+import ClientesPage from './componentes/Pages/ClientesPage'
+import ClientePage from './componentes/Pages/ClientePage'
 
 class App extends Component {
 
@@ -24,9 +23,9 @@ class App extends Component {
   renderApp() {
     if (this.props.isAuthenticated) {
       return <Layout AppName={this.props.appName}>
-        <PrivateRoute exact path='/' component={Home} />
-        <PrivateRoute path='/Clientes' component={Clientes} />
-        <PrivateRoute path='/Cliente/:Id' component={Cliente} />
+        <PrivateRoute exact path='/' component={HomePage} />
+        <PrivateRoute path='/Clientes' component={ClientesPage} />
+        <PrivateRoute path='/Cliente/:Id' component={ClientePage} />
       </Layout>
     }
     else {

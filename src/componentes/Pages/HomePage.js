@@ -5,8 +5,6 @@ import DtmPageBase from './DtmPageBase'
 
 class Home extends DtmPageBase {
 
-
-
     BoasVindas() {
         const { unique_name } = this.props;
         return unique_name ? `Você está logado como ${unique_name}` : 'Faça login para começar'

@@ -1,10 +1,11 @@
+import PropTypes from 'prop-types'
 import classnames from 'classnames';
 import React from 'react'
 import { connect } from 'react-redux'
-import { addCliente } from '../actions/cliente.actions'
-import { addFlashMessage } from '../actions/flashMessages.actions'
-import PropTypes from 'prop-types'
-import { history } from '../helper/history';
+
+import { addCliente } from '../../actions/cliente.actions'
+import { addFlashMessage } from '../../actions/flashMessages.actions'
+import { history } from '../../helper/history';
 import DtmPageBase from './DtmPageBase'
 
 class Cliente extends DtmPageBase {
@@ -23,7 +24,7 @@ class Cliente extends DtmPageBase {
       codigoSad: '',
       url: '',
       email: '',
-      Cnpj: '',
+      cnpj: '',
       dataValidade: '2022-01-01T16:30:39.263Z',
       status: false
     }
