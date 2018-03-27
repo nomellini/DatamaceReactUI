@@ -19,9 +19,7 @@ class Clientes extends React.Component {
   }
 
   componentWillMount() {
-    if (!this.props.clientes) {
       this.props.getClientes(this.props.pageIndex, this.props.pageSize);
-    }
   }
 
 

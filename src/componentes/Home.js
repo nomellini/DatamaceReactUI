@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { connect } from 'react-redux'
-import FlashMessagesList from './flash/FlashMessagesList';
 
 
 class Home extends React.Component {
@@ -13,12 +12,13 @@ class Home extends React.Component {
 
     render() {
         return <div>
-            <h1>Datamace Mobile Configuration</h1>
-            <div><FlashMessagesList /></div>
-            <p>Utilize esta site para:</p>
+            <h1>Datamace Mobile Portal</h1>
+
+            <p>Utilize esta portal para:</p>
             <ul>
                 <li>Listar clientes</li>
                 <li>Adicionar clientes</li>
+                <li>Cadstrar aplicativos</li>
             </ul>
             <p>
                 {this.BoasVindas()}

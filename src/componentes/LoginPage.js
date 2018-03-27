@@ -48,7 +48,6 @@ class LoginPage extends React.Component {
       this.setState({ message: '', errors: {}, isLoading: true });
 
       this.props.login(usuario, senha).then(
-
         (res) => {
           this.props.addFlashMessage({
             type: 'success',

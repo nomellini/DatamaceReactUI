@@ -1,32 +1,65 @@
+import classnames from 'classnames';
 import React from 'react'
 import { connect } from 'react-redux'
 import { addCliente } from '../actions/cliente.actions'
+import { addFlashMessage } from '../actions/flashMessages.actions'
 import PropTypes from 'prop-types'
+import { history } from '../helper/history';
 
 class Cliente extends React.Component {
 
   constructor(props) {
-    super(props);
-    this.onChange = this.onChange.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.gravar = this.gravar.bind(this);
 
+    super(props);
 
     this.state = {
+      errors: {},
+      isLoading: false,
+
       codigo: 0,
       nome: "",
       descricao: '',
       codigoSad: '',
       url: '',
       email: '',
+      Cnpj: '',
+      dataValidade: '2022-01-01T16:30:39.263Z',
       status: false
     }
+
+    this.onChange = this.onChange.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.gravar = this.gravar.bind(this);
+
   }
 
-  gravar()
-  {
-    console.log(JSON.stringify( this.state));
-    this.props.addCliente(this.state);
+  gravar() {
+    this.setState({message:'', errors: {}, isLoading: true });
+
+    this.props.addCliente(this.state).then(
+      (res) => {
+        console.log(res)
+        this.props.addFlashMessage({
+          type: 'success',
+          text: `Cliente inserido com sucesse !`
+        });
+        history.push('/clientes');
+      },
+
+      (err) => {
+
+        const errors = {
+          "nome": "Este campo é obrigatório",
+          "cnpj": "CNPJ inválido",
+          "email": "Email inválido",
+          "url": "URL inválida. Deve conter http:// ou https://"
+        }
+        this.setState({ errors })
+        //this.setState({ errors: err.response.data.errors })
+        this.setState({ message: err.response.data.message , isLoading: false })
+      }
+    );
+
   }
 
   onChange(event) {
@@ -58,49 +91,63 @@ class Cliente extends React.Component {
         </div>
       </div>
 
-
+          {this.state.message && <div className="alert alert-danger">{this.state.message}</div>}
 
       <div className="row">
         <div className="col-sm-8">
           <div className="form-horizontal">
 
-            <div className="form-group">
+            <div className={classnames('form-group', { 'has-error': this.state.errors.nome })}>
               <label htmlFor="inputNome" className="col-md-4 control-label">Nome</label>
               <div className="col-md-8">
                 <input type="text"
                   name="nome" className="form-control" value={this.state.nome} onChange={this.onChange} />
+                {this.state.errors.nome && <span className="help-block">{this.state.errors.nome}</span>}
               </div>
             </div>
 
-            <div className="form-group">
+            <div className={classnames('form-group', { 'has-error': this.state.errors.descricao })}>
               <label htmlFor="input" className="col-md-4 control-label">Descricao</label>
               <div className="col-md-8">
                 <input type="text" name="descricao" className="form-control" value={this.state.descricao} onChange={this.onChange} />
+                {this.state.errors.descricao && <span className="help-block">{this.state.errors.descricao}</span>}
               </div>
             </div>
 
-            <div className="form-group">
+
+            <div className={classnames('form-group', { 'has-error': this.state.errors.cnpj })}>
+              <label htmlFor="input" className="col-md-4 control-label">CNPJ</label>
+              <div className="col-md-8">
+                <input type="text" name="cnpj" className="form-control" value={this.state.cnpj} onChange={this.onChange} />
+                {this.state.errors.cnpj && <span className="help-block">{this.state.errors.cnpj}</span>}
+              </div>
+            </div>
+
+            <div className={classnames('form-group', { 'has-error': this.state.errors.codigoSad })}>
               <label htmlFor="input" className="col-md-4 control-label">Código SAD</label>
               <div className="col-md-8">
                 <input type="text" name="codigoSad" className="form-control" value={this.state.codigoSad} onChange={this.onChange} />
+                {this.state.errors.codigoSad && <span className="help-block">{this.state.errors.codigoSad}</span>}
               </div>
             </div>
 
-            <div className="form-group">
+            <div className={classnames('form-group', { 'has-error': this.state.errors.url })}>
               <label htmlFor="input" className="col-md-4 control-label">URL Server API</label>
               <div className="col-md-8">
                 <input type="text" name="url" className="form-control" value={this.state.url} onChange={this.onChange} />
+                {this.state.errors.url && <span className="help-block">{this.state.errors.url}</span>}
               </div>
             </div>
 
-            <div className="form-group">
+            <div className={classnames('form-group', { 'has-error': this.state.errors.email })}>
               <label htmlFor="input" className="col-md-4 control-label">Email</label>
               <div className="col-md-8">
                 <input type="text" name="email" className="form-control" value={this.state.email} onChange={this.onChange} />
+                {this.state.errors.email && <span className="help-block">{this.state.errors.email}</span>}
               </div>
             </div>
 
-            <div className="form-group">
+            <div className={classnames('form-group', { 'has-error': this.state.errors.status })}>
               <label htmlFor="input" className="col-md-4 control-label">Cliente Ativo</label>
               <div className="col-md-8">
 
@@ -134,8 +181,15 @@ function mapStateToProps(state, ownProps) {
 }
 
 Cliente.propTypes = {
+  addFlashMessage: PropTypes.func.isRequired,
   addCliente: PropTypes.func.isRequired
 }
 
 
-export default connect(mapStateToProps, {addCliente})(Cliente);
+export default connect(
+  mapStateToProps,
+  {
+    addCliente,
+    addFlashMessage
+  }
+)(Cliente);

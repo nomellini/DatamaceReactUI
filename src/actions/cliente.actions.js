@@ -10,30 +10,11 @@ export const clienteActions = {
   No final dê um dispatch para que o Redux atualize o estado do App
 */
 
-function addClienteDone(cliente) {
-  return {
-    type: consts.ADD_CLIENTE_DONE,
-    payload: cliente
-  }
-}
-
 
 export function addCliente(cliente) {
   // vamos inserir o cliente usando a api.
   return dispatch => {
-    clienteService.addCliente(cliente).then(
-      data => {
-        console.log(data);
-        //dispatch(addClienteDone(cliente));
-      },
-      error => {
-        console.log(error.response.data);
-        // dispatch({
-        //   type: consts.FETCHING_FAILURE,
-        //   message: error || "Algo deu errado - inserir cliente"
-        // })
-      }
-    )
+    return clienteService.addCliente(cliente);
   }
 }
 
