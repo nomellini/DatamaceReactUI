@@ -22,10 +22,6 @@ function getClientes(PageIndex, PageSize) {
 function addCliente(cliente)
 {
     return axios.post(CLIENTE_API, cliente);
-    //     .then(
-    //         res => console.log(res),
-    //         err => console.log(err.response.data)
-    // );
 }
 
 

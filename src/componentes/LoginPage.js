@@ -55,9 +55,17 @@ class LoginPage extends React.Component {
           });
           history.push('/');
         },
+        (err) =>
+        {
+            if (err.message === "Network Error") {
+              // message no state é apenas desta tela
+              this.setState({ message: err.message, isLoading: false })
+              return;
+            }
 
+            this.setState({ message: err.response.data.message, isLoading: false })
+        }
 
-        (err) => this.setState({ message: err.response.data.message, isLoading: false })
       );
     }
   }

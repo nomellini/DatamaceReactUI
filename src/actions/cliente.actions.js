@@ -21,16 +21,10 @@ export function addCliente(cliente) {
 
 export function getClientes(pageIndex, pageSize) {
   return dispatch => {
-    clienteService.getClientes(pageIndex, pageSize)
+    return clienteService.getClientes(pageIndex, pageSize)
       .then(
         data => {
           dispatch(success(data, pageIndex, pageSize));
-        },
-        error => {
-          dispatch({
-            type: consts.FETCHING_FAILURE,
-            message: error || "Algo deu errado"
-          })
         }
       )
   }

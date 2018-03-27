@@ -4,22 +4,43 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types'
 
 import { getClientes } from '../actions/cliente.actions';
-import { addFlashMessage } from '../actions/flashMessages.actions'
 
 class Clientes extends React.Component {
 
   constructor(props) {
     super(props);
     this.fetch = this.fetch.bind(this);
+
+    this.state = {
+      errors: {},
+      isLoading: false
+    }
+
   }
 
   fetch(event) {
     event.preventDefault();
-    this.props.getClientes(this.props.pageIndex, this.props.pageSize);
+
+    this.setState({ message: '', errors: {}, isLoading: true });
+
+    this.props.getClientes(this.props.pageIndex, this.props.pageSize)
+      .then(
+        (res) => { console.log(res) },
+        (err) => {
+          console.log(err.message)
+
+          if (err.message === "Network Error") {
+            this.setState({ message: err.message, isLoading: false })
+            return;
+          }
+
+          this.setState({ message: `${err.response.status} - ${err.response.statusText}`, isLoading: false })
+        }
+      )
   }
 
   componentWillMount() {
-      this.props.getClientes(this.props.pageIndex, this.props.pageSize);
+    this.props.getClientes(this.props.pageIndex, this.props.pageSize);
   }
 
 
@@ -32,6 +53,7 @@ class Clientes extends React.Component {
           <h3 className="text-center">Cadastro de clientes</h3>
         </div>
       </div>
+      {this.state.message && <div className="alert alert-danger">{this.state.message}</div>}
 
       <div className="row">
         <div className="col-md-12">
@@ -53,7 +75,7 @@ class Clientes extends React.Component {
           </table>
           <div className="row">
             <div className="col-md-2">
-              <button disabled={this.props.isFetching} onClick={this.fetch} className="btn btn-primary">Carregar</button>
+              <button disabled={this.state.isLoading} onClick={this.fetch} className="btn btn-primary">Carregar</button>
             </div>
             <div className="col-md-2">
               <Link className='btn btn-danger' to={'/Cliente/0'}>Novo Cliente</Link>
@@ -91,18 +113,16 @@ class Clientes extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const { errorMessage, isFetching } = state;
   const { clientes, pageIndex, pageSize, totalPages } = state.cliente;
   return {
-    clientes, pageIndex, pageSize, totalPages, errorMessage, isFetching
+    clientes, pageIndex, pageSize, totalPages
   };
 }
 
 
 Clientes.propTypes = {
-  getClientes: PropTypes.func.isRequired,
-  addFlashMessage: PropTypes.func.isRequired
+  getClientes: PropTypes.func.isRequired
 }
 
 
-export default connect(mapStateToProps, { getClientes, addFlashMessage })(Clientes);
+export default connect(mapStateToProps, { getClientes })(Clientes);

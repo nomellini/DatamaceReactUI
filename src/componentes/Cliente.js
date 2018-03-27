@@ -34,11 +34,12 @@ class Cliente extends React.Component {
   }
 
   gravar() {
-    this.setState({message:'', errors: {}, isLoading: true });
+    this.setState({ message: '', errors: {}, isLoading: true });
 
     this.props.addCliente(this.state).then(
+
       (res) => {
-        console.log(res)
+        // addFlashMessage adiciona uma mensagem na lista de mensagems do aplicativo
         this.props.addFlashMessage({
           type: 'success',
           text: `Cliente inserido com sucesse !`
@@ -48,15 +49,27 @@ class Cliente extends React.Component {
 
       (err) => {
 
-        const errors = {
-          "nome": "Este campo é obrigatório",
-          "cnpj": "CNPJ inválido",
-          "email": "Email inválido",
-          "url": "URL inválida. Deve conter http:// ou https://"
+        if (err.message === "Network Error") {
+          // message no state é apenas desta tela
+          this.setState({ message: err.message, isLoading: false })
+          return;
         }
-        this.setState({ errors })
-        //this.setState({ errors: err.response.data.errors })
-        this.setState({ message: err.response.data.message , isLoading: false })
+
+
+        if (err.response.status !== 200) {
+
+          if (err.response.status === 400) {
+            this.setState({ errors: err.response.data.errors })
+            this.setState({ message: err.response.data.message, isLoading: false })
+          }
+          else {
+            this.setState(
+              {
+                message: `${err.response.status} - ${err.response.statusText}`, isLoading: false
+              }
+            )
+          }
+        }
       }
     );
 
@@ -91,7 +104,7 @@ class Cliente extends React.Component {
         </div>
       </div>
 
-          {this.state.message && <div className="alert alert-danger">{this.state.message}</div>}
+      {this.state.message && <div className="alert alert-danger">{this.state.message}</div>}
 
       <div className="row">
         <div className="col-sm-8">
