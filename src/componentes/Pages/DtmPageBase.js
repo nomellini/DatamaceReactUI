@@ -26,8 +26,9 @@ export default class DtmPageBase extends React.Component {
     //         type: 'success',
     //         text: `Sem permissão para ${PathName}`
     //       }));
+    //     }
     //     //history.push('/');
-
+    //   }
 
   }
 

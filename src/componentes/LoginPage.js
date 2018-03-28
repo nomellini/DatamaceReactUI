@@ -4,10 +4,10 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from "react-router-dom";
 
-import { login } from '../../actions/user.actions';
-import { history } from '../../helper/history';
-import validateInput from '../../validator/login';
-import { addFlashMessage } from '../../actions/flashMessages.actions';
+import { login } from '../actions/user.actions';
+import { history } from '../helper/history';
+import validateInput from '../validator/login';
+import { addFlashMessage } from '../actions/flashMessages.actions';
 
 class LoginPage extends React.Component {
 
@@ -16,7 +16,6 @@ class LoginPage extends React.Component {
 
     this.state = {
       errors: {},
-      isValid: true,
       isLoading: false,
       usuario: '',
       senha: ''
@@ -25,6 +24,15 @@ class LoginPage extends React.Component {
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
+
+  isValid() {
+    const { errors, isValid } = validateInput(this.state);
+    if (!isValid) {
+      this.setState({ errors });
+    }
+    return isValid;
+  }
+
 
   onChange(event) {
     event.preventDefault();
@@ -35,37 +43,25 @@ class LoginPage extends React.Component {
   onSubmit(event) {
     event.preventDefault();
     const { usuario, senha } = this.state;
+    if (this.isValid()) {
 
-    this.setState({ temErros: false, message: '', errors: {}, isLoading: true });
+      this.setState({ message: '', errors: {}, isLoading: true });
 
-    this.props.login(usuario, senha).then(
-      (res) => {
-        this.props.addFlashMessage({
-          type: 'success',
-          text: `Login efetuado com sucesso (para fechar esta mensagem, clique no x)`
-        });
-        history.push('/');
-      },
-      (err) => {
+      this.props.login(usuario, senha).then(
 
-        this.setState({ temErros: true});
+        (res) => {
+          this.props.addFlashMessage({
+            type: 'success',
+            text: `Login efetuado com sucesso (para fechar esta mensagem, clique no x)`
+          });
+          history.push('/');
+        },
 
-        if (err.message === "Network Error") {
-          // message no state é apenas desta tela
-          this.setState({ message: 'Servidor não encontrado', isLoading: false })
-          return;
-        }
-        this.setState(
-          {
-            errors: err.response.data.errors,
-            message: err.response.data.message,
-            isLoading: false
-          }
-        )
-      }
-    );
+
+        (err) => this.setState({ message: err.response.data.message, isLoading: false })
+      );
+    }
   }
-
 
   render() {
 
@@ -75,30 +71,29 @@ class LoginPage extends React.Component {
       return <Redirect to={from} />;
     }
 
-    return <div className={classnames('loginContainer', { 'fieldAnimate': this.state.message })} >
-
-      <div className="loginForm">
+    return <div className="row">
+      <div className="col-md-12">
         <form onSubmit={this.onSubmit}>
 
           <h1>Login</h1>
 
           {this.state.message && <div className="alert alert-danger">{this.state.message}</div>}
 
-          <div className={classnames('form-group', { 'fieldAnimate has-error': this.state.errors.Usuario })}>
+          <div className={classnames('form-group', { 'has-error': this.state.errors.usuario })}>
             <label htmlFor="usuario">Usuario</label>
             <input className="form-control"
               onChange={this.onChange} type="text" value={this.state.usuario} name="usuario">
             </input>
-            {this.state.errors.Usuario && <span className="help-block">{this.state.errors.Usuario}</span>}
+            {this.state.errors.usuario && <span className="help-block">{this.state.errors.usuario}</span>}
           </div>
 
 
-          <div className={classnames('form-group', { 'fieldAnimate has-error': this.state.errors.Senha })}>
+          <div className={classnames('form-group', { 'has-error': this.state.errors.senha })}>
             <label htmlFor="senha">Senha</label>
             <input className="form-control"
               onChange={this.onChange} type="password" value={this.state.senha} name="senha">
             </input>
-            {this.state.errors.Senha && <span className="help-block">{this.state.errors.Senha}</span>}
+            {this.state.errors.senha && <span className="help-block">{this.state.errors.senha}</span>}
           </div>
 
 
@@ -109,7 +104,6 @@ class LoginPage extends React.Component {
         </form>
 
       </div>
-
     </div>;
   }
 }
@@ -119,4 +113,4 @@ LoginPage.propTypes = {
   addFlashMessage: PropTypes.func.isRequired
 }
 
-export default connect(null, { login, addFlashMessage })(LoginPage);
+export default connect(null, {login, addFlashMessage})(LoginPage);

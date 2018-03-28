@@ -105,44 +105,22 @@
 }
 
 .loginForm {
-    border: 1px solid black;
+    border: 1px solid rgba(201, 201, 201, 0.966);
     width: 500px;
     height: 400px;
     margin: auto;
     padding: 15px;
+
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.loginAnimate {
+.fieldAnimate {
 
 
   animation: shake 0.72s cubic-bezier(.36,.07,.19,.97) both;
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
   perspective: 1000px;
-
-}
-
-@keyframes jiggle {
-
-  0% {
-    transform: translate(0, 0px)
-  }
-
-  25% {
-    transform: translate(-5, 0px)
-  }
-
-  75% {
-    transform: translate(0, 0px)
-  }
-
-  100% {
-    transform: translate(5px, 0px)
-  }
-
-  0% {
-    transform: translate(0, 0px)
-  }
 
 }
 

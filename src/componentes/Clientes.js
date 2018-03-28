@@ -1,52 +1,29 @@
-import React from 'react';
-import PropTypes from 'prop-types'
-import classnames from 'classnames';
 import { Link } from 'react-router-dom';
+import * as React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types'
 
-import { getClientes } from '../../actions/cliente.actions';
-import DtmPageBase from './DtmPageBase'
+import { getClientes } from '../actions/cliente.actions';
+import { addFlashMessage } from '../actions/flashMessages.actions'
 
-class Clientes extends DtmPageBase {
+class Clientes extends React.Component {
 
   constructor(props) {
     super(props);
     this.fetch = this.fetch.bind(this);
-    this.state = {
-      errors: {},
-      isLoading: false
-    }
   }
 
   fetch(event) {
     event.preventDefault();
-
-    this.setState({ message: '', errors: {}, isLoading: true });
-
-    this.props.getClientes(this.props.pageIndex, this.props.pageSize)
-      .then(
-
-        (res) => {
-          this.setState({ isLoading: false })
-        },
-
-        (err) => {
-          console.log(err.message)
-
-          if (err.message === "Network Error") {
-            this.setState({ message: err.message, isLoading: false })
-            return;
-          }
-
-          this.setState({ message: `${err.response.status} - ${err.response.statusText}`, isLoading: false })
-        }
-      )
+    this.props.getClientes(this.props.pageIndex, this.props.pageSize);
   }
 
   componentWillMount() {
-    super.componentWillMount();
-    this.props.getClientes(this.props.pageIndex, this.props.pageSize);
+    if (!this.props.clientes) {
+      this.props.getClientes(this.props.pageIndex, this.props.pageSize);
+    }
   }
+
 
   render() {
     return <div>
@@ -57,7 +34,6 @@ class Clientes extends DtmPageBase {
           <h3 className="text-center">Cadastro de clientes</h3>
         </div>
       </div>
-      {this.state.message && <div className="alert alert-danger">{this.state.message}</div>}
 
       <div className="row">
         <div className="col-md-12">
@@ -79,7 +55,7 @@ class Clientes extends DtmPageBase {
           </table>
           <div className="row">
             <div className="col-md-2">
-              <button disabled={this.state.isLoading} onClick={this.fetch} className="btn btn-primary">Carregar</button>
+              <button disabled={this.props.isFetching} onClick={this.fetch} className="btn btn-primary">Carregar</button>
             </div>
             <div className="col-md-2">
               <Link className='btn btn-danger' to={'/Cliente/0'}>Novo Cliente</Link>
@@ -99,15 +75,15 @@ class Clientes extends DtmPageBase {
 
       clientes = this.props.clientes.map(function (cli) {
 
-        return <tr className={classnames({ 'danger fieldAnimate': !cli.status })} key={cli.codigo}>
+        return <tr className="" key={cli.codigo}>
           <td>{cli.codigo}</td>
           <td>{cli.nome}</td>
           <td>{cli.descricao}</td>
           <td>{cli.codigoSad}</td>
           <td>{cli.url}</td>
-          <td>{cli.status ? "SIM" : "Não"}</td>
+          <td>{cli.status}</td>
           <td>
-            <Link to={`/cliente/${cli.codigo}`}><span aria-hidden="true" className="glyphicon glyphicon-edit"></span></Link>
+            <span aria-hidden="true" className="glyphicon glyphicon-edit"></span>
           </td>
         </tr>
       });
@@ -117,16 +93,18 @@ class Clientes extends DtmPageBase {
 }
 
 function mapStateToProps(state) {
+  const { errorMessage, isFetching } = state;
   const { clientes, pageIndex, pageSize, totalPages } = state.cliente;
   return {
-    clientes, pageIndex, pageSize, totalPages
+    clientes, pageIndex, pageSize, totalPages, errorMessage, isFetching
   };
 }
 
 
 Clientes.propTypes = {
-  getClientes: PropTypes.func.isRequired
+  getClientes: PropTypes.func.isRequired,
+  addFlashMessage: PropTypes.func.isRequired
 }
 
 
-export default connect(mapStateToProps, { getClientes })(Clientes);
+export default connect(mapStateToProps, { getClientes, addFlashMessage })(Clientes);

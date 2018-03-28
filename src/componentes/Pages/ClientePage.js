@@ -117,7 +117,7 @@ class Cliente extends DtmPageBase {
         <div className="col-sm-8">
           <div className="form-horizontal">
 
-            <div className={classnames('form-group', { 'has-error': this.state.errors.Nome })}>
+            <div className={classnames('form-group', { 'has-error fieldAnimate': this.state.errors.Nome })}>
               <label htmlFor="inputNome" className="col-md-4 control-label">Nome</label>
               <div className="col-md-8">
                 <input type="text"
@@ -126,7 +126,7 @@ class Cliente extends DtmPageBase {
               </div>
             </div>
 
-            <div className={classnames('form-group', { 'has-error': this.state.errors.descricao })}>
+            <div className={classnames('form-group', { 'has-error fieldAnimate': this.state.errors.descricao })}>
               <label htmlFor="input" className="col-md-4 control-label">Descricao</label>
               <div className="col-md-8">
                 <input type="text" name="descricao" className="form-control" value={this.state.descricao} onChange={this.onChange} />
@@ -135,7 +135,7 @@ class Cliente extends DtmPageBase {
             </div>
 
 
-            <div className={classnames('form-group', { 'has-error': this.state.errors.CNPJ })}>
+            <div className={classnames('form-group', { 'has-error fieldAnimate': this.state.errors.CNPJ })}>
               <label htmlFor="input" className="col-md-4 control-label">CNPJ</label>
               <div className="col-md-8">
                 <input type="text" name="cnpj" className="form-control" value={this.state.cnpj} onChange={this.onChange} />
@@ -143,7 +143,7 @@ class Cliente extends DtmPageBase {
               </div>
             </div>
 
-            <div className={classnames('form-group', { 'has-error': this.state.errors.codigoSad })}>
+            <div className={classnames('form-group', { 'has-error fieldAnimate': this.state.errors.codigoSad })}>
               <label htmlFor="codigoSad" className="col-md-4 control-label">Código SAD</label>
               <div className="col-md-8">
                 <input type="text" name="codigoSad" className="form-control" value={this.state.codigoSad} onChange={this.onChange} />
@@ -151,7 +151,7 @@ class Cliente extends DtmPageBase {
               </div>
             </div>
 
-            <div className={classnames('form-group', { 'has-error': this.state.errors.URL })}>
+            <div className={classnames('form-group', { 'has-error fieldAnimate': this.state.errors.URL })}>
               <label htmlFor="input" className="col-md-4 control-label">URL Server API</label>
               <div className="col-md-8">
                 <input type="text" name="url" className="form-control" value={this.state.url} onChange={this.onChange} />
@@ -159,7 +159,7 @@ class Cliente extends DtmPageBase {
               </div>
             </div>
 
-            <div className={classnames('form-group', { 'has-error': this.state.errors.Email })}>
+            <div className={classnames('form-group', { 'has-error fieldAnimate': this.state.errors.Email })}>
               <label htmlFor="input" className="col-md-4 control-label">Email</label>
               <div className="col-md-8">
                 <input type="text" name="email" className="form-control" value={this.state.email} onChange={this.onChange} />
@@ -167,7 +167,7 @@ class Cliente extends DtmPageBase {
               </div>
             </div>
 
-            <div className={classnames('form-group', { 'has-error': this.state.errors.status })}>
+            <div className={classnames('form-group', { 'has-error fieldAnimate': this.state.errors.status })}>
               <label htmlFor="input" className="col-md-4 control-label">Cliente Ativo</label>
               <div className="col-md-8">
 
