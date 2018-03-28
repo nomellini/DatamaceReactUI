@@ -69,3 +69,97 @@
       text-overflow: ellipsis;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+@import url(https://fonts.googleapis.com/css?family=Raleway:700);
+
+.btn1 {
+  display: inline-block;
+  border-radius: 5px;
+  box-shadow: 1px 1px 10px 3px hsla(0, 0%, 0%, .6);
+  width: 5em;
+  padding: 1em;
+  color: hsla(255, 255%, 255%, 1);
+  text-align: center;
+  text-shadow: 0 2px 0 hsla(0, 0%, 0%, .25);
+  font: 400 1.5em /1 'Raleway', sans-serif;
+  letter-spacing: 4px;
+  background: hsla(155, 95%, 35%, 1);
+  cursor: pointer;
+}
+
+
+.loginContainer {
+    margin : 10px;
+    display: flex;
+    height: 80vh;
+}
+
+.loginForm {
+    border: 1px solid black;
+    width: 500px;
+    height: 400px;
+    margin: auto;
+    padding: 15px;
+}
+
+.loginAnimate {
+
+
+  animation: shake 0.72s cubic-bezier(.36,.07,.19,.97) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+
+}
+
+@keyframes jiggle {
+
+  0% {
+    transform: translate(0, 0px)
+  }
+
+  25% {
+    transform: translate(-5, 0px)
+  }
+
+  75% {
+    transform: translate(0, 0px)
+  }
+
+  100% {
+    transform: translate(5px, 0px)
+  }
+
+  0% {
+    transform: translate(0, 0px)
+  }
+
+}
+
+@keyframes shake {
+    10%, 90% {
+      transform: translate3d(-1px, 0, 0);
+    }
+
+    20%, 80% {
+      transform: translate3d(2px, 0, 0);
+    }
+
+    30%, 50%, 70% {
+      transform: translate3d(-4px, 0, 0);
+    }
+
+    40%, 60% {
+      transform: translate3d(4px, 0, 0);
+    }
+  }
