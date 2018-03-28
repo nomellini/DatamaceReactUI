@@ -3,6 +3,7 @@ import classnames from 'classnames';
 import React from 'react'
 import { connect } from 'react-redux'
 
+import { clienteService } from '../../services/cliente.service';
 import { addCliente } from '../../actions/cliente.actions'
 import { addFlashMessage } from '../../actions/flashMessages.actions'
 import { history } from '../../helper/history';
@@ -33,6 +34,13 @@ class Cliente extends DtmPageBase {
     this.handleChange = this.handleChange.bind(this);
     this.gravar = this.gravar.bind(this);
 
+  }
+
+  componentDidMount() {
+    var ClienteId = this.props.ClienteId;
+    const cliente = clienteService.obterCliente(ClienteId);
+    console.log(cliente);
+    this.setState(cliente);
   }
 
   gravar() {
