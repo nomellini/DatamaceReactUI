@@ -19,7 +19,7 @@ export function setCurrentUser(user) {
 }
 
 export function login(usuario, senha) {
-  userService.login(usuario, senha).then(res => {
+  return userService.login(usuario, senha).then(res => {
     const token = res.data.accessToken;
     localStorage.setItem('jwtToken', token);
     setAuthorizationToken(token);

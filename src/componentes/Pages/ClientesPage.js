@@ -1,11 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types'
 import classnames from 'classnames';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import DtmPageBase from './DtmPageBase'
 
 import { getClientes } from '../../actions/cliente.actions';
-import DtmPageBase from './DtmPageBase'
+
 
 class Clientes extends DtmPageBase {
 
@@ -23,13 +23,11 @@ class Clientes extends DtmPageBase {
 
     this.setState({ message: '', errors: {}, isLoading: true });
 
-    this.props.getClientes(this.props.pageIndex, this.props.pageSize)
+    getClientes()
       .then(
-
         (res) => {
           this.setState({ isLoading: false })
         },
-
         (err) => {
           console.log(err.message)
 
@@ -37,7 +35,6 @@ class Clientes extends DtmPageBase {
             this.setState({ message: err.message, isLoading: false })
             return;
           }
-
           this.setState({ message: `${err.response.status} - ${err.response.statusText}`, isLoading: false })
         }
       )
@@ -45,7 +42,7 @@ class Clientes extends DtmPageBase {
 
   componentWillMount() {
     super.componentWillMount();
-    this.props.getClientes(this.props.pageIndex, this.props.pageSize);
+    getClientes();
   }
 
   render() {
@@ -95,6 +92,7 @@ class Clientes extends DtmPageBase {
   renderClientes() {
 
     var clientes = [];
+
     if (this.props.clientes)
 
       clientes = this.props.clientes.map(function (cli) {
@@ -117,16 +115,11 @@ class Clientes extends DtmPageBase {
 }
 
 function mapStateToProps(state) {
-  const { clientes, pageIndex, pageSize, totalPages } = state.cliente;
+  const { clientes  } = state.cliente;
   return {
-    clientes, pageIndex, pageSize, totalPages
+    clientes
   };
 }
 
 
-Clientes.propTypes = {
-  getClientes: PropTypes.func.isRequired
-}
-
-
-export default connect(mapStateToProps, { getClientes })(Clientes);
+export default connect(mapStateToProps)(Clientes);

@@ -15,21 +15,19 @@ export function addCliente(cliente) {
 }
 
 
-export function getClientes(pageIndex, pageSize) {
-  return clienteService.getClientes(pageIndex, pageSize)
+export function getClientes() {
+  return clienteService.getClientes()
     .then(
-      data => {
-        store.dispatch(success(data, pageIndex, pageSize));
+      res => {
+        store.dispatch(success(res.data));
       }
     )
 }
 
 
-function success(data, pageIndex, pageSize) {
+function success(data) {
   return {
     type: consts.GET_CLIENTE_SUCCESS,
-    clientes: data,
-    pageIndex: pageIndex,
-    pageSize: pageSize
+    clientes: data
   }
 }
