@@ -11,6 +11,7 @@ import { Mensagens } from '../../actions/flashMessages.actions';
 class LoginPage extends React.Component {
 
   constructor(props) {
+
     super(props);
 
     this.state = {
