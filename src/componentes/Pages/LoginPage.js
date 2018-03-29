@@ -6,8 +6,7 @@ import { Redirect } from "react-router-dom";
 
 import { login } from '../../actions/user.actions';
 import { history } from '../../helper/history';
-import validateInput from '../../validator/login';
-import { addFlashMessage } from '../../actions/flashMessages.actions';
+import { Mensagens } from '../../actions/flashMessages.actions';
 
 class LoginPage extends React.Component {
 
@@ -40,10 +39,7 @@ class LoginPage extends React.Component {
 
     this.props.login(usuario, senha).then(
       (res) => {
-        this.props.addFlashMessage({
-          type: 'success',
-          text: `Login efetuado com sucesso (para fechar esta mensagem, clique no x)`
-        });
+        Mensagens.addFlashMessageSucesso(`Login efetuado com sucesso (para fechar esta mensagem, clique no x)`);
         history.push('/');
       },
       (err) => {
@@ -115,8 +111,7 @@ class LoginPage extends React.Component {
 }
 
 LoginPage.propTypes = {
-  login: PropTypes.func.isRequired,
-  addFlashMessage: PropTypes.func.isRequired
+  login: PropTypes.func.isRequired
 }
 
-export default connect(null, { login, addFlashMessage })(LoginPage);
+export default connect(null, { login })(LoginPage);

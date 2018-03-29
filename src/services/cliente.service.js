@@ -1,5 +1,5 @@
 import { CLIENTE_API } from '../helper/apiConfig';
-import { authHeader } from '../helper/auth-header';
+//import { authHeader } from '../helper/auth-header';
 import findIndex from 'lodash/findIndex';
 import axios from 'axios';
 import store from '../redux/store'
@@ -13,18 +13,20 @@ export const clienteService = {
 
 function getClientes(PageIndex, PageSize) {
 
-    const requestOptions = {
-        method: 'GET',
-        headers: authHeader()
-        //,      body: JSON.stringify({ PageIndex, PageSize })
-    };
-    return axios.get(CLIENTE_API, requestOptions)
+    // const requestOptions = {
+    //     method: 'GET',
+    //     headers: authHeader()
+    //     //,      body: JSON.stringify({ PageIndex, PageSize })
+    // };
+    return axios.get(CLIENTE_API)
         .then(handleResponse)
 }
 
 function obterCliente(Id) {
     const state = store.getState();
+    console.log(state)
     const clientes = state.cliente.clientes;
+    console.log(state)
     const index = findIndex(clientes, function (o) { return o.codigo == Id; });
     return clientes[index];
 }

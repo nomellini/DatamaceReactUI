@@ -1,11 +1,12 @@
+import React from 'react'
+
 import PropTypes from 'prop-types'
 import classnames from 'classnames';
-import React from 'react'
 import { connect } from 'react-redux'
 
 import { clienteService } from '../../services/cliente.service';
 import { addCliente } from '../../actions/cliente.actions'
-import { addFlashMessage } from '../../actions/flashMessages.actions'
+import { Mensagens }  from '../../actions/flashMessages.actions'
 import { history } from '../../helper/history';
 import DtmPageBase from './DtmPageBase'
 
@@ -52,10 +53,7 @@ class Cliente extends DtmPageBase {
 
 
         // addFlashMessage adiciona uma mensagem na lista de mensagems do aplicativo
-        this.props.addFlashMessage({
-          type: 'success',
-          text: `Cliente inserido com sucesse !`
-        });
+        Mensagens.addFlashMessageSucesso('Gravação efetuada.');
         history.push('/clientes');
       },
 
@@ -209,7 +207,6 @@ function mapStateToProps(state, ownProps) {
 }
 
 Cliente.propTypes = {
-  addFlashMessage: PropTypes.func.isRequired,
   addCliente: PropTypes.func.isRequired
 }
 
@@ -217,7 +214,6 @@ Cliente.propTypes = {
 export default connect(
   mapStateToProps,
   {
-    addCliente,
-    addFlashMessage
+    addCliente
   }
 )(Cliente);
