@@ -24,9 +24,7 @@ function getClientes(PageIndex, PageSize) {
 
 function obterCliente(Id) {
     const state = store.getState();
-    console.log(state)
     const clientes = state.cliente.clientes;
-    console.log(state)
     const index = findIndex(clientes, function (o) { return o.codigo == Id; });
     return clientes[index];
 }
