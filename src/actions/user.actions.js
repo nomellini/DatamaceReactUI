@@ -28,14 +28,12 @@ export function login(usuario, senha) {
 }
 
 function logout() {
-  return dispatch => {
     localStorage.removeItem('jwtToken');
     localStorage.removeItem('clienteData');
     setAuthorizationToken(false);
-    dispatch(setCurrentUser({}));
-    dispatch({
+    store.dispatch(setCurrentUser({}));
+    store.dispatch({
       type: consts.LOGOUT_USER,
     })
     history.push('/Login');
-  }
 }

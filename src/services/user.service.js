@@ -6,8 +6,6 @@ export const userService = {
     isLogged
 };
 
-//axios.defaults.headers.common['Content-Type'] = 'application/json';
-
 function login(usuario, senha) {
     const body = JSON.stringify({ usuario, senha });
     return axios.post(AUTH_API, body, {
@@ -16,7 +14,6 @@ function login(usuario, senha) {
 }
 
 function isLogged() {
-
     if (localStorage.jwtToken) {
         return true;
     }

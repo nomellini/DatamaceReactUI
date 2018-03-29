@@ -12,8 +12,7 @@ class LinkToLogin extends React.Component {
 
   onClick(event) {
     event.preventDefault();
-    const { dispatch } = this.props;
-    dispatch(userActions.logout());
+    userActions.logout();
   }
 
   render() {

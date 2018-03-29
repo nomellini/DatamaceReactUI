@@ -1,10 +1,8 @@
+import React from 'react';
 import classnames from 'classnames';
-import PropTypes from 'prop-types';
-import * as React from 'react';
-import { connect } from 'react-redux';
-import { Redirect } from "react-router-dom";
 
-import { login } from '../../actions/user.actions';
+import { Redirect } from "react-router-dom";
+import { userActions } from '../../actions/user.actions';
 import { history } from '../../helper/history';
 import { Mensagens } from '../../actions/flashMessages.actions';
 
@@ -38,7 +36,7 @@ class LoginPage extends React.Component {
 
     this.setState({ temErros: false, message: '', errors: {}, isLoading: true });
 
-    login(usuario, senha).then(
+    userActions.login(usuario, senha).then(
       (res) => {
         Mensagens.addFlashMessageSucesso(`Login efetuado com sucesso (para fechar esta mensagem, clique no x)`);
         history.push('/');
@@ -111,8 +109,4 @@ class LoginPage extends React.Component {
   }
 }
 
-LoginPage.propTypes = {
-  login: PropTypes.func.isRequired
-}
-
-export default connect(null, { login })(LoginPage);
+export default LoginPage;

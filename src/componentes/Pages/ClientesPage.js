@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import DtmPageBase from './DtmPageBase'
 
-import { getClientes } from '../../actions/cliente.actions';
+import { clienteActions } from '../../actions/cliente.actions';
 
 
 class Clientes extends DtmPageBase {
@@ -23,7 +23,7 @@ class Clientes extends DtmPageBase {
 
     this.setState({ message: '', errors: {}, isLoading: true });
 
-    getClientes()
+    clienteActions.getClientes()
       .then(
         (res) => {
           this.setState({ isLoading: false })
@@ -42,7 +42,7 @@ class Clientes extends DtmPageBase {
 
   componentWillMount() {
     super.componentWillMount();
-    getClientes();
+    clienteActions.getClientes();
   }
 
   render() {
@@ -114,12 +114,4 @@ class Clientes extends DtmPageBase {
   }
 }
 
-function mapStateToProps(state) {
-  const { clientes  } = state.cliente;
-  return {
-    clientes
-  };
-}
-
-
-export default connect(mapStateToProps)(Clientes);
+export default connect( state => ({clientes: state.cliente.clientes}))(Clientes);

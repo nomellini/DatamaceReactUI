@@ -1,21 +1,7 @@
 Em store.js define-se os reducers
 
 
-StateApp
-{
+Eu tenho que usar o connect quando quero que os props peguem os valores
+do store e atualizem as telas que usarm StateToProps.
 
-  isFetching,
-  errorMessage
-
-  auth: {
-    token: string,
-    user: string,
-    isLoading: boolean
-  },
-  cliente: {
-    clientes []
-    pageIndex
-    pageSize
-    totalPages
-  }
-}
+Posso usar o store diretamente quando estou em componentes
