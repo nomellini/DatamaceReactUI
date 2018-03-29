@@ -2,8 +2,7 @@
 import {
   LOGOUT_USER,
   ADD_FLASH_MESSAGE,
-  DELETE_FLASH_MESSAGE,
-  DELETE_ALL_FLASH_MESSAGE } from '../constants';
+  DELETE_FLASH_MESSAGE   } from '../constants';
 
 import shortid from 'shortid';
 import findIndex from 'lodash/findIndex';
@@ -21,7 +20,6 @@ export default (state = [], action = {}) => {
       ];
 
     case LOGOUT_USER:
-    case DELETE_ALL_FLASH_MESSAGE:
       return [];
 
     case DELETE_FLASH_MESSAGE:

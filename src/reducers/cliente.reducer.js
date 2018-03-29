@@ -21,14 +21,10 @@ const initialState = {
 
 export function clienteReducer(state = initialState, action) {
   switch (action.type) {
-    case consts.GET_CLIENTE_REQUEST:
-      return state
     case consts.GET_CLIENTE_SUCCESS:
       return {
         clientes: action.clientes
       }
-    case consts.FETCHING_FAILURE:
-      return false;
     case consts.LOGOUT_USER:
       return {}
     default:
