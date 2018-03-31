@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import DtmPageBase from './DtmPageBase'
 
 import { clienteActions } from '../../actions/cliente.actions';
-
+import TestApiComponent from '../TestApiComponent';
 
 class Clientes extends DtmPageBase {
 
@@ -68,6 +68,8 @@ class Clientes extends DtmPageBase {
                 <th>URL</th>
                 <th>Ativo</th>
                 <th>Editar</th>
+                <th>ApiTest</th>
+                <th>Apps</th>
               </tr>
             </thead>
             <tbody>
@@ -107,6 +109,12 @@ class Clientes extends DtmPageBase {
           <td>
             <Link to={`/cliente/${cli.codigo}`}><span aria-hidden="true" className="glyphicon glyphicon-edit"></span></Link>
           </td>
+          <td>
+            <Link to={`/cliente/${cli.codigo}`}><span aria-hidden="true" className="glyphicon glyphicon-eye-open"></span></Link>
+          </td>          
+          <td>
+            <TestApiComponent />
+          </td>          
         </tr>
       });
 
@@ -114,4 +122,27 @@ class Clientes extends DtmPageBase {
   }
 }
 
-export default connect( state => ({clientes: state.cliente.clientes}))(Clientes);
+
+function mapStateToProps(state)
+{  
+  console.log(state, "state");
+  // const clientes = [
+  //     {
+  //       codigo: 1,
+  //       nome: 'Fernando',
+  //       descricao: 'descrição',
+  //       cnpj : '123.222.331-0001/12'
+  //     },
+  //     {
+  //       codigo: 2,
+  //       nome: 'Fernando',
+  //       descricao: 'descrição',
+  //       cnpj : '123.222.331-0001/12'
+  //     }
+  //   ];
+
+  const { clientes } = state.cliente;
+  return { clientes };
+}
+
+export default connect(mapStateToProps)(Clientes);

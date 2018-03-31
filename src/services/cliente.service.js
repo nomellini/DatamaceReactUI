@@ -1,4 +1,4 @@
-import { CLIENTE_API } from '../helper/apiConfig';
+import { CLIENTE_API, CLIENTE_API_TESTE } from '../helper/apiConfig';
 //import { authHeader } from '../helper/auth-header';
 import findIndex from 'lodash/findIndex';
 import axios from 'axios';
