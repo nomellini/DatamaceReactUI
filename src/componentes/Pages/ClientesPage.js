@@ -72,8 +72,8 @@ class Clientes extends DtmPageBase {
                 <th>URL</th>
                 <th>Ativo</th>
                 <th>Editar</th>
-                <th>ApiTest</th>
-                <th>Apps</th>
+                <th>ver Apps</th>
+                <th>Api Test</th>
               </tr>
             </thead>
             <tbody>
