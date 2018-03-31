@@ -17,13 +17,13 @@ export default class TestApiComponent extends React.Component {
     }
 
     componentDidMount() {
-        setTimeout(this.testarApi, 5000 * Math.random());
+        setTimeout(this.testarApi, 10000 * Math.random());
     }
 
     testarApi() {
         console.log('opa !')
 
-        if (Math.random() < .5)
+        if (Math.random() <= .8)
             this.setState({
                 loading: 1
             });
