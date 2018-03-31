@@ -9,13 +9,21 @@ export const clienteService = {
     getClientes,
     addCliente,
     obterCliente,
+    testarApiPorIdCliente,
+    obterClientePorId
 };
 
-function getClientes(PageIndex, PageSize) {
+function getClientes() {
     return axios.get(CLIENTE_API);
 }
 
+function testarApiPorIdCliente(Id) {
+    return axios.post(CLIENTE_API_TESTE, Id);
+}
 
+function obterClientePorId(Id) {
+    return axios.get(CLIENTE_API + "/" + Id);
+}
 
 
 function obterCliente(Id) {

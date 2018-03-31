@@ -4,8 +4,13 @@ import store from '../redux/store';
 
 export const clienteActions = {
   getClientes,
-  addCliente
+  addCliente,
+  testarApiPorIdCliente
 };
+
+export function testarApiPorIdCliente(Id) {
+  return clienteService.testarApiPorIdCliente(Id);
+}
 
 export function addCliente(cliente) {
   return clienteService.addCliente(cliente);
