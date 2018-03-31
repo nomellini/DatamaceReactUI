@@ -42,6 +42,10 @@ class Clientes extends DtmPageBase {
 
   componentWillMount() {
     super.componentWillMount();
+  }
+
+  componentDidMount()
+  {
     clienteActions.getClientes();
   }
 

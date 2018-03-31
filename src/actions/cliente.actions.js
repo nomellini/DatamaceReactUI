@@ -11,7 +11,7 @@ export const clienteActions = {
 function FakeApiReturnClientes() {
 
   let clientes = [];
-  for (let index = 1; index <= 200; index++) {
+  for (let index = 1; index <= 10; index++) {
     const element = {
       codigo: index,
       nome: `Fernando ${index}`,
