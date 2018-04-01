@@ -14,8 +14,8 @@ function FakeApiReturnClientes() {
   for (let index = 1; index <= 10; index++) {
     const element = {
       codigo: index,
-      nome: `Fernando ${index}`,
-      descricao: 'descrição',
+      nome: `Cliente nome ${index}`,
+      descricao: `descrição do cliente ${index}`,
       cnpj: '123.222.331-0001/12',
       status: Math.random() < .8 ? true : false
     }

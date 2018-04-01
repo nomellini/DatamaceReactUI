@@ -167,3 +167,60 @@
       transform: rotate(359deg);
     }
   }
+
+
+  .card-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    margin: 10px auto;
+  }
+
+  .card {
+    width: 300px;
+    border: 1px solid #919192;
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 10px auto;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+
+  .card-header {
+    
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 10px;
+  }
+
+  .card-header-blue {
+    color: #0c5470;
+    border-bottom: 1px solid #b8e5f3;
+    background-color: #b8e5f3;
+  }
+
+  .card-header-red {
+    color: #D32F2F;
+    border-bottom: 1px solid #EF9A9A;
+    background-color: #EF9A9A;
+  }
+  
+
+  .card-main {
+    display: flex;              /* Children use Flexbox */
+    flex-direction: column;     /* Rotate Axis to Vertical */
+    justify-content: center;    /* Group Children in Center */
+    align-items: center;        /* Group Children in Center (+axis) */
+    padding: 15px 0;            /* Add padding to the top/bottom */
+  }
+
+  .ApiClienteOk {
+    color: green;
+  }
+
+  .ApiClienteFailure   {
+    color: red;
+  }

@@ -38,7 +38,7 @@ class LoginPage extends React.Component {
 
     userActions.login(usuario, senha).then(
       (res) => {
-        Mensagens.addFlashMessageSucesso(`Login efetuado com sucesso (para fechar esta mensagem, clique no x)`);
+        //Mensagens.addFlashMessageSucesso(`Login efetuado com sucesso (para fechar esta mensagem, clique no x)`);
         history.push('/');
       },
       (err) => {

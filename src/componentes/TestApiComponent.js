@@ -9,20 +9,22 @@ export default class TestApiComponent extends React.Component {
     // 2 - remove
     constructor(props) {
         super(props);
-        this.state = {
-            loading: 0
-        }
 
         this.testarApi = this.testarApi.bind(this);
     }
 
+    componentWillMount()
+    {
+        this.setState( {
+            loading: 0
+        })
+    }
+    
     componentDidMount() {
         setTimeout(this.testarApi, 5000 * Math.random());
     }
 
     testarApi() {
-        console.log('opa !')
-
         if (Math.random() <= .8)
             this.setState({
                 loading: 1
@@ -34,11 +36,11 @@ export default class TestApiComponent extends React.Component {
     }
 
     render() {
-        return <span aria-hidden="true" className={classnames('glyphicon',
+        return <div><span aria-hidden="true" className={classnames('glyphicon',
             { 'glyphicon-refresh glyphicon-spin': this.state.loading == 0 },
-            { 'glyphicon-ok': this.state.loading == 1 },
-            { 'glyphicon-remove': this.state.loading == 2 }
-        )} ></span>
+            { 'glyphicon-ok ApiClienteOk': this.state.loading == 1 },
+            { 'glyphicon-remove ApiClienteFailure fieldAnimate': this.state.loading == 2 }
+        )} ></span></div>
     }
 
 }

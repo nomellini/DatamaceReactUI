@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 import DtmPageBase from './DtmPageBase'
 
 import { clienteActions } from '../../actions/cliente.actions';
-import TestApiComponent from '../TestApiComponent';
+import CardCliente from '../CardCliente'
+
 
 class Clientes extends DtmPageBase {
 
@@ -44,14 +45,12 @@ class Clientes extends DtmPageBase {
     super.componentWillMount();
   }
 
-  componentDidMount()
-  {
+  componentDidMount() {
     clienteActions.getClientes();
   }
 
   render() {
     return <div>
-
 
       <div className="row">
         <div className="col-md-12">
@@ -60,26 +59,13 @@ class Clientes extends DtmPageBase {
       </div>
       {this.state.message && <div className="alert alert-danger">{this.state.message}</div>}
 
+
+      <div className="card-container">
+        {this.clientesCards()}
+      </div>
+
       <div className="row">
         <div className="col-md-12">
-          <table className="table">
-            <thead>
-              <tr>
-                <th>Id</th>
-                <th>Nome</th>
-                <th>Descrição</th>
-                <th>SAD</th>
-                <th>URL</th>
-                <th>Ativo</th>
-                <th>Editar</th>
-                <th>ver Apps</th>
-                <th>Api Test</th>
-              </tr>
-            </thead>
-            <tbody>
-              {this.renderClientes()}
-            </tbody>
-          </table>
           <div className="row">
             <div className="col-md-2">
               <button disabled={this.state.isLoading} onClick={this.fetch} className="btn btn-primary">Carregar</button>
@@ -94,57 +80,55 @@ class Clientes extends DtmPageBase {
     </div>
   }
 
+  isActive(cliente) {
+    return true;//cliente.status === true;
+  }
 
-  renderClientes() {
+  clientesCards() {
 
     var clientes = [];
-
     if (this.props.clientes)
-
-      clientes = this.props.clientes.map(function (cli) {
-
-        return <tr className={classnames({ 'danger fieldAnimate': !cli.status })} key={cli.codigo}>
-          <td>{cli.codigo}</td>
-          <td>{cli.nome}</td>
-          <td>{cli.descricao}</td>
-          <td>{cli.codigoSad}</td>
-          <td>{cli.url}</td>
-          <td>{cli.status ? "SIM" : "Não"}</td>
-          <td>
-            <Link to={`/cliente/${cli.codigo}`}><span aria-hidden="true" className="glyphicon glyphicon-edit"></span></Link>
-          </td>
-          <td>
-            <Link to={`/cliente/${cli.codigo}`}><span aria-hidden="true" className="glyphicon glyphicon-eye-open"></span></Link>
-          </td>          
-          <td>
-            <TestApiComponent />
-          </td>          
-        </tr>
+      clientes = this.props.clientes.filter(this.isActive).map(function (cli) {
+        return <CardCliente cliente={cli} />
       });
-
     return clientes
   }
+
+
+  // renderClientes() {
+
+  //   var clientes = [];
+
+  //   if (this.props.clientes)
+
+  //     clientes = this.props.clientes.map(function (cli) {
+
+  //       return <tr className={classnames({ 'danger fieldAnimate': !cli.status })} key={cli.codigo}>
+  //         <td>{cli.codigo}</td>
+  //         <td>{cli.nome}</td>
+  //         <td>{cli.descricao}</td>
+  //         <td>{cli.codigoSad}</td>
+  //         <td>{cli.url}</td>
+  //         <td>{cli.status ? "SIM" : "Não"}</td>
+  //         <td>
+  //           <Link to={`/cliente/${cli.codigo}`}><span aria-hidden="true" className="glyphicon glyphicon-edit"></span></Link>
+  //         </td>
+  //         <td>
+  //           <Link to={`/cliente/${cli.codigo}`}><span aria-hidden="true" className="glyphicon glyphicon-eye-open"></span></Link>
+  //         </td>
+  //         <td>
+  //           <TestApiComponent />
+  //         </td>
+  //       </tr>
+  //     });
+
+  //  return clientes
+  //}
 }
 
 
-function mapStateToProps(state)
-{  
+function mapStateToProps(state) {
   console.log(state, "state");
-  // const clientes = [
-  //     {
-  //       codigo: 1,
-  //       nome: 'Fernando',
-  //       descricao: 'descrição',
-  //       cnpj : '123.222.331-0001/12'
-  //     },
-  //     {
-  //       codigo: 2,
-  //       nome: 'Fernando',
-  //       descricao: 'descrição',
-  //       cnpj : '123.222.331-0001/12'
-  //     }
-  //   ];
-
   const { clientes } = state.cliente;
   return { clientes };
 }
