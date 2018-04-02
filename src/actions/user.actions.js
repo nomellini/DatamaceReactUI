@@ -10,18 +10,18 @@ export const userActions = {
   logout
 };
 
-function FakeApiReturnUser() 
-{
-  return new Promise((resolve) =>{
-    const user = {
-      nome: 'nomellini',
-      role: ["Master", "Administrador"]
-    }
-    localStorage.setItem('jwtToken', user);
-    store.dispatch(setCurrentUser(user));
-    resolve(user);
-  })
-}
+// function FakeApiReturnUser()
+// {
+//   return new Promise((resolve) =>{
+//     const user = {
+//       nome: 'nomellini',
+//       role: ["Master", "Administrador"]
+//     }
+//     localStorage.setItem('jwtToken', user);
+//     store.dispatch(setCurrentUser(user));
+//     resolve(user);
+//   })
+// }
 
 export function setCurrentUser(user) {
   return {
@@ -31,7 +31,7 @@ export function setCurrentUser(user) {
 }
 
 export function login(usuario, senha) {
-  return FakeApiReturnUser();
+  //return FakeApiReturnUser();
   return userService.login(usuario, senha).then(res => {
     const token = res.data.accessToken;
     localStorage.setItem('jwtToken', token);

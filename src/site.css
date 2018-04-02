@@ -173,7 +173,6 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-
     margin: 10px auto;
   }
 
@@ -189,7 +188,7 @@
   }
 
   .card-header {
-    
+
     text-align: center;
     font-size: 12px;
     font-weight: 600;
@@ -207,7 +206,7 @@
     border-bottom: 1px solid #EF9A9A;
     background-color: #EF9A9A;
   }
-  
+
 
   .card-main {
     display: flex;              /* Children use Flexbox */

@@ -8,32 +8,33 @@ export const clienteActions = {
   testarApiPorIdCliente
 };
 
-function FakeApiReturnClientes() {
+// function FakeApiReturnClientes() {
 
-  let clientes = [];
-  for (let index = 1; index <= 10; index++) {
-    const element = {
-      codigo: index,
-      nome: `Cliente nome ${index}`,
-      descricao: `descrição do cliente ${index}`,
-      cnpj: '123.222.331-0001/12',
-      status: Math.random() < .8 ? true : false
-    }
-    clientes.push(element);
+//   let clientes = [];
+//   for (let index = 1; index <= 10; index++) {
+//     const element = {
+//       codigo: index,
+//       nome: `Cliente nome ${index}`,
+//       descricao: `descrição do cliente ${index}`,
+//       cnpj: '123.222.331-0001/12',
+//       status: Math.random() < .8 ? true : false
+//     }
+//     clientes.push(element);
 
-  }
+//   }
 
-  return new Promise((resolve) => {
+//   return new Promise((resolve) => {
 
-    const cliente = clientes;
+//     const cliente = clientes;
 
-    store.dispatch({
-      type: consts.GET_CLIENTE_SUCCESS,
-      clientes: cliente
-    })
-    resolve(cliente);
-  })
-}
+//     store.dispatch({
+//       type: consts.GET_CLIENTE_SUCCESS,
+//       clientes: cliente
+//     })
+//     resolve(cliente);
+//   })
+// }
+
 
 export function testarApiPorIdCliente(Id) {
   return clienteService.testarApiPorIdCliente(Id);
@@ -43,8 +44,11 @@ export function addCliente(cliente) {
   return clienteService.addCliente(cliente);
 }
 
+
 export function getClientes() {
-  return FakeApiReturnClientes();
+//  return clienteService.getClientes();
+
+  //return FakeApiReturnClientes();
   return clienteService.getClientes()
     .then(
       res => {

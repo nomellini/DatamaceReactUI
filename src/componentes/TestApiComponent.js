@@ -1,5 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
+import { testarApiPorIdCliente } from '../actions/cliente.actions';
 
 
 export default class TestApiComponent extends React.Component {
@@ -9,38 +10,33 @@ export default class TestApiComponent extends React.Component {
     // 2 - remove
     constructor(props) {
         super(props);
-
-        this.testarApi = this.testarApi.bind(this);
-    }
-
-    componentWillMount()
-    {
-        this.setState( {
+        this.state = {
             loading: 0
-        })
-    }
-    
-    componentDidMount() {
-        setTimeout(this.testarApi, 5000 * Math.random());
+        };
     }
 
-    testarApi() {
-        if (Math.random() <= .8)
-            this.setState({
-                loading: 1
-            });
-        else
-            this.setState({
-                loading: 2
-            });
+    componentDidMount() {
+        console.log('componentDidMount - TestApiComponent', this.props);
+        testarApiPorIdCliente(this.props.cliente.codigo).then(
+            (res) => {
+                this.setState({
+                    loading: 1
+                })
+            },
+            (err) =>  {
+                this.setState({
+                    loading: 2
+                })
+            }
+        )
     }
 
     render() {
-        return <div><span aria-hidden="true" className={classnames('glyphicon',
+        return <span aria-hidden="true" className={classnames('glyphicon',
             { 'glyphicon-refresh glyphicon-spin': this.state.loading == 0 },
             { 'glyphicon-ok ApiClienteOk': this.state.loading == 1 },
             { 'glyphicon-remove ApiClienteFailure fieldAnimate': this.state.loading == 2 }
-        )} ></span></div>
+        )} ></span>
     }
 
 }

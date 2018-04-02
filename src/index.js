@@ -8,10 +8,10 @@ import setAuthorizationToken from './utils/setAuthorizationToken';
 import { setCurrentUser } from './actions/user.actions';
 import jwtDecode from 'jwt-decode';
 
-// if (localStorage.jwtToken) {
-//   setAuthorizationToken(localStorage.jwtToken);
-//   store.dispatch(setCurrentUser(jwtDecode(localStorage.jwtToken)));
-// }
+if (localStorage.jwtToken) {
+  setAuthorizationToken(localStorage.jwtToken);
+  store.dispatch(setCurrentUser(jwtDecode(localStorage.jwtToken)));
+}
 
 ReactDOM.render(
   <Provider store={store}>

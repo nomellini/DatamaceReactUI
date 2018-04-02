@@ -25,6 +25,7 @@ export function clienteReducer(state = initialState, action) {
       return {
         clientes: action.clientes
       }
+    case consts.LIMPA_CLIENTES:
     case consts.LOGOUT_USER:
       return {}
     default:

@@ -1,5 +1,4 @@
 import React from 'react';
-import classnames from 'classnames';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import DtmPageBase from './DtmPageBase'
@@ -12,17 +11,38 @@ class Clientes extends DtmPageBase {
 
   constructor(props) {
     super(props);
+
     this.fetch = this.fetch.bind(this);
+    this.clientesCards = this.clientesCards.bind(this);
+    this.testarApi = this.testarApi.bind(this);
+    this.carregar = this.carregar.bind(this);
+
     this.state = {
+      checkConnection: false,
       errors: {},
       isLoading: false
     }
   }
 
-  fetch(event) {
-    event.preventDefault();
+  testarApi(event) {
+    this.setState({ checkConnection: true });
+    this.fetch();
+  }
 
-    this.setState({ message: '', errors: {}, isLoading: true });
+  carregar(event) {
+    this.setState({ checkConnection: false });
+    this.fetch();
+  }
+
+  fetch(event) {
+
+    this.setState({
+      clientes: [],
+      message: '',
+      errors: {},
+      isLoading: true
+    });
+
 
     clienteActions.getClientes()
       .then(
@@ -30,8 +50,6 @@ class Clientes extends DtmPageBase {
           this.setState({ isLoading: false })
         },
         (err) => {
-          console.log(err.message)
-
           if (err.message === "Network Error") {
             this.setState({ message: err.message, isLoading: false })
             return;
@@ -46,7 +64,8 @@ class Clientes extends DtmPageBase {
   }
 
   componentDidMount() {
-    clienteActions.getClientes();
+    console.log('componentDidMount', this.props)
+    this.carregar();
   }
 
   render() {
@@ -61,35 +80,37 @@ class Clientes extends DtmPageBase {
 
 
       <div className="card-container">
-        {this.clientesCards()}
+        {this.clientesCards(this)}
       </div>
 
-      <div className="row">
-        <div className="col-md-12">
-          <div className="row">
-            <div className="col-md-2">
-              <button disabled={this.state.isLoading} onClick={this.fetch} className="btn btn-primary">Carregar</button>
-            </div>
-            <div className="col-md-2">
-              <Link className='btn btn-danger' to={'/Cliente/0'}>Novo Cliente</Link>
-            </div>
-          </div>
+      <div className="card-container">
+        <div className="card">
+          <button disabled={this.state.isLoading} onClick={this.carregar} className="btn btn-primary">Carregar</button>
+        </div>
+        <div className="card">
+          <button disabled={this.state.isLoading} onClick={this.testarApi} className="btn btn-primary">Testar Api</button>
+        </div>
+        <div className="card">
+          <Link className='btn btn-danger' to={'/Cliente/0'}>Novo Cliente</Link>
         </div>
       </div>
+
 
     </div>
   }
 
   isActive(cliente) {
-    return true;//cliente.status === true;
+    return cliente.codigo <= 9;
   }
 
-  clientesCards() {
+  clientesCards(_this) {
+
+    const _clientes = this.props.clientes;
 
     var clientes = [];
-    if (this.props.clientes)
-      clientes = this.props.clientes.filter(this.isActive).map(function (cli) {
-        return <CardCliente cliente={cli} />
+    if (_clientes)
+      clientes = _clientes.filter(this.isActive).map(function (cli) {
+        return <CardCliente cliente={cli} key={cli.codigo} checkConnection={_this.state.checkConnection} />
       });
     return clientes
   }
@@ -126,9 +147,8 @@ class Clientes extends DtmPageBase {
   //}
 }
 
-
 function mapStateToProps(state) {
-  console.log(state, "state");
+  console.log('MapStateToProps', state)
   const { clientes } = state.cliente;
   return { clientes };
 }

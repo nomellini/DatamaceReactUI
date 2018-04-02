@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import { Redirect } from "react-router-dom";
 import { userActions } from '../../actions/user.actions';
 import { history } from '../../helper/history';
-import { Mensagens } from '../../actions/flashMessages.actions';
+//import { Mensagens } from '../../actions/flashMessages.actions';
 
 class LoginPage extends React.Component {
 

@@ -7,7 +7,7 @@ import { addCliente } from '../../actions/cliente.actions'
 import { Mensagens }  from '../../actions/flashMessages.actions'
 import { history } from '../../helper/history';
 import DtmPageBase from './DtmPageBase'
-import TestApiComponent from '../TestApiComponent';
+
 
 class Cliente extends DtmPageBase {
 
@@ -39,7 +39,6 @@ class Cliente extends DtmPageBase {
   componentDidMount() {
     var ClienteId = this.props.ClienteId;
     const cliente = clienteService.obterCliente(ClienteId);
-    console.log(cliente);
     this.setState(cliente);
   }
 
@@ -106,7 +105,6 @@ class Cliente extends DtmPageBase {
       </div>
 
       {this.state.message && <div className="alert alert-danger">{this.state.message}</div>}
-      <TestApiComponent />
       <div className="row">
         <div className="col-sm-8">
           <div className="form-horizontal">

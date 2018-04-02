@@ -18,7 +18,9 @@ function getClientes() {
 }
 
 function testarApiPorIdCliente(Id) {
-    return axios.post(CLIENTE_API_TESTE, Id);
+    return axios.post(CLIENTE_API_TESTE, Id, {
+        headers: { 'Content-Type': 'application/json' }
+    });
 }
 
 function obterClientePorId(Id) {

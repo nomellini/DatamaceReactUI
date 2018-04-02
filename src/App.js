@@ -11,6 +11,7 @@ import HomePage from './componentes/Pages/HomePage';
 import LoginPage from './componentes/Pages/LoginPage';
 import ClientesPage from './componentes/Pages/ClientesPage'
 import ClientePage from './componentes/Pages/ClientePage'
+import LogoutComponent from './componentes/LogoutComponent'
 
 class App extends Component {
 
@@ -25,6 +26,7 @@ class App extends Component {
       return <Layout AppName={this.props.appName}>
         <Switch>
           <PrivateRoute exact path='/' component={HomePage} />
+          <Route exact path='/Logout' component={LogoutComponent} />
           <PrivateRoute path='/Clientes' component={ClientesPage} />
           <PrivateRoute path='/Cliente/:Id' component={ClientePage} />
           <Route path="*" component={HomePage} />
