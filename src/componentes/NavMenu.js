@@ -2,9 +2,41 @@ import * as React from 'react';
 import { connect } from 'react-redux'
 import { Link, NavLink } from 'react-router-dom';
 import LinkToLogin from './LinkToLogin';
+import classnames from 'classnames';
 
 class NavMenu extends React.Component {
+
+
     render() {
+
+        const linksList = [
+            {
+                Path: "/",
+                Icon: "glyphicon-home",
+                Nome: "Home"
+            },
+            {
+                Path: "/Clientes",
+                Icon: "glyphicon-briefcase",
+                Nome: "Clientes"
+            },
+            {
+                Path: "/Aplicativos",
+                Icon: "glyphicon-phone",
+                Nome: "Aplicativos"
+            }
+        ]
+
+        var links = linksList.map(
+            function (link) {
+                return <li>
+                    <NavLink to={link.Path} exact activeClassName='active'>
+                        <span className={classnames('glyphicon', link.Icon)}></span>{link.Nome}
+                    </NavLink>
+                </li>
+            }
+        )
+
         return <div className='main-nav'>
             <nav className='navbar navbar-inverse'>
                 <div className='navbar-header'>
@@ -23,17 +55,7 @@ class NavMenu extends React.Component {
                             <LinkToLogin />
                         </li>
 
-                        <li>
-                            <NavLink to={'/'} exact activeClassName='active'>
-                                <span className='glyphicon glyphicon-home'></span>Home
-                            </NavLink>
-                        </li>
-
-                        <li>
-                            <NavLink to={'/Clientes'} exact activeClassName='active'>
-                                <span className='glyphicon glyphicon-home'></span>Clientes
-                            </NavLink>
-                        </li>
+                        {links}
 
                     </ul>
                 </div>
@@ -56,4 +78,4 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, null, null, {
     pure: false
-  })(NavMenu)
+})(NavMenu)

@@ -76,6 +76,7 @@ class Clientes extends DtmPageBase {
           <h3 className="text-center">Cadastro de clientes</h3>
         </div>
       </div>
+
       {this.state.message && <div className="alert alert-danger">{this.state.message}</div>}
 
 
@@ -100,7 +101,7 @@ class Clientes extends DtmPageBase {
   }
 
   isActive(cliente) {
-    return cliente.codigo <= 9;
+    return true;// cliente.codigo <= 9;
   }
 
   clientesCards(_this) {
