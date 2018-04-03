@@ -11,7 +11,7 @@ export default class CardCliente extends React.Component {
         const cli = this.props.cliente;
 
         return (
-            <div className={classnames('card', { 'fieldAnimate': !cli.status }, 'card-cliente')} key={shortid.generate()}>
+            <div className={classnames('card', { 'fieldAnimate': !cli.status })} key={shortid.generate()}>
                 <div className={classnames(
                     'card-header',
                     { 'card-header-blue': cli.status },

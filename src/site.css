@@ -24,6 +24,13 @@
   z-index: 1;
 }
 
+body {
+  background-image: url("img/background_login.jpg");
+  background-size: 100vw 100vh;
+  /* background-size: cover; */
+  background-repeat: no-repeat;
+}
+
 @media (max-width: 767px) {
   /* On small screens, the nav menu spans the full width of the screen. Leave a space for it. */
   body {
@@ -35,7 +42,7 @@
   /* On small screens, convert the nav menu to a vertical sidebar */
   .main-nav {
       height: 100%;
-      width: calc(25% - 20px);
+      width: calc(20% - 40px);
   }
   .main-nav .navbar {
       border-radius: 0px;
@@ -99,7 +106,6 @@
 
 
 .loginContainer {
-    background-image: url("img/background_login.jpg");
     background-repeat: no-repeat;
     background-position: center;
     margin : 10px;
@@ -192,10 +198,13 @@
 
 
   .card-container {
+    width: 95%;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    margin: 10px auto;
+    margin: 10px;
+    align-items: stretch;
+    justify-content: safe;
   }
 
   .card {
@@ -209,8 +218,19 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
 
-  .card-header {
 
+  .card-app {
+    width: 400px;
+    border: 1px solid #919192;
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+
+  .card-header {
     text-align: center;
     font-size: 12px;
     font-weight: 600;
@@ -243,7 +263,7 @@
     margin: auto;
     display: flex;
     flex-direction: row;
-    align-content: space-around;
+
   }
   .card-botao {
     margin: 5px auto;

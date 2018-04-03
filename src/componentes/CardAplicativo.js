@@ -10,13 +10,13 @@ export default class CardAplicativo extends React.Component {
         const app = this.props.app;
 
         return (
-            <div className={classnames('card', { 'fieldAnimate': !app.status }, 'card-cliente')} key={shortid.generate()}>
+            <div className={classnames('card-app', { 'fieldAnimate': !app.status })} key={shortid.generate()}>
                 <div className={classnames(
                     'card-header',
                     { 'card-header-blue': app.status },
                     { 'card-header-red': !app.status })}>{app.nome}</div>
                 <div className="card-main">
-                    <h4>{app.descricao}</h4>
+                    <div>{app.descricao}</div>
                     <div className="card-botoes">
                         <Link to={`/Aplicativo/${app.codigo}`} className='btn btn-primary card-botao'>Editar</Link>
                     </div>

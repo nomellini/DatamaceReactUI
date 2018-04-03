@@ -43,7 +43,7 @@ export default class AplicativosPage extends DtmPageBase {
     var apps = [];
     if (_apps) {
       apps = _apps.map(function (app) {
-        return <CardAplicativo app={app} key={shortid.generate()}/>
+        return <CardAplicativo app={app} key={shortid.generate()} />
       });
     }
     return apps
@@ -62,10 +62,11 @@ export default class AplicativosPage extends DtmPageBase {
 
         {this.state.message && <div className="alert alert-danger">{this.state.message}</div>}
 
-        <div className="card">
-          <Link disabled={this.state.isLoading} className='btn btn-danger' to={'/Aplicativo/0'}>Novo Aplicativo</Link>
+        <div className="card-container">
+          <div className="card-app">
+            <Link disabled={this.state.isLoading} className='btn btn-danger' to={'/Aplicativo/0'}>Novo Aplicativo</Link>
+          </div>
         </div>
-
 
         <div className="card-container">
           {this.renderCards(this)}
