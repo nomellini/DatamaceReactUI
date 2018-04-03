@@ -19,7 +19,7 @@ export default class DtmPageBase extends React.Component {
 
     // if (PathName !== '/') {
     //   console.log(PathName)
-    //   const index = role.indexOf("Master1");
+    //   const index = role.indexOf("Master");
     //   if (index === -1) {
     //     Mensagens.addFlashMessageErro(`Sem permissão para ${PathName}`);
     //   }

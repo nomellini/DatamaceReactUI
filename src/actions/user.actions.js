@@ -10,18 +10,7 @@ export const userActions = {
   logout
 };
 
-// function FakeApiReturnUser()
-// {
-//   return new Promise((resolve) =>{
-//     const user = {
-//       nome: 'nomellini',
-//       role: ["Master", "Administrador"]
-//     }
-//     localStorage.setItem('jwtToken', user);
-//     store.dispatch(setCurrentUser(user));
-//     resolve(user);
-//   })
-// }
+
 
 export function setCurrentUser(user) {
   return {
@@ -41,12 +30,12 @@ export function login(usuario, senha) {
 }
 
 function logout() {
-    localStorage.removeItem('jwtToken');
-    localStorage.removeItem('clienteData');
-    setAuthorizationToken(false);
-    store.dispatch(setCurrentUser({}));
-    store.dispatch({
-      type: consts.LOGOUT_USER,
-    })
-    history.push('/Login');
+  localStorage.removeItem('jwtToken');
+  localStorage.removeItem('clienteData');
+  setAuthorizationToken(false);
+  store.dispatch(setCurrentUser({}));
+  store.dispatch({
+    type: consts.LOGOUT_USER,
+  })
+  history.push('/Login');
 }

@@ -3,16 +3,19 @@ import { Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PrivateRoute from './componentes/PrivateRoute'
 
-import './site.css';
-
 import { history } from './helper/history';
+import { userService } from './services/user.service'
+
 import Layout from './componentes/Layout';
 import AplicativosPage from './componentes/Pages/AplicativosPage';
 import HomePage from './componentes/Pages/HomePage';
 import LoginPage from './componentes/Pages/LoginPage';
 import ClientesPage from './componentes/Pages/ClientesPage'
 import ClientePage from './componentes/Pages/ClientePage'
+import UsuariosPage from './componentes/Pages/UsuariosPage'
 import LogoutComponent from './componentes/LogoutComponent'
+
+import './site.css';
 
 class App extends Component {
 
@@ -31,6 +34,7 @@ class App extends Component {
           <PrivateRoute path='/Clientes' component={ClientesPage} />
           <PrivateRoute path='/Cliente/:Id' component={ClientePage} />
           <PrivateRoute path='/Aplicativos' component={AplicativosPage} />
+          {userService.isMaster() ? <PrivateRoute path='/Usuarios' component={UsuariosPage} /> : null }
           <Route path="*" component={HomePage} />
         </Switch>
       </Layout>

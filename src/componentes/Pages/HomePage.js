@@ -13,19 +13,20 @@ class Home extends DtmPageBase {
 
     render() {
         return <div>
-            <h1>Datamace Mobile Portal</h1>
-            <p>
-                {this.BoasVindas()}
-            </p>
-
-            <p>Utilize esta portal para:</p>
-            <ul>
-                <li><Link to={'/Clientes'}>Listar Clientes</Link></li>
-                <li><Link to={'/Cliente/0'}>Adicionar Clientes</Link></li>
-                <li>Cadastrar aplicativos</li>
-                <li>Relacionar aplicativos com cliente</li>
-                <li>Cadastrar usuários</li>
-            </ul>
+            <div className="col-md-12">
+                <h1>Datamace Mobile Portal</h1>
+                <p>
+                    {this.BoasVindas()}
+                </p>
+                <p>Utilize esta portal para:</p>
+                <ul>
+                    <li><Link to={'/Clientes'}>Listar Clientes</Link></li>
+                    <li><Link to={'/Cliente/0'}>Adicionar Clientes</Link></li>
+                    <li>Cadastrar aplicativos</li>
+                    <li>Relacionar aplicativos com cliente</li>
+                    <li>Cadastrar usuários</li>
+                </ul>
+            </div>
         </div>;
     }
 }

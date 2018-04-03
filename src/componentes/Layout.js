@@ -1,6 +1,6 @@
 import * as React from 'react';
 import NavMenu from './NavMenu';
-import FlashMessagesList from './flash/FlashMessagesList';
+//import FlashMessagesList from './flash/FlashMessagesList';
 
 
 class Layout extends React.Component {
@@ -11,8 +11,7 @@ class Layout extends React.Component {
                 <NavMenu AppName={this.props.AppName} />
                 </div>
                 <div className='col-sm-10'>
-
-                    <div><FlashMessagesList /></div>
+                    {/* <div><FlashMessagesList /></div> */}
                     {this.props.children}
                 </div>
             </div>

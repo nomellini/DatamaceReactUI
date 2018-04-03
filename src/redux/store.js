@@ -5,7 +5,7 @@ import thunkMiddleware from 'redux-thunk';
 import { authenticationReducer } from '../reducers/authentication.reducer';
 import { clienteReducer } from '../reducers/cliente.reducer';
 
-import flashMessages from '../reducers/flashMessages';
+//import flashMessages from '../reducers/flashMessages';
 
 
 
@@ -13,8 +13,8 @@ import flashMessages from '../reducers/flashMessages';
 
 const rootReducer = combineReducers({
   auth: authenticationReducer,
-  cliente: clienteReducer,
-  flashMessages
+  cliente: clienteReducer
+  //,flashMessages
 });
 
 const store = createStore(

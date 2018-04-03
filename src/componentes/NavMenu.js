@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux'
 import { Link, NavLink } from 'react-router-dom';
+import { userService } from '../services/user.service'
 import LinkToLogin from './LinkToLogin';
 import classnames from 'classnames';
 import shortid from 'shortid';
@@ -27,6 +28,16 @@ class NavMenu extends React.Component {
                 Nome: "Aplicativos"
             }
         ]
+
+        if (userService.isMaster()) {
+            linksList.push(
+                {
+                    Path: "/Usuarios",
+                    Icon: "glyphicon-user",
+                    Nome: "Usuarios"
+                }
+            )
+        }
 
         var links = linksList.map(
             function (link) {
