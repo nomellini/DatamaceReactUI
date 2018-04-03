@@ -10,7 +10,7 @@ export const clienteService = {
     addCliente,
     obterCliente,
     testarApiPorIdCliente,
-    obterClientePorId
+    getClienteById
 };
 
 function getClientes() {
@@ -23,7 +23,7 @@ function testarApiPorIdCliente(Id) {
     });
 }
 
-function obterClientePorId(Id) {
+function getClienteById(Id) {
     return axios.get(CLIENTE_API + "/" + Id);
 }
 
@@ -31,12 +31,13 @@ function obterClientePorId(Id) {
 function obterCliente(Id) {
     const state = store.getState();
     const clientes = state.cliente.clientes;
+    // eslint-disable-next-line
     const index = findIndex(clientes, function (o) { return o.codigo == Id; });
     return clientes[index];
 }
 
 function addCliente(cliente) {
-    if (cliente.id === 0)
+    if (cliente.codigo === 0)
         return axios.post(CLIENTE_API, cliente);
     else
         return axios.put(CLIENTE_API, cliente);

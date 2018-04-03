@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import { Redirect } from "react-router-dom";
 import { userActions } from '../../actions/user.actions';
 import { history } from '../../helper/history';
-//import { Mensagens } from '../../actions/flashMessages.actions';
+import LogoDatamace from '../../img/LogoDatamace.png'
 
 class LoginPage extends React.Component {
 
@@ -43,7 +43,7 @@ class LoginPage extends React.Component {
       },
       (err) => {
 
-        this.setState({ temErros: true});
+        this.setState({ temErros: true });
 
         if (err.message === "Network Error") {
           // message no state é apenas desta tela
@@ -75,7 +75,12 @@ class LoginPage extends React.Component {
       <div className="loginForm">
         <form onSubmit={this.onSubmit}>
 
-          <h1>Login</h1>
+          <div className="login-bem-vindo">
+            <h3>Bem vindo ao<br />
+              <strong><span className="blue">Datamace</span> Mobile</strong></h3>
+          </div>
+
+          <p>Favor inserir seu login e sua senha</p>
 
           {this.state.message && <div className="alert alert-danger">{this.state.message}</div>}
 
@@ -96,9 +101,9 @@ class LoginPage extends React.Component {
             {this.state.errors.Senha && <span className="help-block">{this.state.errors.Senha}</span>}
           </div>
 
-
-          <div className="form-group">
-            <button disabled={this.state.isLoading} className="btn btn-primary" type="submit">Vai</button>
+          <div className="login-btn-enviar">
+            <img src={LogoDatamace} alt="Logotipo Datamace"/>
+            <button disabled={this.state.isLoading} className="btn btn-primary" type="submit">Logar</button>
           </div>
 
         </form>

@@ -1,13 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 import DtmPageBase from './DtmPageBase'
-
 import { clienteActions } from '../../actions/cliente.actions';
 import CardCliente from '../CardCliente'
 
 
-class Clientes extends DtmPageBase {
+export default class Clientes extends DtmPageBase {
 
   constructor(props) {
     super(props);
@@ -47,7 +45,12 @@ class Clientes extends DtmPageBase {
     clienteActions.getClientes()
       .then(
         (res) => {
-          this.setState({ isLoading: false })
+          this.setState(
+            {
+              isLoading: false,
+              clientes: res.data
+            }
+          )
         },
         (err) => {
           if (err.message === "Network Error") {
@@ -64,7 +67,6 @@ class Clientes extends DtmPageBase {
   }
 
   componentDidMount() {
-    console.log('componentDidMount', this.props)
     this.carregar();
   }
 
@@ -79,22 +81,20 @@ class Clientes extends DtmPageBase {
 
       {this.state.message && <div className="alert alert-danger">{this.state.message}</div>}
 
+      <div className="card-container">
+        <div className="card">
+          <button disabled={this.state.isLoading} onClick={this.testarApi} className="btn btn-primary">Testar Api</button>
+        </div>
+        <div className="card">
+          <Link disabled={this.state.isLoading} className='btn btn-danger' to={'/Cliente/0'}>Novo Cliente</Link>
+        </div>
+      </div>
+
 
       <div className="card-container">
         {this.clientesCards(this)}
       </div>
 
-      <div className="card-container">
-        <div className="card">
-          <button disabled={this.state.isLoading} onClick={this.carregar} className="btn btn-primary">Carregar</button>
-        </div>
-        <div className="card">
-          <button disabled={this.state.isLoading} onClick={this.testarApi} className="btn btn-primary">Testar Api</button>
-        </div>
-        <div className="card">
-          <Link className='btn btn-danger' to={'/Cliente/0'}>Novo Cliente</Link>
-        </div>
-      </div>
 
 
     </div>
@@ -105,9 +105,7 @@ class Clientes extends DtmPageBase {
   }
 
   clientesCards(_this) {
-
-    const _clientes = this.props.clientes;
-
+    const _clientes = this.state.clientes;
     var clientes = [];
     if (_clientes)
       clientes = _clientes.filter(this.isActive).map(function (cli) {
@@ -115,43 +113,4 @@ class Clientes extends DtmPageBase {
       });
     return clientes
   }
-
-
-  // renderClientes() {
-
-  //   var clientes = [];
-
-  //   if (this.props.clientes)
-
-  //     clientes = this.props.clientes.map(function (cli) {
-
-  //       return <tr className={classnames({ 'danger fieldAnimate': !cli.status })} key={cli.codigo}>
-  //         <td>{cli.codigo}</td>
-  //         <td>{cli.nome}</td>
-  //         <td>{cli.descricao}</td>
-  //         <td>{cli.codigoSad}</td>
-  //         <td>{cli.url}</td>
-  //         <td>{cli.status ? "SIM" : "Não"}</td>
-  //         <td>
-  //           <Link to={`/cliente/${cli.codigo}`}><span aria-hidden="true" className="glyphicon glyphicon-edit"></span></Link>
-  //         </td>
-  //         <td>
-  //           <Link to={`/cliente/${cli.codigo}`}><span aria-hidden="true" className="glyphicon glyphicon-eye-open"></span></Link>
-  //         </td>
-  //         <td>
-  //           <TestApiComponent />
-  //         </td>
-  //       </tr>
-  //     });
-
-  //  return clientes
-  //}
 }
-
-function mapStateToProps(state) {
-  console.log('MapStateToProps', state)
-  const { clientes } = state.cliente;
-  return { clientes };
-}
-
-export default connect(mapStateToProps)(Clientes);

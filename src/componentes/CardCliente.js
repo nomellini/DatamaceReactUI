@@ -18,9 +18,11 @@ export default class CardCliente extends React.Component {
                     { 'card-header-red': !cli.status })}>{cli.nome} - {cli.codigo}</div>
                 <div className="card-main">
                     <div>{cli.descricao}</div>
-                    <div>{this.props.checkConnection ? <TestApiComponent cliente={cli} /> : null } {cli.url}</div>
-                    <Link to={`/cliente/${cli.codigo}`} className='btn btn-primary'>Editar</Link>
-                    <Link to={`/cliente/${cli.codigo}`} className='btn btn-primary'>Editar</Link>
+                    <div>{this.props.checkConnection ? <TestApiComponent cliente={cli} /> : null} {cli.url}</div>
+                    <div className="card-botoes">
+                        <Link to={`/Cliente/${cli.codigo}`} className='btn btn-primary card-botao'>Editar</Link>
+                        <Link to={`/Aplicativo/${cli.codigo}`} className='btn btn-primary card-botao'>Applicativos</Link>
+                    </div>
                 </div>
             </div>
         )

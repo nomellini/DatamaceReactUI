@@ -11,30 +11,42 @@ export default class TestApiComponent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            loading: 0
+            loading: 0,
+            isTesting: false
         };
     }
 
     componentDidMount() {
-        console.log('componentDidMount - TestApiComponent', this.props);
-        testarApiPorIdCliente(this.props.cliente.codigo).then(
-            (res) => {
-                this.setState({
-                    loading: 1
-                })
-            },
-            (err) =>  {
-                this.setState({
-                    loading: 2
-                })
-            }
-        )
+
+        if (!this.state.isTesting) {
+            this.setState({
+                isTesting: true
+            })
+
+            testarApiPorIdCliente(this.props.cliente.codigo).then(
+                (res) => {
+                    this.setState({
+                        loading: 1,
+                        isTesting: false
+                    })
+                },
+                (err) => {
+                    this.setState({
+                        loading: 2,
+                        isTesting: false
+                    })
+                }
+            )
+        }
     }
 
     render() {
         return <span aria-hidden="true" className={classnames('glyphicon',
+            // eslint-disable-next-line
             { 'glyphicon-refresh glyphicon-spin': this.state.loading == 0 },
+            // eslint-disable-next-line
             { 'glyphicon-ok ApiClienteOk': this.state.loading == 1 },
+            // eslint-disable-next-line
             { 'glyphicon-remove ApiClienteFailure fieldAnimate': this.state.loading == 2 }
         )} ></span>
     }

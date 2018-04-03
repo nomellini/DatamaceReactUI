@@ -99,19 +99,41 @@
 
 
 .loginContainer {
+    background-image: url("img/background_login.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
     margin : 10px;
     display: flex;
     height: 80vh;
 }
 
-.loginForm {
-    border: 1px solid rgba(201, 201, 201, 0.966);
-    width: 500px;
-    height: 400px;
-    margin: auto;
-    padding: 15px;
 
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+.loginForm {
+  border: 1px solid rgba(201, 201, 201, 0.966);
+  background-color: #f8f6f69c;
+  width: 500px;
+  height: 450px;
+  margin: auto;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.login-btn-enviar
+{
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 30px;
+  display: flex;
+}
+
+.login-btn-enviar img {
+  width: 150px;
+  height: 100%;
+}
+
+.login-bem-vindo {
+  margin-bottom: 50px;
 }
 
 .fieldAnimate {
@@ -216,10 +238,26 @@
     padding: 15px 0;            /* Add padding to the top/bottom */
   }
 
+  .card-botoes {
+    width: 100%;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    align-content: space-around;
+  }
+  .card-botao {
+    margin: 5px auto;
+  }
+
   .ApiClienteOk {
     color: green;
   }
 
   .ApiClienteFailure   {
     color: red;
+  }
+
+  .blue
+  {
+    color: #4870ac;
   }

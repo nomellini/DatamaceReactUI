@@ -1,15 +1,11 @@
 import React from 'react'
-
 import classnames from 'classnames';
-import { connect } from 'react-redux'
-import { clienteService } from '../../services/cliente.service';
-import { addCliente } from '../../actions/cliente.actions'
-import { Mensagens }  from '../../actions/flashMessages.actions'
+import { clienteActions } from '../../actions/cliente.actions'
 import { history } from '../../helper/history';
 import DtmPageBase from './DtmPageBase'
+import shortid from 'shortid';
 
-
-class Cliente extends DtmPageBase {
+export default class Cliente extends DtmPageBase {
 
   constructor(props) {
 
@@ -20,14 +16,14 @@ class Cliente extends DtmPageBase {
       isLoading: false,
 
       codigo: 0,
-      nome: "",
+      nome: `Cliente ${shortid.generate()}`,
       descricao: '',
       codigoSad: '',
-      url: '',
-      email: '',
-      cnpj: '',
+      url: 'http://dtmweb/ClientMobileApiTeste',
+      email: 'nomellini@datamace.com.br',
+      cnpj: '39.724.160/0001-19',
       dataValidade: '2022-01-01T16:30:39.263Z',
-      status: false
+      status: true
     }
 
     this.onChange = this.onChange.bind(this);
@@ -37,42 +33,51 @@ class Cliente extends DtmPageBase {
   }
 
   componentDidMount() {
-    var ClienteId = this.props.ClienteId;
-    const cliente = clienteService.obterCliente(ClienteId);
-    this.setState(cliente);
+    var ClienteId = this.props.match.params.Id
+    if (ClienteId > 0)
+      clienteActions.getClienteById(ClienteId)
+        .then(
+          (res) => {
+            this.setState(res.data);
+          },
+          (err) => {
+          }
+        )
+
   }
 
   gravar() {
 
     this.setState({ message: '', errors: {}, isLoading: true });
 
-    addCliente(this.state).then(
-      (res) => {
-        // addFlashMessage adiciona uma mensagem na lista de mensagems do aplicativo
-        Mensagens.addFlashMessageSucesso('Gravação efetuada.');
-        history.push('/clientes');
-      },
-      (err) => {
-        if (err.message === "Network Error") {
-          // message no state é apenas desta tela
-          this.setState({ message: err.message, isLoading: false })
-          return;
-        }
-        if (err.response.status !== 200) {
-          if (err.response.status === 400) {
-            this.setState({ errors: err.response.data.errors })
-            this.setState({ message: err.response.data.message, isLoading: false })
+      clienteActions.addCliente(this.state).then(
+        (res) => {
+
+          // addFlashMessage adiciona uma mensagem na lista de mensagems do aplicativo
+          //Mensagens.addFlashMessageSucesso('Não sei');
+          history.push('/clientes');
+        },
+        (err) => {
+          if (err.message === "Network Error") {
+            // message no state é apenas desta tela
+            this.setState({ message: err.message, isLoading: false })
+            return;
           }
-          else {
-            this.setState(
-              {
-                message: `${err.response.status} - ${err.response.statusText}`, isLoading: false
-              }
-            )
+          if (err.response.status !== 200) {
+            if (err.response.status === 400) {
+              this.setState({ errors: err.response.data.errors })
+              this.setState({ message: err.response.data.message, isLoading: false })
+            }
+            else {
+              this.setState(
+                {
+                  message: `${err.response.status} - ${err.response.statusText}`, isLoading: false
+                }
+              )
+            }
           }
         }
-      }
-    );
+      );
   }
 
   onChange(event) {
@@ -86,10 +91,10 @@ class Cliente extends DtmPageBase {
 
     if (target.checked) {
       target.removeAttribute('checked');
-      target.parentNode.style.textDecoration = "";
+      //target.parentNode.style.textDecoration = "";
     } else {
       target.setAttribute('checked', true);
-      target.parentNode.style.textDecoration = "line-through";
+      //target.parentNode.style.textDecoration = "line-through";
     }
 
     this.setState({ status: event.target.checked });
@@ -159,18 +164,23 @@ class Cliente extends DtmPageBase {
               </div>
             </div>
 
-            <div className={classnames('form-group', { 'has-error fieldAnimate': this.state.errors.status })}>
-              <label htmlFor="input" className="col-md-4 control-label">Cliente Ativo</label>
-              <div className="col-md-8">
+            <div className={classnames(
+              { 'ApiClienteOk': this.state.status },
+              { 'ApiClienteFailure': !this.state.status }
+            )}>
 
-                <input
-                  type="checkbox"
-                  name="status"
-                  onClick={this.handleChange}
-                  defaultChecked={this.state.status} />
-              </div>
-            </div >
-
+              <div className={classnames('form-group', { 'has-error fieldAnimate': this.state.errors.status })}>
+                <label htmlFor="input" className="col-md-4 control-label">Cliente {this.state.status ? "Ativo" : "Inativo"}</label>
+                <div className="col-md-8">
+                  <input
+                    type="checkbox"
+                    name="status"
+                    onClick={this.handleChange}
+                    checked={this.state.status}
+                    defaultChecked={this.state.status} />
+                </div>
+              </div >
+            </div>
           </div >
         </div >
       </div >
@@ -185,12 +195,3 @@ class Cliente extends DtmPageBase {
     </div >
   }
 }
-
-function mapStateToProps(state, ownProps) {
-  return {
-    ClienteId: ownProps.match.params.Id
-  };
-}
-
-
-export default connect(  mapStateToProps)(Cliente);

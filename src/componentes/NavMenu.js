@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Link, NavLink } from 'react-router-dom';
 import LinkToLogin from './LinkToLogin';
 import classnames from 'classnames';
+import shortid from 'shortid';
 
 class NavMenu extends React.Component {
 
@@ -29,7 +30,7 @@ class NavMenu extends React.Component {
 
         var links = linksList.map(
             function (link) {
-                return <li>
+                return <li key={shortid.generate()}>
                     <NavLink to={link.Path} exact activeClassName='active'>
                         <span className={classnames('glyphicon', link.Icon)}></span>{link.Nome}
                     </NavLink>

@@ -7,6 +7,7 @@ import './site.css';
 
 import { history } from './helper/history';
 import Layout from './componentes/Layout';
+import AplicativosPage from './componentes/Pages/AplicativosPage';
 import HomePage from './componentes/Pages/HomePage';
 import LoginPage from './componentes/Pages/LoginPage';
 import ClientesPage from './componentes/Pages/ClientesPage'
@@ -29,6 +30,7 @@ class App extends Component {
           <Route exact path='/Logout' component={LogoutComponent} />
           <PrivateRoute path='/Clientes' component={ClientesPage} />
           <PrivateRoute path='/Cliente/:Id' component={ClientePage} />
+          <PrivateRoute path='/Aplicativos' component={AplicativosPage} />
           <Route path="*" component={HomePage} />
         </Switch>
       </Layout>
