@@ -22,10 +22,24 @@ class App extends Component {
 
   componentDidMount() {
     if (!this.props.isAuthenticated)
-      history.push('/Login');
+      history.replace('/Login');
   }
 
+
+
   renderApp() {
+
+    const linksList = [
+      {
+        Nome: "Clientes"
+      },
+      {
+        Nome: "Aplicativos"
+      }
+    ]
+
+
+
     if (this.props.isAuthenticated) {
       return <Layout AppName={this.props.appName}>
         <Switch>
@@ -34,7 +48,7 @@ class App extends Component {
           <PrivateRoute path='/Clientes' component={ClientesPage} />
           <PrivateRoute path='/Cliente/:Id' component={ClientePage} />
           <PrivateRoute path='/Aplicativos' component={AplicativosPage} />
-          {userService.isMaster() ? <PrivateRoute path='/Usuarios' component={UsuariosPage} /> : null }
+          {userService.isMaster() ? <PrivateRoute path='/Usuarios' component={UsuariosPage} /> : null}
           <Route path="*" component={HomePage} />
         </Switch>
       </Layout>

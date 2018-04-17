@@ -203,8 +203,6 @@ body {
     flex-direction: row;
     flex-wrap: wrap;
     margin: 10px;
-    align-items: stretch;
-    justify-content: safe;
   }
 
   .card {
@@ -221,12 +219,13 @@ body {
 
   .card-app {
     width: 400px;
-    border: 1px solid #919192;
     border-radius: 4px;
     overflow: hidden;
     margin: 10px;
     display: flex;
+
     flex-direction: column;
+    border: 1px solid #919192;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
 
@@ -280,4 +279,15 @@ body {
   .blue
   {
     color: #4870ac;
+  }
+
+  .shaddow {
+    border: 1px solid #919192;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+
+  .form-aplicativo {
+    width: 90%;
+    padding: 10px;
+    margin: 10px auto;
   }

@@ -13,9 +13,9 @@ export default class DtmPageBase extends React.Component {
  */
   componentWillMount() {
 
-    //const state = store.getState();
-    //const { role } = state.auth.user;
-    //const PathName = history.location.pathname;
+    // const state = store.getState();
+    // const { role } = state.auth.user;
+    // const PathName = history.location.pathname;
 
     // if (PathName !== '/') {
     //   console.log(PathName)
@@ -23,8 +23,8 @@ export default class DtmPageBase extends React.Component {
     //   if (index === -1) {
     //     Mensagens.addFlashMessageErro(`Sem permissão para ${PathName}`);
     //   }
-      //history.push('/');
-    //}
+    //   history.replace('/');
+    // }
 
   }
 

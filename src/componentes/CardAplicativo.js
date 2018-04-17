@@ -3,11 +3,47 @@ import classnames from 'classnames';
 import shortid from 'shortid';
 import { Link } from 'react-router-dom';
 
+import FormAplicativo from './FormAplicativo';
+
 export default class CardAplicativo extends React.Component {
+
+
+    constructor(props)
+    {
+        super(props);
+
+        this.state = {
+            isEditing: false,
+            app: this.props.app
+        }
+
+        this.onClick = this.onClick.bind(this);
+        this.setAppToState = this.setAppToState.bind(this)
+    }
+
+    onClick(event) {
+        event.preventDefault();
+        this.setState(
+            {
+               isEditing: !this.state.isEditing
+            }
+        )
+    }
+
+    setAppToState(app)
+    {
+        this.setState(
+            {
+                app: app,
+                isEditing: !this.state.isEditing
+            }
+        )
+    }
+
 
     render() {
 
-        const app = this.props.app;
+        const app = this.state.app;
 
         return (
             <div className={classnames('card-app', { 'fieldAnimate': !app.status })} key={shortid.generate()}>
@@ -18,8 +54,9 @@ export default class CardAplicativo extends React.Component {
                 <div className="card-main">
                     <div>{app.descricao}</div>
                     <div className="card-botoes">
-                        <Link to={`/Aplicativo/${app.codigo}`} className='btn btn-primary card-botao'>Editar</Link>
+                        <button onClick={this.onClick} className='btn btn-primary card-botao'>Editar</button>
                     </div>
+                    { this.state.isEditing ? <FormAplicativo updateApp={this.setAppToState} app={app} /> : null }
                 </div>
             </div>
         )

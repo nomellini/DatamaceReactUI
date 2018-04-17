@@ -37,5 +37,5 @@ function logout() {
   store.dispatch({
     type: consts.LOGOUT_USER,
   })
-  history.push('/Login');
+  history.replace('/Login');
 }

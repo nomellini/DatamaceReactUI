@@ -55,7 +55,7 @@ export default class Cliente extends DtmPageBase {
 
           // addFlashMessage adiciona uma mensagem na lista de mensagems do aplicativo
           //Mensagens.addFlashMessageSucesso('Não sei');
-          history.push('/clientes');
+          history.replace('/clientes');
         },
         (err) => {
           if (err.message === "Network Error") {

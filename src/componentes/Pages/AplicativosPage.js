@@ -5,7 +5,7 @@ import shortid from 'shortid';
 import DtmPageBase from './DtmPageBase'
 import CardAplicativo from '../CardAplicativo'
 import axios from 'axios';
-
+import FormAplicativo from '../FormAplicativo';
 
 
 export default class AplicativosPage extends DtmPageBase {
@@ -14,28 +14,48 @@ export default class AplicativosPage extends DtmPageBase {
     super(props);
     this.state = {
       message: '',
-      isLoading: false
+      isLoading: false,
+      isAdding: false
     }
+
+    this.loadApps = this.loadApps.bind(this);
+    this.onNewApp = this.onNewApp.bind(this);
+
   }
 
-  componentDidMount() {
+  onNewApp(event) {
+    event.preventDefault();
+    this.setState(
+        {
+          isAdding: !this.state.isAdding
+        }
+    )
+  }
+
+  loadApps()
+  {
 
     this.setState({
       apps: [],
       message: '',
       errors: {},
-      isLoading: true
+      isLoading: false,
+      isAdding: false
     });
 
     return axios.get(APP_API)
-      .then(
-        (res) => {
-          this.setState({
-            apps: res.data,
-            isLoading: false
-          })
-        }
-      )
+    .then(
+      (res) => {
+        this.setState({
+          apps: res.data,
+          isLoading: false
+        })
+      }
+    )
+  }
+
+  componentDidMount() {
+    this.loadApps();
   }
 
   renderCards(_this) {
@@ -64,7 +84,8 @@ export default class AplicativosPage extends DtmPageBase {
 
         <div className="card-container">
           <div className="card-app">
-            <Link disabled={this.state.isLoading} className='btn btn-danger' to={'/Aplicativo/0'}>Novo Aplicativo</Link>
+            <button onClick={this.onNewApp} className='btn btn-danger'>Cadastrar Novo Aplicativo</button>
+            { this.state.isAdding ? <FormAplicativo updateApp={this.loadApps} app={''} /> : null }
           </div>
         </div>
 

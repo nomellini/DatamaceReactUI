@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import DtmPageBase from "./DtmPageBase";
 
 export default class UsuariosPage extends DtmPageBase {

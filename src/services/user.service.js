@@ -11,7 +11,7 @@ export const userService = {
 function isMaster() {
     const state = store.getState();
     const { role } = state.auth.user;
-    const index = role.indexOf("Master1");
+    const index = role.indexOf("Master");
     return !(index === -1);
 }
 

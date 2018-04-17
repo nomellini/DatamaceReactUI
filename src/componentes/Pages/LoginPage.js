@@ -1,6 +1,5 @@
 import React from 'react';
 import classnames from 'classnames';
-
 import { Redirect } from "react-router-dom";
 import { userActions } from '../../actions/user.actions';
 import { history } from '../../helper/history';
@@ -39,7 +38,7 @@ class LoginPage extends React.Component {
     userActions.login(usuario, senha).then(
       (res) => {
         //Mensagens.addFlashMessageSucesso(`Login efetuado com sucesso (para fechar esta mensagem, clique no x)`);
-        history.push('/');
+        history.replace('/');
       },
       (err) => {
 
