@@ -7,3 +7,7 @@ do store e atualizem as telas que usarm StateToProps.
 Posso usar o store diretamente quando estou em componentes
 
 Editando o arquivo no GitHub. Como será que vai ficar no visual studio code ?
+
+git checkout CadastroDeUsuarios
+Esta linha aparece somente neste branch
+
