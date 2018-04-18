@@ -2,6 +2,7 @@ let _root_api = ''
 if (process.env.NODE_ENV === 'production')
 {
    _root_api = 'http://dtmweb/DtmMobileDatamaceWebApi/api/v1'; // Local IIS
+   _root_api = 'http://201.72.232.228/DtmMobileDatamaceWebApi/api/v1'; // Local IIS
 }
 else
 {
@@ -12,6 +13,7 @@ else
 const ROOT_API = _root_api;
 const AUTH_API = ROOT_API + '/Authentication';
 const CLIENTE_API = ROOT_API + '/Cliente';
+const CLIENTE_LICENCA = ROOT_API + '/Licenca';
 const CLIENTE_API_TESTE = CLIENTE_API + '/CheckConnetion'
 const APP_API = ROOT_API + '/Aplicativo'
 
@@ -19,6 +21,7 @@ module.exports = {
   ROOT_API,
   AUTH_API,
   CLIENTE_API,
+  CLIENTE_LICENCA,
   CLIENTE_API_TESTE,
   APP_API
 };

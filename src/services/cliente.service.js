@@ -1,4 +1,4 @@
-import { CLIENTE_API, CLIENTE_API_TESTE } from '../helper/apiConfig';
+import { CLIENTE_API, CLIENTE_API_TESTE, CLIENTE_LICENCA } from '../helper/apiConfig';
 //import { authHeader } from '../helper/auth-header';
 import findIndex from 'lodash/findIndex';
 import axios from 'axios';
@@ -10,6 +10,7 @@ export const clienteService = {
     addCliente,
     obterCliente,
     testarApiPorIdCliente,
+    aplicarLicencaPorIdCliente,
     getClienteById
 };
 
@@ -19,6 +20,13 @@ function getClientes() {
 
 function testarApiPorIdCliente(Id) {
     return axios.post(CLIENTE_API_TESTE, Id, {
+        headers: { 'Content-Type': 'application/json' }
+    });
+}
+
+function aplicarLicencaPorIdCliente(Id)
+{
+    return axios.post(CLIENTE_LICENCA, Id, {
         headers: { 'Content-Type': 'application/json' }
     });
 }

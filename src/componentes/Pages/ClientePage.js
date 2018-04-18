@@ -1,9 +1,12 @@
 import React from 'react'
 import classnames from 'classnames';
-import { clienteActions } from '../../actions/cliente.actions'
 import { history } from '../../helper/history';
 import DtmPageBase from './DtmPageBase'
 import shortid from 'shortid';
+import { clienteActions } from '../../actions/cliente.actions';
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default class Cliente extends DtmPageBase {
 
@@ -29,7 +32,6 @@ export default class Cliente extends DtmPageBase {
     this.onChange = this.onChange.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.gravar = this.gravar.bind(this);
-
   }
 
   componentDidMount() {
@@ -46,38 +48,75 @@ export default class Cliente extends DtmPageBase {
 
   }
 
+
+  aplicarLicenca = () => {
+
+    var ClienteId = this.props.match.params.Id;
+
+
+    if (ClienteId > 0) {
+
+      clienteActions.aplicarLicencaPorIdCliente(ClienteId).then(
+        (res) => {
+          toast.success("Licença aplicada com sucesso !");
+        },
+        (err) => {
+          console.log(err.response)
+          toast.error(`Erro ao aplicar a licença: ${err.response.statusText}`);
+        }
+      )
+    }
+  }
+
+
+  testarApi = () => {
+
+    var ClienteId = this.props.match.params.Id;
+    if (ClienteId > 0) {
+      clienteActions.testarApiPorIdCliente(ClienteId).then(
+        (res) => {
+          toast.success("API testada com sucesso !");
+        },
+        (err) => {
+          toast.error("Erro ao conectar a API");
+        }
+      )
+    }
+  }
+
   gravar() {
 
     this.setState({ message: '', errors: {}, isLoading: true });
 
-      clienteActions.addCliente(this.state).then(
-        (res) => {
+    clienteActions.addCliente(this.state).then(
+      (res) => {
 
-          // addFlashMessage adiciona uma mensagem na lista de mensagems do aplicativo
-          //Mensagens.addFlashMessageSucesso('Não sei');
-          history.replace('/clientes');
-        },
-        (err) => {
-          if (err.message === "Network Error") {
-            // message no state é apenas desta tela
-            this.setState({ message: err.message, isLoading: false })
-            return;
+        // addFlashMessage adiciona uma mensagem na lista de mensagems do aplicativo
+        //Mensagens.addFlashMessageSucesso('Não sei');
+        //history.replace('/clientes');
+        toast.success("Cliente atualizado no banco de dados")
+      },
+      (err) => {
+        if (err.message === "Network Error") {
+          // message no state é apenas desta tela
+          this.setState({ message: err.message, isLoading: false })
+          return;
+        }
+        if (err.response.status !== 200) {
+          if (err.response.status === 400) {
+            this.setState({ errors: err.response.data.errors })
+            this.setState({ message: err.response.data.message, isLoading: false })
           }
-          if (err.response.status !== 200) {
-            if (err.response.status === 400) {
-              this.setState({ errors: err.response.data.errors })
-              this.setState({ message: err.response.data.message, isLoading: false })
-            }
-            else {
-              this.setState(
-                {
-                  message: `${err.response.status} - ${err.response.statusText}`, isLoading: false
-                }
-              )
-            }
+          else {
+            this.setState(
+              {
+                message: `${err.response.status} - ${err.response.statusText}`, isLoading: false
+              }
+            )
           }
         }
-      );
+      }
+    );
   }
 
   onChange(event) {
@@ -91,10 +130,8 @@ export default class Cliente extends DtmPageBase {
 
     if (target.checked) {
       target.removeAttribute('checked');
-      //target.parentNode.style.textDecoration = "";
     } else {
       target.setAttribute('checked', true);
-      //target.parentNode.style.textDecoration = "line-through";
     }
 
     this.setState({ status: event.target.checked });
@@ -180,18 +217,23 @@ export default class Cliente extends DtmPageBase {
                     defaultChecked={this.state.status} />
                 </div>
               </div >
+
             </div>
           </div >
         </div >
       </div >
       <div className="row">
-        <div className="col-md-6">
-          <button onClick={this.gravar} className='btn btn-primary' to={'/Cliente/0'}>Gravar</button>
-        </div>
-        <div className="col-md-6">
+        <div className="col-md-12">
+          <button onClick={this.gravar} className='btn btn-primary'>Gravar</button>&nbsp;
+          <button onClick={this.testarApi} className='btn btn-primary'>Testar Api</button>&nbsp;
+          <button onClick={this.aplicarLicenca} className='btn btn-primary' >Aplicar licença</button>
         </div>
       </div>
+      <ToastContainer
+        autoClose={2500}
+        hideProgressBar={true}
 
+      />
     </div >
   }
 }

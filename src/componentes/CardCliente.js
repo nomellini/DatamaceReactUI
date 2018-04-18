@@ -21,7 +21,6 @@ export default class CardCliente extends React.Component {
                     <div>{this.props.checkConnection ? <TestApiComponent cliente={cli} /> : null} {cli.url}</div>
                     <div className="card-botoes">
                         <Link to={`/Cliente/${cli.codigo}`} className='btn btn-primary card-botao'>Editar</Link>
-                        <Link to={`/Aplicativo/${cli.codigo}`} className='btn btn-primary card-botao'>Applicativos</Link>
                     </div>
                 </div>
             </div>
