@@ -85,7 +85,7 @@ class LoginPage extends React.Component {
 
           <div className={classnames('form-group', { 'fieldAnimate has-error': this.state.errors.Usuario })}>
             <label htmlFor="usuario">Usuario</label>
-            <input className="form-control"
+            <input className="form-control" id="usuario"
               onChange={this.onChange} type="text" value={this.state.usuario} name="usuario">
             </input>
             {this.state.errors.Usuario && <span className="help-block">{this.state.errors.Usuario}</span>}
@@ -94,7 +94,7 @@ class LoginPage extends React.Component {
 
           <div className={classnames('form-group', { 'fieldAnimate has-error': this.state.errors.Senha })}>
             <label htmlFor="senha">Senha</label>
-            <input className="form-control"
+            <input className="form-control" id="senha"
               onChange={this.onChange} type="password" value={this.state.senha} name="senha">
             </input>
             {this.state.errors.Senha && <span className="help-block">{this.state.errors.Senha}</span>}

@@ -154,25 +154,25 @@ export default class Cliente extends DtmPageBase {
             <div className={classnames('form-group', { 'has-error fieldAnimate': this.state.errors.Nome })}>
               <label htmlFor="inputNome" className="col-md-4 control-label">Nome</label>
               <div className="col-md-8">
-                <input type="text"
+                <input type="text" id="inputNome"
                   name="nome" className="form-control" value={this.state.nome} onChange={this.onChange} />
                 {this.state.errors.Nome && <span className="help-block">{this.state.errors.Nome}</span>}
               </div>
             </div>
 
             <div className={classnames('form-group', { 'has-error fieldAnimate': this.state.errors.descricao })}>
-              <label htmlFor="input" className="col-md-4 control-label">Descricao</label>
+              <label htmlFor="inputDescricao" className="col-md-4 control-label">Descricao</label>
               <div className="col-md-8">
-                <input type="text" name="descricao" className="form-control" value={this.state.descricao} onChange={this.onChange} />
+                <input type="text" id="inputDescricao" name="descricao" className="form-control" value={this.state.descricao} onChange={this.onChange} />
                 {this.state.errors.descricao && <span className="help-block">{this.state.errors.descricao}</span>}
               </div>
             </div>
 
 
             <div className={classnames('form-group', { 'has-error fieldAnimate': this.state.errors.CNPJ })}>
-              <label htmlFor="input" className="col-md-4 control-label">CNPJ</label>
+              <label htmlFor="inputCnpj" className="col-md-4 control-label">CNPJ</label>
               <div className="col-md-8">
-                <input type="text" name="cnpj" className="form-control" value={this.state.cnpj} onChange={this.onChange} />
+                <input type="text" id="inputCnpj" name="cnpj" className="form-control" value={this.state.cnpj} onChange={this.onChange} />
                 {this.state.errors.CNPJ && <span className="help-block">{this.state.errors.CNPJ}</span>}
               </div>
             </div>
@@ -180,23 +180,23 @@ export default class Cliente extends DtmPageBase {
             <div className={classnames('form-group', { 'has-error fieldAnimate': this.state.errors.codigoSad })}>
               <label htmlFor="codigoSad" className="col-md-4 control-label">Código SAD</label>
               <div className="col-md-8">
-                <input type="text" name="codigoSad" className="form-control" value={this.state.codigoSad} onChange={this.onChange} />
+                <input type="text" id="codigoSad" name="codigoSad" className="form-control" value={this.state.codigoSad} onChange={this.onChange} />
                 {this.state.errors.codigoSad && <span className="help-block">{this.state.errors.codigoSad}</span>}
               </div>
             </div>
 
             <div className={classnames('form-group', { 'has-error fieldAnimate': this.state.errors.URL })}>
-              <label htmlFor="input" className="col-md-4 control-label">URL Server API</label>
+              <label htmlFor="inputURL" className="col-md-4 control-label">URL Server API</label>
               <div className="col-md-8">
-                <input type="text" name="url" className="form-control" value={this.state.url} onChange={this.onChange} />
+                <input type="text" id="inputURL" name="url" className="form-control" value={this.state.url} onChange={this.onChange} />
                 {this.state.errors.URL && <span className="help-block">{this.state.errors.URL}</span>}
               </div>
             </div>
 
             <div className={classnames('form-group', { 'has-error fieldAnimate': this.state.errors.Email })}>
-              <label htmlFor="input" className="col-md-4 control-label">Email</label>
+              <label htmlFor="inputEmail" className="col-md-4 control-label">Email</label>
               <div className="col-md-8">
-                <input type="text" name="email" className="form-control" value={this.state.email} onChange={this.onChange} />
+                <input type="text" id="inputEmail" name="email" className="form-control" value={this.state.email} onChange={this.onChange} />
                 {this.state.errors.Email && <span className="help-block">{this.state.errors.Email}</span>}
               </div>
             </div>
@@ -207,9 +207,10 @@ export default class Cliente extends DtmPageBase {
             )}>
 
               <div className={classnames('form-group', { 'has-error fieldAnimate': this.state.errors.status })}>
-                <label htmlFor="input" className="col-md-4 control-label">Cliente {this.state.status ? "Ativo" : "Inativo"}</label>
+                <label htmlFor="inputStatus" className="col-md-4 control-label">Cliente {this.state.status ? "Ativo" : "Inativo"}</label>
                 <div className="col-md-8">
                   <input
+                    id="inputStatus"
                     type="checkbox"
                     name="status"
                     onClick={this.handleChange}
