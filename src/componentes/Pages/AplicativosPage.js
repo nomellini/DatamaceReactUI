@@ -1,6 +1,6 @@
 import React from 'react'
 import { APP_API } from '../../helper/apiConfig';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import shortid from 'shortid';
 import DtmPageBase from './DtmPageBase'
 import CardAplicativo from '../CardAplicativo'

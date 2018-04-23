@@ -7,7 +7,8 @@ import store from '../redux/store';
 
 export const userActions = {
   login,
-  logout
+  logout,
+  zeraSenha
 };
 
 
@@ -17,6 +18,12 @@ export function setCurrentUser(user) {
     type: consts.SET_CURRENT_USER,
     user
   };
+}
+
+
+export function zeraSenha(usuario)
+{
+  return userService.zeraSenha( `"${usuario}"` );
 }
 
 export function login(usuario, senha) {

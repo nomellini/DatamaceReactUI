@@ -10,6 +10,8 @@ import Layout from './componentes/Layout';
 import AplicativosPage from './componentes/Pages/AplicativosPage';
 import HomePage from './componentes/Pages/HomePage';
 import LoginPage from './componentes/Pages/LoginPage';
+import TrocaSenhaPage from './componentes/Pages/TrocaSenhaPage';
+
 import ClientesPage from './componentes/Pages/ClientesPage'
 import ClientePage from './componentes/Pages/ClientePage'
 import UsuariosPage from './componentes/Pages/UsuariosPage'
@@ -20,25 +22,8 @@ import './site.css';
 class App extends Component {
 
 
-  componentDidMount() {
-    if (!this.props.isAuthenticated)
-      history.replace('/Login');
-  }
-
-
 
   renderApp() {
-
-    const linksList = [
-      {
-        Nome: "Clientes"
-      },
-      {
-        Nome: "Aplicativos"
-      }
-    ]
-
-
 
     if (this.props.isAuthenticated) {
       return <Layout AppName={this.props.appName}>
@@ -54,7 +39,12 @@ class App extends Component {
       </Layout>
     }
     else {
-      return <Route exact path='/Login' component={LoginPage} />;
+      return (
+        <Switch>
+          <Route path='/TrocaSenha/:Token' component={TrocaSenhaPage} />;
+          <Route path="*" component={LoginPage} />
+        </Switch>
+      )
     }
   }
 

@@ -27,11 +27,6 @@ class LinkToLogin extends React.Component {
         <NavLink to={'/Logout'} exact activeClassName='active'>
           <span className='glyphicon glyphicon-log-out'></span>Sair
         </NavLink>)
-
-        // <div>
-        //   <a role="button" href="/Logout" onClick={this.onClick} clasname='btn'><span className='glyphicon glyphicon-log-out'></span>Logout</a>
-        // </div>
-      //)
   }
 }
 

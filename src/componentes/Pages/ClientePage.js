@@ -1,6 +1,5 @@
 import React from 'react'
 import classnames from 'classnames';
-import { history } from '../../helper/history';
 import DtmPageBase from './DtmPageBase'
 import shortid from 'shortid';
 import { clienteActions } from '../../actions/cliente.actions';
@@ -61,7 +60,6 @@ export default class Cliente extends DtmPageBase {
           toast.success("Licença aplicada com sucesso !");
         },
         (err) => {
-          console.log(err.response)
           toast.error(`Erro ao aplicar a licença: ${err.response.statusText}`);
         }
       )

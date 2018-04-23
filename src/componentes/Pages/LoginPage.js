@@ -4,6 +4,8 @@ import { Redirect } from "react-router-dom";
 import { userActions } from '../../actions/user.actions';
 import { history } from '../../helper/history';
 import LogoDatamace from '../../img/LogoDatamace.png'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class LoginPage extends React.Component {
 
@@ -21,6 +23,34 @@ class LoginPage extends React.Component {
 
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.onEsqueci = this.onEsqueci.bind(this);
+  }
+
+
+  onEsqueci()
+  {
+    if (this.state.usuario) {
+      userActions.zeraSenha(this.state.usuario).then(
+        (res) => {
+          console.log(res)
+          toast.success(`${this.state.usuario}, Verifique seu email`);
+        },
+        (err) =>
+        {
+          this.setState({ temErros: true });
+          if (err.message === "Network Error") {
+            // message no state é apenas desta tela
+            this.setState({ message: 'Servidor não encontrado', isLoading: false })
+            return;
+          }
+          this.setState({ message: `Erro na api: ${err.response.statusText}`, isLoading: false })
+        }
+      )
+
+
+    } else {
+      toast.error(`Digitar o usuário`);
+    }
   }
 
   onChange(event) {
@@ -84,8 +114,8 @@ class LoginPage extends React.Component {
           {this.state.message && <div className="alert alert-danger">{this.state.message}</div>}
 
           <div className={classnames('form-group', { 'fieldAnimate has-error': this.state.errors.Usuario })}>
-            <label htmlFor="usuario">Usuario</label>
-            <input className="form-control" id="usuario"
+            <label htmlFor="inputUsuario">Usuario</label>
+            <input className="form-control" id="inputUsuario"
               onChange={this.onChange} type="text" value={this.state.usuario} name="usuario">
             </input>
             {this.state.errors.Usuario && <span className="help-block">{this.state.errors.Usuario}</span>}
@@ -93,8 +123,8 @@ class LoginPage extends React.Component {
 
 
           <div className={classnames('form-group', { 'fieldAnimate has-error': this.state.errors.Senha })}>
-            <label htmlFor="senha">Senha</label>
-            <input className="form-control" id="senha"
+            <label htmlFor="inputSenha">Senha</label>
+            <input className="form-control" id="inputSenha"
               onChange={this.onChange} type="password" value={this.state.senha} name="senha">
             </input>
             {this.state.errors.Senha && <span className="help-block">{this.state.errors.Senha}</span>}
@@ -105,12 +135,22 @@ class LoginPage extends React.Component {
             <button disabled={this.state.isLoading} className="btn btn-primary" type="submit">Logar</button>
           </div>
 
+          <div className="login-btn-enviar">
+            <a onClick={this.onEsqueci} href="pá">Esqueci minha senha</a>
+          </div>
+
         </form>
 
       </div>
 
+      <ToastContainer
+        autoClose={2500}
+        hideProgressBar={true}
+
+      />
     </div>;
   }
 }
 
 export default LoginPage;
+

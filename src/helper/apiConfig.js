@@ -12,16 +12,21 @@ else
 
 const ROOT_API = _root_api;
 const AUTH_API = ROOT_API + '/Authentication';
+const USUARIO_API = ROOT_API + '/Usuario';
 const CLIENTE_API = ROOT_API + '/Cliente';
+const APP_API = ROOT_API + '/Aplicativo'
+
+const USUARIO_ZERASENHA = USUARIO_API + '/ZerarSenha';
+
 const CLIENTE_LICENCA = ROOT_API + '/Licenca';
 const CLIENTE_API_TESTE = CLIENTE_API + '/CheckConnetion'
-const APP_API = ROOT_API + '/Aplicativo'
 
 module.exports = {
   ROOT_API,
   AUTH_API,
+  APP_API,
   CLIENTE_API,
   CLIENTE_LICENCA,
   CLIENTE_API_TESTE,
-  APP_API
+  USUARIO_ZERASENHA
 };
