@@ -21,16 +21,20 @@ class LoginPage extends React.Component {
       senha: ''
     };
 
-    if (this.props.match.params.NovoLogin)
-    {
-      toast.info('Efetuar seu login com a nova senha cadastrada');
-    }
 
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.onEsqueci = this.onEsqueci.bind(this);
   }
 
+
+  componentDidMount()
+  {
+    if (this.props.match.params.NovoLogin)
+    {
+      toast.info('Efetuar seu login com a nova senha cadastrada');
+    }
+  }
 
   onEsqueci()
   {
