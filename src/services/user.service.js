@@ -1,9 +1,10 @@
-import { AUTH_API, USUARIO_ZERASENHA } from '../helper/apiConfig';
+import { AUTH_API, USUARIO_ZERASENHA, USUARIO_NOVASENHA } from '../helper/apiConfig';
 import axios from 'axios';
 import store from '../redux/store';
 
 export const userService = {
     login,
+    NovaSenha,
     zeraSenha,
     isLogged,
     isMaster
@@ -24,6 +25,14 @@ function login(usuario, senha) {
     });
 }
 
+function NovaSenha(state)
+{
+    const body = JSON.stringify(state);
+    console.log(body);
+    return axios.post(USUARIO_NOVASENHA, body, {
+        headers: { 'Content-Type': 'application/json' }
+    });
+}
 
 function zeraSenha(usuario)
 {

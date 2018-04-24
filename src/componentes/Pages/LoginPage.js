@@ -21,6 +21,11 @@ class LoginPage extends React.Component {
       senha: ''
     };
 
+    if (this.props.match.params.NovoLogin)
+    {
+      toast.info('Efetuar seu login com a nova senha cadastrada');
+    }
+
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.onEsqueci = this.onEsqueci.bind(this);
@@ -32,18 +37,18 @@ class LoginPage extends React.Component {
     if (this.state.usuario) {
       userActions.zeraSenha(this.state.usuario).then(
         (res) => {
-          console.log(res)
           toast.success(`${this.state.usuario}, Verifique seu email`);
         },
         (err) =>
         {
           this.setState({ temErros: true });
           if (err.message === "Network Error") {
-            // message no state é apenas desta tela
-            this.setState({ message: 'Servidor não encontrado', isLoading: false })
+            toast.error('Servidor não encontrado');
+            this.setState({isLoading: false});
             return;
           }
-          this.setState({ message: `Erro na api: ${err.response.statusText}`, isLoading: false })
+          toast.error(`Erro na api: ${err.response.statusText}`);
+          this.setState({isLoading: false});
         }
       )
 
@@ -67,7 +72,6 @@ class LoginPage extends React.Component {
 
     userActions.login(usuario, senha).then(
       (res) => {
-        //Mensagens.addFlashMessageSucesso(`Login efetuado com sucesso (para fechar esta mensagem, clique no x)`);
         history.replace('/');
       },
       (err) => {
@@ -76,13 +80,15 @@ class LoginPage extends React.Component {
 
         if (err.message === "Network Error") {
           // message no state é apenas desta tela
-          this.setState({ message: 'Servidor não encontrado', isLoading: false })
+          toast.error('Servidor não encontrado');
+          this.setState({isLoading: false })
           return;
         }
+        if (err.response.data.message)
+          toast.error(err.response.data.message);
         this.setState(
           {
             errors: err.response.data.errors,
-            message: err.response.data.message,
             isLoading: false
           }
         )
@@ -136,7 +142,7 @@ class LoginPage extends React.Component {
           </div>
 
           <div className="login-btn-enviar">
-            <a onClick={this.onEsqueci} href="pá">Esqueci minha senha</a>
+            <a onClick={this.onEsqueci} href="#">Esqueci minha senha</a>
           </div>
 
         </form>
@@ -146,7 +152,6 @@ class LoginPage extends React.Component {
       <ToastContainer
         autoClose={2500}
         hideProgressBar={true}
-
       />
     </div>;
   }

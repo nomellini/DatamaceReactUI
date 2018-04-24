@@ -8,7 +8,8 @@ import store from '../redux/store';
 export const userActions = {
   login,
   logout,
-  zeraSenha
+  zeraSenha,
+  NovaSenha
 };
 
 
@@ -20,6 +21,10 @@ export function setCurrentUser(user) {
   };
 }
 
+export function NovaSenha(state)
+{
+  return userService.NovaSenha(state);
+}
 
 export function zeraSenha(usuario)
 {

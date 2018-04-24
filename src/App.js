@@ -21,12 +21,11 @@ import './site.css';
 
 class App extends Component {
 
-
-
   renderApp() {
 
     if (this.props.isAuthenticated) {
-      return <Layout AppName={this.props.appName}>
+      return (
+      <Layout AppName={this.props.appName}>
         <Switch>
           <PrivateRoute exact path='/' component={HomePage} />
           <Route exact path='/Logout' component={LogoutComponent} />
@@ -36,11 +35,12 @@ class App extends Component {
           {userService.isMaster() ? <PrivateRoute path='/Usuarios' component={UsuariosPage} /> : null}
           <Route path="*" component={HomePage} />
         </Switch>
-      </Layout>
+      </Layout>)
     }
     else {
       return (
         <Switch>
+          <Route exact path='/Login/:NovoLogin' component={LoginPage} />;
           <Route path='/TrocaSenha/:Token' component={TrocaSenhaPage} />;
           <Route path="*" component={LoginPage} />
         </Switch>
@@ -49,8 +49,6 @@ class App extends Component {
   }
 
   render() {
-
-
     return (
       <Router history={history}>
         {this.renderApp()}
@@ -60,11 +58,8 @@ class App extends Component {
 }
 
 function mapStateToProps(state) {
-
   const appName = "Datamace";
-
   const { isAuthenticated } = state.auth;
-
   return {
     appName, isAuthenticated
   };

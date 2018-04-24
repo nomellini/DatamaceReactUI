@@ -17,6 +17,7 @@ const CLIENTE_API = ROOT_API + '/Cliente';
 const APP_API = ROOT_API + '/Aplicativo'
 
 const USUARIO_ZERASENHA = USUARIO_API + '/ZerarSenha';
+const USUARIO_NOVASENHA = USUARIO_API + '/NovaSenha';
 
 const CLIENTE_LICENCA = ROOT_API + '/Licenca';
 const CLIENTE_API_TESTE = CLIENTE_API + '/CheckConnetion'
@@ -28,5 +29,6 @@ module.exports = {
   CLIENTE_API,
   CLIENTE_LICENCA,
   CLIENTE_API_TESTE,
-  USUARIO_ZERASENHA
+  USUARIO_ZERASENHA,
+  USUARIO_NOVASENHA
 };
