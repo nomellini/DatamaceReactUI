@@ -6,7 +6,7 @@ if (process.env.NODE_ENV === 'production')
 }
 else
 {
-  _root_api = 'http://dtmweb/DtmMobileDatamaceWebApi/api/v1'; // Local IIS
+  _root_api = 'http://dtmweb/DtmMobileDatamaceWebApi/api/v1'; //Alterado linha 9
   //_root_api = 'http://localhost:49713/api/v1'; // Local Debug
 }
 
