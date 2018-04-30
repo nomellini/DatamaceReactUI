@@ -41,7 +41,13 @@ class LoginPage extends React.Component {
     if (this.state.usuario) {
       userActions.zeraSenha(this.state.usuario).then(
         (res) => {
-          toast.success(`${this.state.usuario}, Verifique seu email`);
+          if (res.status === 204)
+          {
+            toast.error(`Usuário não encontrado`);
+          }
+          else if (res.status === 200) {
+            toast.success(`${this.state.usuario}, verifique seu email`);
+          }
         },
         (err) =>
         {

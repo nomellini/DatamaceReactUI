@@ -9,9 +9,15 @@ export const userActions = {
   login,
   logout,
   zeraSenha,
-  NovaSenha
+  NovaSenha,
+  obterUsuarios
 };
 
+
+export function obterUsuarios()
+{
+  return userService.obterUsuarios();
+}
 
 
 export function setCurrentUser(user) {

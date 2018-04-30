@@ -1,4 +1,4 @@
-import { AUTH_API, USUARIO_ZERASENHA, USUARIO_NOVASENHA } from '../helper/apiConfig';
+import consts from '../helper/apiConfig';
 import axios from 'axios';
 import store from '../redux/store';
 
@@ -7,8 +7,15 @@ export const userService = {
     NovaSenha,
     zeraSenha,
     isLogged,
-    isMaster
+    isMaster,
+    obterUsuarios
 };
+
+
+export function obterUsuarios()
+{
+    return axios.get(consts.USUARIO_API);
+}
 
 function isMaster() {
     const state = store.getState();
@@ -20,7 +27,7 @@ function isMaster() {
 
 function login(usuario, senha) {
     const body = JSON.stringify({ usuario, senha });
-    return axios.post(AUTH_API, body, {
+    return axios.post(consts.AUTH_API, body, {
         headers: { 'Content-Type': 'application/json' }
     });
 }
@@ -28,16 +35,14 @@ function login(usuario, senha) {
 function NovaSenha(state)
 {
     const body = JSON.stringify(state);
-    console.log(body);
-    return axios.post(USUARIO_NOVASENHA, body, {
+    return axios.post(consts.USUARIO_NOVASENHA, body, {
         headers: { 'Content-Type': 'application/json' }
     });
 }
 
 function zeraSenha(usuario)
 {
-    //const body = JSON.stringify({ usuario });
-    return axios.post(USUARIO_ZERASENHA, usuario, {
+    return axios.post(consts.USUARIO_ZERASENHA, usuario, {
         headers: { 'Content-Type': 'application/json' }
     });
 }
