@@ -6,7 +6,7 @@ if (process.env.NODE_ENV === 'production')
 }
 else
 {
-  _root_api = 'http://dtmweb/DtmMobileDatamaceWebApi/api/v1'; // Local IIS
+  _root_api = 'http://dtmweb/DtmMobileDatamaceWebApi/api/v1'; // é para dar merge Local IIS
   //_root_api = 'http://localhost:49713/api/v1'; // Local Debug
 }
 
