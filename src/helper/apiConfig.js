@@ -2,12 +2,10 @@ let _root_api = ''
 if (process.env.NODE_ENV === 'production')
 {
    _root_api = 'http://www.rhnet.com.br:3000/api/api/v1'; // servidor de produção
- //  _root_api = 'http://201.72.232.228/DtmMobileDatamaceWebApi/api/v1'; // Local IIS
 }
 else
 {
-  _root_api = 'http://dtmweb/DtmMobileDatamaceWebApi/api/v1'; //Alterado linha 9
-  //_root_api = 'http://localhost:49713/api/v1'; // Local Debug
+  _root_api = 'http://dtmweb/DtmMobileDatamaceWebApi/api/v1';
 }
 
 const ROOT_API = _root_api;
@@ -15,6 +13,8 @@ const AUTH_API = ROOT_API + '/Authentication';
 const USUARIO_API = ROOT_API + '/Usuario';
 const CLIENTE_API = ROOT_API + '/Cliente';
 const APP_API = ROOT_API + '/Aplicativo'
+
+const APP_AUTORIZACOES = APP_API + '/GetAutorizacoes'
 
 const USUARIO_ZERASENHA = USUARIO_API + '/ZerarSenha';
 const USUARIO_NOVASENHA = USUARIO_API + '/NovaSenha';
@@ -27,6 +27,8 @@ module.exports = {
   AUTH_API,
   APP_API,
   USUARIO_API,
+
+  APP_AUTORIZACOES,
 
   CLIENTE_API,
   CLIENTE_LICENCA,
