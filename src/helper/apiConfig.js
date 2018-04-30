@@ -1,7 +1,7 @@
 let _root_api = ''
 if (process.env.NODE_ENV === 'production')
 {
-   _root_api = 'http://dtmweb/DtmMobileDatamaceWebApi/api/v1'; // Local IIS
+   _root_api = 'http://www.rhnet.com.br:3000/api/api/v1'; // Local IIS
  //  _root_api = 'http://201.72.232.228/DtmMobileDatamaceWebApi/api/v1'; // Local IIS
 }
 else
