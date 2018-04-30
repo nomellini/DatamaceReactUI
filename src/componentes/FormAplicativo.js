@@ -2,6 +2,7 @@ import React from 'react';
 import classnames from 'classnames';
 import { appService } from '../services/app.service'
 
+
 export default class FormAplicativo extends React.Component {
 
   constructor(props) {
@@ -76,21 +77,21 @@ export default class FormAplicativo extends React.Component {
 
         <div className={classnames('form-group', { 'fieldAnimate has-error': this.state.errors.Nome })}>
           <label htmlFor="nome">Nome</label>
-          <input className="form-control" name="nome" onChange={this.onChange} type="text" value={this.state.nome} >
+          <input className="form-control" id="nome" name="nome" onChange={this.onChange} type="text" value={this.state.nome} >
           </input>
           {this.state.errors.Nome && <span className="help-block">{this.state.errors.Nome}</span>}
         </div>
 
         <div className={classnames('form-group', { 'fieldAnimate has-error': this.state.errors.descricao })}>
           <label htmlFor="descricao">Descrição</label>
-          <input className="form-control" name="descricao" onChange={this.onChange} type="text" value={this.state.descricao} >
+          <input className="form-control" id="descricao" name="descricao" onChange={this.onChange} type="text" value={this.state.descricao} >
           </input>
           {this.state.errors.descricao && <span className="help-block">{this.state.errors.descricao}</span>}
         </div>
 
         <div className={classnames('form-group', { 'fieldAnimate has-error': this.state.errors.Email })}>
           <label htmlFor="email">Email</label>
-          <input className="form-control" name="email" onChange={this.onChange} type="text" value={this.state.email} >
+          <input className="form-control" id="email" name="email" onChange={this.onChange} type="text" value={this.state.email} >
           </input>
           {this.state.errors.Email && <span className="help-block">{this.state.errors.Email}</span>}
 
@@ -103,11 +104,12 @@ export default class FormAplicativo extends React.Component {
             <input
               type="checkbox"
               name="status"
+              id="inputStatus"
               onClick={this.handleChange}
               checked={this.state.status}
               defaultChecked={this.state.status} />
+            <label htmlFor="inputStatus"> App {this.state.status ? " Ativo " : " Inativo "}</label>
           </div >
-          <label htmlFor="input">App {this.state.status ? "Ativo" : "Inativo"}</label>
         </div >
 
 

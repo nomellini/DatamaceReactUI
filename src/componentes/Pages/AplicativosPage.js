@@ -6,21 +6,23 @@ import DtmPageBase from './DtmPageBase'
 import CardAplicativo from '../CardAplicativo'
 import axios from 'axios';
 import FormAplicativo from '../FormAplicativo';
-
+import listaTipoApp from '../../helper/listaTipoApp'
 
 export default class AplicativosPage extends DtmPageBase {
 
   constructor(props) {
+
     super(props);
+
     this.state = {
       message: '',
+      listaTipoApp : listaTipoApp(),
       isLoading: false,
       isAdding: false
     }
 
     this.loadApps = this.loadApps.bind(this);
     this.onNewApp = this.onNewApp.bind(this);
-
   }
 
   onNewApp(event) {
@@ -63,7 +65,7 @@ export default class AplicativosPage extends DtmPageBase {
     var apps = [];
     if (_apps) {
       apps = _apps.map(function (app) {
-        return <CardAplicativo app={app} key={shortid.generate()} />
+        return <CardAplicativo Autorizacoes={_this.state.Autorizacoes} app={app} key={shortid.generate()} />
       });
     }
     return apps
@@ -85,7 +87,7 @@ export default class AplicativosPage extends DtmPageBase {
         <div className="card-container">
           <div className="card-app">
             <button onClick={this.onNewApp} className='btn btn-danger'>Cadastrar Novo Aplicativo</button>
-            { this.state.isAdding ? <FormAplicativo updateApp={this.loadApps} app={''} /> : null }
+            { this.state.isAdding ? <FormAplicativo updateApp={this.loadApps} app={ {status:true, listaTipoApp: listaTipoApp()} } /> : null }
           </div>
         </div>
 
