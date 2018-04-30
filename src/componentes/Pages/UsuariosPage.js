@@ -1,10 +1,9 @@
 import React from 'react';
 import { userActions } from '../../actions/user.actions'
-
 import DtmPageBase from "./DtmPageBase";
 import CardUsuario from "../CardUsuario";
+import FormUsuario from '../FormUsuario';
 
-import { FormUsuario } from '../FormUsuario'
 
 export default class UsuariosPage extends DtmPageBase {
 
@@ -12,6 +11,7 @@ export default class UsuariosPage extends DtmPageBase {
     super(props);
     this.carregar = this.carregar.bind(this);
     this.usuariosCards = this.usuariosCards.bind(this);
+    this.onNewUser = this.onNewUser.bind(this);
 
     this.state = {
       users: []
@@ -19,9 +19,18 @@ export default class UsuariosPage extends DtmPageBase {
 
   }
 
-  loadUsers()
+  loadUsers(state)
   {
+    console.log(state)
+  }
 
+  onNewUser(event) {
+    event.preventDefault();
+    this.setState(
+        {
+          isAdding: !this.state.isAdding
+        }
+      )
   }
 
   componentWillMount() {
@@ -73,7 +82,7 @@ export default class UsuariosPage extends DtmPageBase {
 
         <div className="card-container">
           <div className="card-app">
-            <button onClick={this.onNewApp} className='btn btn-danger'>Cadastrar Novo Usuário</button>
+            <button onClick={this.onNewUser} className='btn btn-danger'>Cadastrar Novo Usuário</button>
             { this.state.isAdding ? <FormUsuario updateUser={this.loadUsers} user={''} /> : null }
           </div>
         </div>
