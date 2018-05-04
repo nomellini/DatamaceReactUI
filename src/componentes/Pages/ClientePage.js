@@ -1,7 +1,6 @@
 import React from 'react'
 import classnames from 'classnames';
 import DtmPageBase from './DtmPageBase'
-import shortid from 'shortid';
 import { clienteActions } from '../../actions/cliente.actions';
 
 import { ToastContainer, toast } from 'react-toastify';
@@ -13,18 +12,22 @@ export default class Cliente extends DtmPageBase {
 
     super(props);
 
+    let hoje = new Date();
+    let DaquiUmAno = hoje;
+    DaquiUmAno.setDate(hoje.getDate() + 365);
+
     this.state = {
       errors: {},
       isLoading: false,
 
       codigo: 0,
-      nome: `Cliente ${shortid.generate()}`,
+      nome: ``,
       descricao: '',
       codigoSad: '',
-      url: 'http://dtmweb/ClientMobileApiTeste',
-      email: 'nomellini@datamace.com.br',
-      cnpj: '39.724.160/0001-19',
-      dataValidade: '2022-01-01T16:30:39.263Z',
+      url: '',
+      email: '',
+      cnpj: '',
+      dataValidade: DaquiUmAno,
       status: true
     }
 
