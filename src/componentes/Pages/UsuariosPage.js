@@ -66,7 +66,7 @@ export default class UsuariosPage extends DtmPageBase {
     const { users } = this.state;
 
     let result = users.map(function (user) {
-      return <CardUsuario usuario={user} key={user.codigo} />
+      return <CardUsuario user={user} key={user.codigo} />
     });
 
     return result;
@@ -83,7 +83,7 @@ export default class UsuariosPage extends DtmPageBase {
         <div className="card-container">
           <div className="card-app">
             <button onClick={this.onNewUser} className='btn btn-danger'>Cadastrar Novo Usuário</button>
-            { this.state.isAdding ? <FormUsuario updateUser={this.loadUsers} user={''} /> : null }
+            { this.state.isAdding ? <FormUsuario updateUser={this.loadUsers} user={{Master: false, status:true, CodigoPerfil: "1"}} /> : null }
           </div>
         </div>
 

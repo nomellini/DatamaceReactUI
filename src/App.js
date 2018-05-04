@@ -32,6 +32,7 @@ class App extends Component {
           <PrivateRoute path='/Clientes' component={ClientesPage} />
           <PrivateRoute path='/Cliente/:Id' component={ClientePage} />
           <PrivateRoute path='/Aplicativos' component={AplicativosPage} />
+          <Route path='/TrocaSenha/:Token' component={TrocaSenhaPage} />;
           {userService.isMaster() ? <PrivateRoute path='/Usuarios' component={UsuariosPage} /> : null}
           <Route path="*" component={HomePage} />
         </Switch>

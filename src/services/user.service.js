@@ -16,7 +16,7 @@ export const userService = {
 export function gravarUsuario(user)
 {
     const body = JSON.stringify(user);
-    return axios.post("", body, {
+    return axios.post(consts.USUARIO_API, body, {
         headers: { 'Content-Type': 'application/json' }
     });
 }

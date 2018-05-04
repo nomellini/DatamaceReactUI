@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 export default class CardUsuario extends React.Component {
 
   render() {
-    const user = this.props.usuario;
+    const user = this.props.user;
     return (
       <div className={classnames('card', { 'fieldAnimate': !user.status })} key={shortid.generate()}>
         <div className={classnames(

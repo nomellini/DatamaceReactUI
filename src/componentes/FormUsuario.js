@@ -18,17 +18,64 @@ export default class FormUsuario extends React.Component {
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleMasterCh = this.handleMasterCh.bind(this);
   }
 
   onSubmit(event) {
-    event.preventDefault();
 
-    //this.props.updateUser(this.state);
+    this.setState(
+      {
+        message: '',
+        errors: []
+      }
+    )
+
+    event.preventDefault();
+    userActions.gravarUsuario(this.state)
+    .then(
+      (res) => {
+        this.props.updateApp(this.state);
+      },
+      (err) => {
+        this.setState({ temErros: true });
+
+        if (err.message === "Network Error") {
+          // message no state é apenas desta tela
+          this.setState({ message: 'Servidor não encontrado', isLoading: false })
+          return;
+        }
+        this.setState(
+          {
+            errors: err.response.data.errors,
+            message: err.response.data.message,
+            isLoading: false
+          }
+        )
+
+      }
+    )
   }
 
 
   onChange(event) {
     this.setState({ [event.target.name]: event.target.value });
+  }
+
+  handleMasterCh(event)
+  {
+    const { target } = event;
+    this.handleChange(event);
+
+    let CodigoPerfil = "1"
+
+    if (target.checked) {
+      CodigoPerfil = "2"
+    }
+
+    this.setState(
+      {CodigoPerfil}
+    )
+
   }
 
   handleChange(event) {
@@ -38,7 +85,7 @@ export default class FormUsuario extends React.Component {
     } else {
       target.setAttribute('checked', true);
     }
-    this.setState({ status: event.target.checked });
+    this.setState({ [target.name]: event.target.checked });
   }
 
 
@@ -100,9 +147,19 @@ export default class FormUsuario extends React.Component {
               onClick={this.handleChange}
               checked={this.state.status}
               defaultChecked={this.state.status} />
-            <label htmlFor="inputStatus"> App {this.state.status ? " Ativo " : " Inativo "}</label>
+            <label htmlFor="inputStatus"> Usuário {this.state.status ? " Ativo " : " Inativo "}</label>
           </div >
         </div >
+
+
+            <input
+              type="checkbox"
+              name="Master"
+              id="inputMaster"
+              onClick={this.handleMasterCh}
+              checked={this.state.Master}
+              defaultChecked={this.state.Master} />
+            <label htmlFor="inputMaster">Master</label>
 
 
         <div className="login-btn-enviar">

@@ -97,6 +97,7 @@ export default class FormAplicativo extends React.Component {
           {this.state.errors.Email && <span className="help-block">{this.state.errors.Email}</span>}
 
         </div>
+
         <div className={classnames(
           { 'ApiClienteOk': this.state.status },
           { 'ApiClienteFailure': !this.state.status }
