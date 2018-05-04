@@ -1,7 +1,7 @@
 let _root_api = ''
 if (process.env.NODE_ENV === 'production')
 {
-   _root_api = 'http://www.rhnet.com.br:3000/api/api/v1'; // servidor de produÃ§Ã£o
+   _root_api = 'http://portalmobile.rhnet.com.br/api/api/v1'; // servidor de produção
 }
 else
 {
