@@ -1,12 +1,16 @@
-import { APP_API } from '../helper/apiConfig';
-//import { authHeader } from '../helper/auth-header';
-//import findIndex from 'lodash/findIndex';
+import { APP_API, APP_AUTORIZACOES } from '../helper/apiConfig';
+
 import axios from 'axios';
 
 
 export const appService = {
   gravaApp
+  ,getAutorizacoes
 };
+
+export function getAutorizacoes() {
+  return axios.get(APP_AUTORIZACOES);
+}
 
 export function gravaApp(app) {
   let funcao;
