@@ -8,9 +8,18 @@ export const userService = {
     zeraSenha,
     isLogged,
     isMaster,
-    obterUsuarios
+    obterUsuarios,
+    gravarUsuario
 };
 
+
+export function gravarUsuario(user)
+{
+    const body = JSON.stringify(user);
+    return axios.post("", body, {
+        headers: { 'Content-Type': 'application/json' }
+    });
+}
 
 export function obterUsuarios()
 {

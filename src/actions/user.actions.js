@@ -10,9 +10,14 @@ export const userActions = {
   logout,
   zeraSenha,
   NovaSenha,
-  obterUsuarios
+  obterUsuarios,
+  gravarUsuario
 };
 
+export function gravarUsuario(user)
+{
+  return userService.gravarUsuario(user);
+}
 
 export function obterUsuarios()
 {

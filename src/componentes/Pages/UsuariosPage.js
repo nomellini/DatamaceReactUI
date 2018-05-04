@@ -87,8 +87,6 @@ export default class UsuariosPage extends DtmPageBase {
           </div>
         </div>
 
-
-
         <div className="card-container">
           {this.usuariosCards(this)}
         </div>

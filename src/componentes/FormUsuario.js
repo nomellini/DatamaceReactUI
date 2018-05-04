@@ -1,7 +1,7 @@
-
 import React from 'react';
-
 import classnames from 'classnames';
+import { userActions } from '../actions/user.actions'
+
 
 export default class FormUsuario extends React.Component {
 
@@ -17,17 +17,31 @@ export default class FormUsuario extends React.Component {
 
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   onSubmit(event) {
     event.preventDefault();
-    this.props.updateUser(this.state);
+
+    //this.props.updateUser(this.state);
   }
 
 
   onChange(event) {
-    this.setState({ [event.target.key]: event.target.value });
+    this.setState({ [event.target.name]: event.target.value });
   }
+
+  handleChange(event) {
+    const { target } = event;
+    if (target.checked) {
+      target.removeAttribute('checked');
+    } else {
+      target.setAttribute('checked', true);
+    }
+    this.setState({ status: event.target.checked });
+  }
+
+
 
   render() {
     return (
@@ -72,6 +86,24 @@ export default class FormUsuario extends React.Component {
           </input>
           {this.state.errors.Email && <span className="help-block">{this.state.errors.Email}</span>}
         </div>
+
+
+        <div className={classnames(
+          { 'ApiClienteOk': this.state.status },
+          { 'ApiClienteFailure': !this.state.status }
+        )}>
+          <div className={classnames('form-group', { 'has-error': this.state.errors.Status })}>
+            <input
+              type="checkbox"
+              name="status"
+              id="inputStatus"
+              onClick={this.handleChange}
+              checked={this.state.status}
+              defaultChecked={this.state.status} />
+            <label htmlFor="inputStatus"> App {this.state.status ? " Ativo " : " Inativo "}</label>
+          </div >
+        </div >
+
 
         <div className="login-btn-enviar">
           <button disabled={this.state.isLoading} className="btn btn-primary" type="submit">Gravar</button>
