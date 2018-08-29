@@ -13,3 +13,4 @@ git checkout CadastroDeUsuarios
 O Projeto está na pasta abaixo:
 
 D:\VisualStudioFJ\Projects\WebSites\Mobile\DtmMobileDatamaceSolution\DtmMobileDatamaceUIReactRedux
+Rodar:npm start
