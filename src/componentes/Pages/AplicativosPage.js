@@ -34,7 +34,7 @@ export default class AplicativosPage extends DtmPageBase {
           },
           {
             codigo: 3,
-            descricao: "Algum outro"
+            descricao: "Algum outro!1"
           }
         ]
       });

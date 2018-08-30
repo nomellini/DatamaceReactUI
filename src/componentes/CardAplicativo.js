@@ -25,6 +25,8 @@ export default class CardAplicativo extends React.Component {
   }
 
   setAppToState(app) {
+    console.log("App:");
+    console.log(app);
     this.setState({
       app: app,
       isEditing: !this.state.isEditing

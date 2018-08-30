@@ -1,12 +1,10 @@
-import React from 'react';
-import { userActions } from '../../actions/user.actions'
+import React from "react";
+import { userActions } from "../../actions/user.actions";
 import DtmPageBase from "./DtmPageBase";
 import CardUsuario from "../CardUsuario";
-import FormUsuario from '../FormUsuario';
-
+import FormUsuario from "../FormUsuario";
 
 export default class UsuariosPage extends DtmPageBase {
-
   constructor(props) {
     super(props);
     this.carregar = this.carregar.bind(this);
@@ -15,22 +13,16 @@ export default class UsuariosPage extends DtmPageBase {
 
     this.state = {
       users: []
-    }
-
+    };
   }
 
-  loadUsers(state)
-  {
-    console.log(state)
-  }
+  loadUsers(state) {}
 
   onNewUser(event) {
     event.preventDefault();
-    this.setState(
-        {
-          isAdding: !this.state.isAdding
-        }
-      )
+    this.setState({
+      isAdding: !this.state.isAdding
+    });
   }
 
   componentWillMount() {
@@ -42,35 +34,29 @@ export default class UsuariosPage extends DtmPageBase {
   }
 
   carregar() {
-
     this.setState({
       users: [],
-      message: '',
+      message: "",
       errors: {},
       isLoading: true
     });
 
-    userActions.obterUsuarios().then(
-      (res) => {
-        this.setState(
-          {
-            isLoading: false,
-            users: res.data
-          });
-      }
-    )
-
+    userActions.obterUsuarios().then(res => {
+      this.setState({
+        isLoading: false,
+        users: res.data
+      });
+    });
   }
 
   usuariosCards() {
     const { users } = this.state;
 
-    let result = users.map(function (user) {
-      return <CardUsuario user={user} key={user.codigo} />
+    let result = users.map(function(user) {
+      return <CardUsuario user={user} key={user.codigo} />;
     });
 
     return result;
-
   }
 
   render() {
@@ -82,19 +68,20 @@ export default class UsuariosPage extends DtmPageBase {
 
         <div className="card-container">
           <div className="card-app">
-            <button onClick={this.onNewUser} className='btn btn-danger'>Cadastrar Novo Usuário</button>
-            { this.state.isAdding ? <FormUsuario updateUser={this.loadUsers} user={{Master: false, status:true, CodigoPerfil: "1"}} /> : null }
+            <button onClick={this.onNewUser} className="btn btn-danger">
+              Cadastrar Novo Usuário
+            </button>
+            {this.state.isAdding ? (
+              <FormUsuario
+                updateUser={this.loadUsers}
+                user={{ Master: false, status: true, CodigoPerfil: "1" }}
+              />
+            ) : null}
           </div>
         </div>
 
-        <div className="card-container">
-          {this.usuariosCards(this)}
-        </div>
-
-
-
+        <div className="card-container">{this.usuariosCards(this)}</div>
       </div>
-    )
+    );
   }
-
 }

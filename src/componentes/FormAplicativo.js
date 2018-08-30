@@ -8,52 +8,75 @@ export default class FormAplicativo extends React.Component {
     super(props);
 
     this.state = {
+      //app:
       ...this.props.app,
       errors: [],
-      message: "",
-      autorizacoes: this.props.autorizacoes
+      message: ""
     };
-
-    //console.log(this.state.autorizacoes);
-    //console.log(this.props.app);
-
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleChangeApp = this.handleChangeApp.bind(this);
     this.Autorizacoes = this.Autorizacoes.bind(this);
+    this.flipCheckedApp = this.flipCheckedApp.bind(this);
+  }
+
+  flipCheckedApp(descricao) {
+    const { listaTipoApp } = this.state;
+    let app = listaTipoApp.find(item => item.descricao === descricao);
+    app.ativo = !app.ativo;
+    console.log(app.ativo);
+  }
+
+  isCheckedApp(codigo) {
+    const { listaTipoApp } = this.state;
+    let app = listaTipoApp.find(item => item.codigo === codigo);
+    return app.ativo;
+    //return listaTipoApp.some(item => item.codigo === codigo);
   }
 
   Autorizacoes() {
-    const { listaTipoApp, autorizacoes } = this.state;
-    const teste = autorizacoes.map(l => {
-      const checked = listaTipoApp.some(item => item.codigo === l.codigo)
-        ? true
-        : false;
+    const { listaTipoApp } = this.state;
 
-      console.log(checked);
-
+    const teste = listaTipoApp.map(l => {
       const saida = (
         <div key={shortid.generate()}>
-          <input type="checkbox" key={l.codigo} checked={checked} />
-          {l.descricao}
+          <input
+            teste={l.codigo}
+            type="checkbox"
+            key={l.codigo}
+            id={l.descricao}
+            name={l.descricao}
+            onClick={this.handleChangeApp}
+            //onChange={this.handleChangeApp}
+            checked={this.isCheckedApp(l.codigo)}
+          />
+          <label htmlFor={l.descricao}>{l.descricao}</label>
         </div>
       );
 
-      console.log(saida);
       return saida;
     });
 
     return <div>{teste}</div>;
   }
 
+  handleChangeApp(event) {
+    const { target } = event;
+    let { name } = target;
+    this.setState({ [name]: event.target.checked });
+    this.flipCheckedApp(name);
+  }
+
   handleChange(event) {
     const { target } = event;
+    let { name } = target;
     if (target.checked) {
       target.removeAttribute("checked");
     } else {
       target.setAttribute("checked", true);
     }
-    this.setState({ status: event.target.checked });
+    this.setState({ [name]: event.target.checked });
   }
 
   onSubmit(event) {
@@ -72,7 +95,7 @@ export default class FormAplicativo extends React.Component {
         this.setState({ temErros: true });
 
         if (err.message === "Network Error") {
-          // message no state Ã© apenas desta tela
+          // message no state é apenas desta tela
           this.setState({
             message: "Servidor não encontrado",
             isLoading: false
