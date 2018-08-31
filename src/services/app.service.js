@@ -1,11 +1,10 @@
-import { APP_API, APP_AUTORIZACOES } from '../helper/apiConfig';
+import { APP_API, APP_AUTORIZACOES } from "../helper/apiConfig";
 
-import axios from 'axios';
-
+import axios from "axios";
 
 export const appService = {
-  gravaApp
-  ,getAutorizacoes
+  gravaApp,
+  getAutorizacoes
 };
 
 export function getAutorizacoes() {
@@ -14,9 +13,7 @@ export function getAutorizacoes() {
 
 export function gravaApp(app) {
   let funcao;
-  if ((!app.codigo) || (app.codigo === 0))
-    funcao = axios.post;
-  else
-    funcao = axios.put;
-  return funcao(APP_API, app)
+  if (!app.codigo || app.codigo === 0) funcao = axios.post;
+  else funcao = axios.put;
+  return funcao(APP_API, app);
 }

@@ -1,7 +1,7 @@
-import shortid from "shortid";
 import React from "react";
 import classnames from "classnames";
 import { appService } from "../services/app.service";
+import Checkbox from "./Checkbox";
 
 export default class FormAplicativo extends React.Component {
   constructor(props) {
@@ -16,56 +16,39 @@ export default class FormAplicativo extends React.Component {
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.handleChangeApp = this.handleChangeApp.bind(this);
+
     this.Autorizacoes = this.Autorizacoes.bind(this);
-    this.flipCheckedApp = this.flipCheckedApp.bind(this);
+
+    this.onCbClick = this.onCbClick.bind(this);
   }
 
-  flipCheckedApp(descricao) {
-    const { listaTipoApp } = this.state;
-    let app = listaTipoApp.find(item => item.descricao === descricao);
-    app.ativo = !app.ativo;
-    console.log(app.ativo);
-  }
+  /**
+   * Esta função deve ser passada por props para o CheckBox
+   */
+  onCbClick(i) {
+    let app = this.state;
 
-  isCheckedApp(codigo) {
-    const { listaTipoApp } = this.state;
-    let app = listaTipoApp.find(item => item.codigo === codigo);
-    return app.ativo;
-    //return listaTipoApp.some(item => item.codigo === codigo);
+    app.listaTipoApp.find(app => app.codigo === i.codigo).ativo = i.ativo;
+
+    console.log(this.state);
+
+    this.setState({
+      ...app
+    });
   }
 
   Autorizacoes() {
     const { listaTipoApp } = this.state;
-
-    const teste = listaTipoApp.map(l => {
-      const saida = (
-        <div key={shortid.generate()}>
-          <input
-            teste={l.codigo}
-            type="checkbox"
-            key={l.codigo}
-            id={l.descricao}
-            name={l.descricao}
-            onClick={this.handleChangeApp}
-            //onChange={this.handleChangeApp}
-            checked={this.isCheckedApp(l.codigo)}
-          />
-          <label htmlFor={l.descricao}>{l.descricao}</label>
-        </div>
+    const result = listaTipoApp.map(tipoApp => {
+      return (
+        <Checkbox
+          key={tipoApp.codigo}
+          tipoApp={tipoApp}
+          onCbClick={this.onCbClick}
+        />
       );
-
-      return saida;
     });
-
-    return <div>{teste}</div>;
-  }
-
-  handleChangeApp(event) {
-    const { target } = event;
-    let { name } = target;
-    this.setState({ [name]: event.target.checked });
-    this.flipCheckedApp(name);
+    return result;
   }
 
   handleChange(event) {
@@ -88,7 +71,7 @@ export default class FormAplicativo extends React.Component {
     });
 
     appService.gravaApp(this.state).then(
-      res => {
+      () => {
         this.props.updateApp(this.state);
       },
       err => {
