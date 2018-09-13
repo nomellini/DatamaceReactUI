@@ -27,11 +27,8 @@ export default class FormAplicativo extends React.Component {
    */
   onCbClick(i) {
     let app = this.state;
-
     app.listaTipoApp.find(app => app.codigo === i.codigo).ativo = i.ativo;
-
     console.log(this.state);
-
     this.setState({
       ...app
     });

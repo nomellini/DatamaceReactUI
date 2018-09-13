@@ -22,7 +22,8 @@ export default class AplicativosPage extends DtmPageBase {
     appService.getAutorizacoes().then(res => {
       this.setState({
         ...this.state,
-        //autorizacoes: res.data
+        autorizacoes: res.data
+        /*
         autorizacoes: [
           {
             codigo: 1,
@@ -37,6 +38,7 @@ export default class AplicativosPage extends DtmPageBase {
             descricao: "Algum outro!1"
           }
         ]
+        */
       });
     });
 

@@ -1,11 +1,11 @@
 let _root_api = "";
 if (process.env.NODE_ENV === "production") {
-  _root_api = "http://portalmobile.rhnet.com.br/api/api/v1"; // servidor de produção
+  _root_api = "http://portalmobile.rhnet.com.br/api/api/v1"; // servidor de produÃ§Ã£o
 } else {
   _root_api = "http://dtmweb/DtmMobileDatamaceWebApi/api/v1";
 }
 
-_root_api = "http://portalmobile.rhnet.com.br/api/api/v1"; // servidor de produção
+_root_api = "http://localhost:49713/api/v1"; // servidor de produÃ§Ã£o
 
 const ROOT_API = _root_api;
 const AUTH_API = ROOT_API + "/Authentication";
@@ -16,6 +16,7 @@ const APP_AUTORIZACOES = APP_API + "/GetAutorizacoes";
 const USUARIO_ZERASENHA = USUARIO_API + "/ZerarSenha";
 const USUARIO_NOVASENHA = USUARIO_API + "/NovaSenha";
 const CLIENTE_LICENCA = ROOT_API + "/Licenca";
+const CLIENTE_DEFAULT = CLIENTE_API + "/Default";
 const CLIENTE_API_TESTE = CLIENTE_API + "/CheckConnetion";
 
 module.exports = {
@@ -29,6 +30,7 @@ module.exports = {
   CLIENTE_API,
   CLIENTE_LICENCA,
   CLIENTE_API_TESTE,
+  CLIENTE_DEFAULT,
 
   USUARIO_ZERASENHA,
   USUARIO_NOVASENHA
