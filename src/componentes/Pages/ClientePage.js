@@ -39,8 +39,7 @@ export default class Cliente extends DtmPageBase {
 
   onCbClick(i) {
     let cliente = this.state;
-    let cli = cliente.aplicacoes.find(app => app.codigo === i.codigo); //
-    console.log(cli);
+    let cli = cliente.aplicacoes.find(app => app.codigo === i.codigo); //    
     cli.ativo = i.ativo;
     if (cli.quantidade === null || cli.quantidade < 0) {
       cli.quantidade = 1;
