@@ -4,6 +4,7 @@ import DtmPageBase from "./DtmPageBase";
 import { clienteActions } from "../../actions/cliente.actions";
 import { clienteService } from "../../services/cliente.service";
 import Checkbox from "../Checkbox";
+import ClienteApp from "../ClienteApp";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -39,7 +40,7 @@ export default class Cliente extends DtmPageBase {
 
   onCbClick(i) {
     let cliente = this.state;
-    let cli = cliente.aplicacoes.find(app => app.codigo === i.codigo); //    
+    let cli = cliente.aplicacoes.find(app => app.codigo === i.codigo); //
     cli.ativo = i.ativo;
     if (cli.quantidade === null || cli.quantidade < 0) {
       cli.quantidade = 1;
@@ -51,9 +52,10 @@ export default class Cliente extends DtmPageBase {
 
   Aplicativos() {
     const { aplicacoes } = this.state;
+    console.log(aplicacoes);
     const result = aplicacoes.map(tipoApp => {
       return (
-        <Checkbox
+        <ClienteApp
           key={tipoApp.codigo}
           tipoApp={tipoApp}
           onCbClick={this.onCbClick}
